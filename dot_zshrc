@@ -43,3 +43,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 
 eval "$(atuin init zsh)"
+
+
+# for mac to move with alt plus left and right arrow.
+
+bindkey "\e\e[D" backward-word
+bindkey "\e\e[C" forward-word
