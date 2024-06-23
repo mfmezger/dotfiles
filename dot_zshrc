@@ -39,15 +39,14 @@ alias cat="bat"
 alias cd="z"
 eval "$(zoxide init zsh)"
 
+# update everything
+alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
+
 # PYENV
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+
 eval "$(atuin init zsh)"
-
-
-# for mac to move with alt plus left and right arrow.
-
-bindkey "\e\e[D" backward-word
-bindkey "\e\e[C" forward-word
