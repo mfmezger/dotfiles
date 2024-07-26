@@ -32,21 +32,25 @@ alias gs="git status"
 alias gg="git add . && git commit -m"
 alias gp="git push"
 
+alias tt="tilt down; tilt up"
+
 # FANCY NEW TOOLS
 alias ls="eza -lah"
 alias l="eza -lah"
 alias cat="bat"
 alias cd="z"
-eval "$(zoxide init zsh)"
+alias k="kubectl"
 
 # update everything
 alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
 
+eval "$(zoxide init zsh)"
+eval "$(atuin init zsh)"
+eval "$(pyenv init -)"
+
+
+
 # PYENV
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
-export POETRY_VIRTUALENVS_IN_PROJECT=true
-
-eval "$(atuin init zsh)"
