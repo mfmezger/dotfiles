@@ -15,11 +15,21 @@ echo ">>>Installing Powerlevel10k <<<"
 # install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-
+echo ">>> Linking the files <<<"
 stow . 
 
-# # install auto suggestion plugin
+echo ">>>Installing Python. <<<"
+pyenv install 3.11
+
+pyenv global 3.11
+
+pip install poetry
+
+# TODO: does this work with installation via brew?
+#  install auto suggestion plugin
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # for poetry 
-# poetry config virtualenvs.in-project true
+poetry config virtualenvs.in-project true
+
+echo ">>>Installation succesful completed! <<<"
