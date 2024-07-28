@@ -14,6 +14,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export LANG=en_US.UTF-8
 
+export EDITOR="nvim"
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='nvim'
  else
@@ -33,10 +34,12 @@ alias gg="git add . && git commit -m"
 alias gp="git push"
 
 alias tt="tilt down; tilt up"
-
+alias v="$EDITOR"
 # FANCY NEW TOOLS
-alias ls="eza -lah"
-alias l="eza -lah"
+alias ff="fastfetch"
+alias c="clear"
+alias ls="eza -lah --icons"
+alias l="eza -lah --icons"
 alias cat="bat"
 alias cd="z"
 alias k="kubectl"
@@ -46,11 +49,10 @@ alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
 
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
-eval "$(pyenv init -)"
 
 
 
 # PYENV
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-
+eval "$(pyenv init -)"
