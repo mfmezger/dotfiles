@@ -32,16 +32,22 @@ alias ghcs="gh copilot suggest"
 alias gs="git status"
 alias gg="git add . && git commit -m"
 alias gp="git push"
+alias gpl="git pull"
+alias gcb="git checkout -b"
 
-alias tt="tilt down; tilt up"
 alias v="$EDITOR"
+
 # FANCY NEW TOOLS
 alias ff="fastfetch"
 alias c="clear"
-alias ls="eza -lah --icons"
+alias ls="eza -l --icons"
 alias l="eza -lah --icons"
+alias ll="eza -lah --icons"
 alias cat="bat"
 alias cd="z"
+
+# kubernetes
+alias tt="tilt down; tilt up"
 alias k="kubectl"
 
 # update everything
@@ -49,8 +55,6 @@ alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
 
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
-
-
 
 # PYENV
 export PYENV_ROOT="$HOME/.pyenv"

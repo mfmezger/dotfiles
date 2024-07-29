@@ -9,6 +9,13 @@ git clone https://github.com/mfmezger/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles; source setup.sh
 ```
 
+Manually apply with stow:
+
+```
+stow zsh nvim kitty
+```
+
+
 
 ZSH Autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
