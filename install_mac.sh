@@ -16,7 +16,7 @@ echo ">>>Installing Powerlevel10k <<<"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 echo ">>> Linking the files <<<"
-stow . 
+stow zsh nvim kitty
 
 echo ">>>Installing Python. <<<"
 pyenv install 3.11
