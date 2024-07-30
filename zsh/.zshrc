@@ -34,6 +34,7 @@ alias gg="git add . && git commit -m"
 alias gp="git push"
 alias gpl="git pull"
 alias gcb="git checkout -b"
+alias gc="git checkout"
 
 alias v="$EDITOR"
 
@@ -52,6 +53,7 @@ alias k="kubectl"
 
 # update everything
 alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
+alias au="sudo pacman -Syyu && tldr --update"
 
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
