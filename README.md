@@ -12,7 +12,7 @@ cd ~/.dotfiles; source setup.sh
 Manually apply with stow:
 
 ```
-stow zsh nvim kitty
+stow zsh nvim kitty yazi
 ```
 
 
