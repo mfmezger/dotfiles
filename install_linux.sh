@@ -1,7 +1,7 @@
 # arch based systems
 sudo pacman -Syyu
 
-sudo pacman -S zsh kitty stow atuin eza zoxide docker docker-compose
+sudo pacman -S zsh kitty stow atuin eza zoxide docker docker-compose btop
 
 # Enableling the docker service on system start.
 sudo systemctl start docker.service
