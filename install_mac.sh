@@ -26,8 +26,8 @@ pyenv global 3.11
 pip install poetry
 
 # TODO: does this work with installation via brew?
-#  install auto suggestion plugin
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+ # install auto suggestion plugin
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # for poetry 
 poetry config virtualenvs.in-project true

@@ -6,8 +6,15 @@
 # install git
 xcode-select --install
 git clone https://github.com/mfmezger/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles; source setup.sh
+cd ~/.dotfiles
 ```
+
+Install the selected environment:
+```
+sh install_mac.sh
+```
+
+
 
 Manually apply with stow:
 
