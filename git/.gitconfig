@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Marc Fabian Mezger
+	email = marc.mezger@gmail.com
+[init]
+    defaultBranch = main
+[pull]
+    rebase = false
+[push]
+    # Automatically set origin as the remote for current branch
+    autoSetupRemote = true

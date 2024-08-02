@@ -19,7 +19,7 @@ sh install_mac.sh
 Manually apply with stow:
 
 ```
-stow zsh nvim kitty yazi
+stow zsh nvim kitty yazi git
 ```
 
 
