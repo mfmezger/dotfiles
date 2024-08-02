@@ -5,18 +5,14 @@ echo ">>>Installing homebrew <<<"
 
 echo ">>>Installing brew packages.<<<"
 # install brew dependencies
-brew bundle --file=~/.dotfiles/homebrew/.Brewfile
-
-echo ">>>Installing Oh my Zsh! <<<"
-# install oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+brew bundle --file=~/.dotfiles/.Brewfile
 
 echo ">>>Installing Powerlevel10k <<<"
 # install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 echo ">>> Linking the files <<<"
-stow zsh nvim kitty
+stow zsh nvim kitty yazi
 
 echo ">>>Installing Python. <<<"
 pyenv install 3.11
@@ -25,11 +21,12 @@ pyenv global 3.11
 
 pip install poetry
 
-# TODO: does this work with installation via brew?
- # install auto suggestion plugin
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# for poetry 
 poetry config virtualenvs.in-project true
+
+echo ">>>Installing Oh my Zsh! <<<"
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# install oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo ">>>Installation succesful completed! <<<"
