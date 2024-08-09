@@ -50,6 +50,7 @@ alias cd="z"
 # docker
 alias dcb="docker compose build"
 alias dcu="docker compose up"
+alias dcud="docker compose up -d"
 
 # kubernetes
 alias tt="tilt down; tilt up"
