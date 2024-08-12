@@ -15,11 +15,6 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 export EDITOR="nvim"
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nvim'
- else
-   export EDITOR='vim'
- fi
 
 # set poetry to only use local venv
 export POETRY_VIRTUALENVS_IN_PROJECT=true
