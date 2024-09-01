@@ -1,5 +1,5 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Path to your oh-my-zsh installation.
@@ -7,29 +7,31 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git 
-brew 
-colored-man-pages
-zsh-autosuggestions
-eza
-docker
-helm
-history
-iterm2 
-docker-compose 
-macos 
-pre-commit 
-dotenv 
-zoxide 
-poetry 
-git-hubflow
-colorize 
-ssh-agent
-ssh
-sudo
-rsync
-gh 
-golang)
+plugins=(
+    brew
+    colored-man-pages
+    eza
+	git
+    git-hubflow
+    docker
+    docker-compose
+    dotenv
+    helm
+    history
+    iterm2
+    macos
+    pre-commit
+    poetry
+    colorize
+    ssh
+    ssh-agent
+    sudo
+    gh
+	golang
+    rsync
+    zoxide
+    zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -53,6 +55,11 @@ export POETRY_VIRTUALENVS_IN_PROJECT=true
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# BASIC STUFF
+alias e="exit"
+alias v="$EDITOR"
+alias c="clear"
+
 # GITHUB & GIT
 alias ghcs="gh copilot suggest"
 alias gs="git status"
@@ -62,11 +69,9 @@ alias gpl="git pull"
 alias gcb="git checkout -b"
 alias gc="git checkout"
 
-alias v="$EDITOR"
 
 # FANCY NEW TOOLS
 alias ff="fastfetch"
-alias c="clear"
 alias ls="eza -l --icons"
 alias l="eza -lah --icons"
 alias ll="eza -lah --icons"
@@ -76,7 +81,7 @@ alias cd="z"
 # docker
 alias dcb="docker compose build"
 alias dcu="docker compose up"
-alias dcud="docker compose up -d"
+alias dd="docker compose up --build -d"
 
 # kubernetes
 alias tt="tilt down; tilt up"
@@ -95,13 +100,15 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# RYE
 source "$HOME/.rye/env"
 
+# YAZI
 function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
 }
