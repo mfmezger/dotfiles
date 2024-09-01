@@ -12,7 +12,7 @@ plugins=(
     colored-man-pages
     eza
 	git
-    # git-hubflow
+    git-hubflow
     docker
     docker-compose
     dotenv
