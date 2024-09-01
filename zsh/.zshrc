@@ -7,7 +7,29 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git zsh-autosuggestions docker docker-compose zoxide poetry colorize gh golang)
+plugins=(git 
+brew 
+colored-man-pages
+zsh-autosuggestions
+eza
+docker
+helm
+history
+iterm2 
+docker-compose 
+macos 
+pre-commit 
+dotenv 
+zoxide 
+poetry 
+git-hubflow
+colorize 
+ssh-agent
+ssh
+sudo
+rsync
+gh 
+golang)
 
 source $ZSH/oh-my-zsh.sh
 
