@@ -15,7 +15,7 @@ plugins=(
     git-hubflow
     docker
     docker-compose
-    dotenv
+    # dotenv
     helm
     history
     iterm2
@@ -68,7 +68,7 @@ alias gp="git push"
 alias gpl="git pull"
 alias gcb="git checkout -b"
 alias gc="git checkout"
-
+alias pcr="pre-commit run --all-files"
 
 # FANCY NEW TOOLS
 alias ff="fastfetch"
