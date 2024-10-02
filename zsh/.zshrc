@@ -82,6 +82,7 @@ alias cd="z"
 alias dcb="docker compose build"
 alias dcu="docker compose up"
 alias dd="docker compose up --build -d"
+alias dl="docker compose logs -f -t"
 
 # kubernetes
 alias tt="tilt down; tilt up"
