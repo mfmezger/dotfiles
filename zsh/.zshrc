@@ -21,7 +21,6 @@ plugins=(
     iterm2
     macos
     pre-commit
-    poetry
     colorize
     ssh
     ssh-agent
@@ -48,9 +47,6 @@ setopt SHARE_HISTORY      # Share history between sessions
 export LANG=en_US.UTF-8
 
 export EDITOR="nvim"
-
-# set poetry to only use local venv
-export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -96,13 +92,6 @@ alias au="sudo pacman -Syyu -noconfirm&& tldr --update"
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
 
-# PYENV
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# RYE
-source "$HOME/.rye/env"
 
 # YAZI
 function yy() {
@@ -113,5 +102,6 @@ function yy() {
     fi
     rm -f -- "$tmp"
 }
-# Added by LM Studio CLI (lms)
-# export PATH="$PATH:/Users/mfm/.cache/lm-studio/bin"
+
+# UV Python Management
+eval "$(uv generate-shell-completion zsh)"
