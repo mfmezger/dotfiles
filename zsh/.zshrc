@@ -56,6 +56,9 @@ alias e="exit"
 alias v="$EDITOR"
 alias c="clear"
 
+# PYTHON VIRTUAL ENV
+alias av=". .venv/bin/activate"
+
 # GITHUB & GIT
 alias ghcs="gh copilot suggest"
 alias gs="git status"
@@ -89,6 +92,7 @@ alias kgp='kubectl get pods'
 alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
 alias au="sudo pacman -Syyu -noconfirm&& tldr --update"
 
+# ZSH Tools
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
 
@@ -105,3 +109,4 @@ function yy() {
 
 # UV Python Management
 eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
