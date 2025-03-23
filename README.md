@@ -1,7 +1,8 @@
 # Dotfiles
 
-## Installation
+# Installation
 
+## Installation on Mac
 ```bash
 # install git
 xcode-select --install
@@ -9,7 +10,8 @@ git clone https://github.com/mfmezger/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 ```
 
-Install the selected environment:
+## Installation of programs and packages
+Install the selected environment on Mac:
 ```
 sh install_mac.sh
 ```
