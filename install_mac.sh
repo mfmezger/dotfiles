@@ -5,7 +5,7 @@ echo ">>>Installing homebrew <<<"
 
 echo ">>>Installing brew packages.<<<"
 # install brew dependencies
-brew bundle --file=~/.dotfiles/.Brewfile
+brew bundle --file=~/.dotfiles/Brewfile
 
 echo ">>>Installing Powerlevel10k <<<"
 # install powerlevel10k
