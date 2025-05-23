@@ -110,3 +110,6 @@ function yy() {
 # UV Python Management
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+
+. "$HOME/.local/bin/env"
+source ~/powerlevel10k/powerlevel10k.zsh-theme
