@@ -1,7 +1,7 @@
 # arch based systems
 sudo pacman -Syyu
 
-sudo pacman -Sy zsh kitty stow atuin eza zoxide docker docker-compose btop bat discord onefetch fastfetch neovim  obsidian dust tokei git-delta
+sudo pacman -Sy zsh kitty stow atuin eza zoxide docker docker-compose btop bat discord onefetch fastfetch neovim  obsidian dust tokei git-delta ttf-cascadia-code-nerd ttf-cascadia-mono-nerd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 yay -S --noconfirm zsh-theme-powerlevel10k-git
 sudo pacman -S github-cli
