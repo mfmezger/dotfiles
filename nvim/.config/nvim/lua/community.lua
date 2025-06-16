@@ -7,6 +7,7 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
+  { import = "astrocommunity.recipes.vscode" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.python"},
   { import = "astrocommunity.fuzzy-finder.telescope-zoxide" },
