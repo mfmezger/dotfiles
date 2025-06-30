@@ -68,6 +68,7 @@ alias gpl="git pull"
 alias gcb="git checkout -b"
 alias gc="git checkout"
 alias pcr="pre-commit run --all-files"
+alias pcu="pre-commit autoupdate"
 
 # FANCY NEW TOOLS
 alias ff="fastfetch"
@@ -76,10 +77,6 @@ alias l="eza -lah --icons"
 alias ll="eza -lah --icons"
 alias cat="bat"
 alias cd="z"
-
-# Precommit
-alias pcr="pre-commit run --all-files"
-alias pcu="pre-commit autoupdate"
 
 # docker
 alias dcb="docker compose build"
