@@ -77,6 +77,10 @@ alias ll="eza -lah --icons"
 alias cat="bat"
 alias cd="z"
 
+# Precommit
+alias pcr="pre-commit run --all-files"
+alias pcu="pre-commit autoupdate"
+
 # docker
 alias dcb="docker compose build"
 alias dcu="docker compose up"
