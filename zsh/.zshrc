@@ -68,6 +68,7 @@ alias gpl="git pull"
 alias gcb="git checkout -b"
 alias gc="git checkout"
 alias pcr="pre-commit run --all-files"
+alias pcu="pre-commit autoupdate"
 
 # FANCY NEW TOOLS
 alias ff="fastfetch"
