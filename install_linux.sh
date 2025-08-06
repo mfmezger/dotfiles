@@ -4,7 +4,8 @@ sudo pacman -Syyu
 sudo pacman -Sy zsh kitty stow atuin eza zoxide docker docker-compose btop bat discord onefetch fastfetch neovim  obsidian dust tokei git-delta ttf-cascadia-code-nerd ttf-cascadia-mono-nerd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 yay -S --noconfirm zsh-theme-powerlevel10k-git
-sudo pacman -S github-cli
+sudo pacman -Sy github-cli ghostty
+sudo pacman -S clamav
 # Enableling the docker service on system start.
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
@@ -12,4 +13,27 @@ sudo systemctl enable docker.service
 sudo usermod -aG docker $USER
 yay -S visual-studio-code-bin
 yay -Sy brave-bin
+
+
+# update virus database
+sudo freshclam
+
+# Real-time monitoring setup
+sudo systemctl enable clamav-freshclam
+
+
+# Firewall
+sudo pacman -S ufw
+sudo systemctl enable ufw.service
+sudo systemctl start ufw.service
+
+# Basic configuration
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw enable
+
+# Application Firewall - OpenSnitch
+sudo pacman -S opensnitch
+sudo systemctl enable --now opensnitchd
 

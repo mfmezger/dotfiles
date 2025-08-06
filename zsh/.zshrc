@@ -91,7 +91,7 @@ alias kgp='kubectl get pods'
 
 # update everything
 alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
-alias au="sudo pacman -Syyu --noconfirm && yay && tldr --update"
+alias au="sudo pacman -Syyu --noconfirm && yay && tldr --update && sudo clamav"
 
 # ZSH Tools
 eval "$(zoxide init zsh)"
