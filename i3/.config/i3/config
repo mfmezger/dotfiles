@@ -23,7 +23,7 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango: Noto Sans Regular 10
+font pango: Cascadia Code 10
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -481,10 +481,12 @@ set $urgentred		#e53935
 set $white		#ffffff
 set $black		#000000
 set $purple		#e345ff
-set $darkgrey		#383c4a
+set $darkgrey		#2f343f
 set $grey		#b0b5bd
 set $mediumgrey		#8b8b8b
 set $yellowbrown	#e1b700
+set $accent		#4c7899
+set $bg_dark		#1e1e2e
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
@@ -500,14 +502,16 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
 bar {
-		font pango: Noto Sans Regular 10
+		font pango: Cascadia Code 11
 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	    	position bottom
+	    	position top
+		height 30
+		separator_symbol "  "
 #	    	i3bar_command i3bar --transparency
 # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
 # reference: https://i3wm.org/docs/userguide.html#_tray_output
 		    #tray_output primary
-		    tray_padding 0
+		    tray_padding 2
 
 # When strip_workspace_numbers is set to yes,
 # any workspace that has a name of the form
@@ -516,13 +520,13 @@ strip_workspace_numbers yes
 ##strip_workspace_name no
 
 		    colors {
-		    separator          $purple
-		    background         $darkgrey
+		    separator          $accent
+		    background         $bg_dark
 		    statusline         $white
 #                          		border 		        bg		txt		indicator
-		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
-		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
-		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
+		focused_workspace	$accent		   	$accent		$white		$purple
+		active_workspace	$lightblue      	$darkgrey	$white		$purple
+		inactive_workspace	$bg_dark   		$bg_dark	$grey		$purple
 		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
 	}
 }
