@@ -299,11 +299,11 @@ bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -313,11 +313,11 @@ set $ws10 "10"
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays
 # you can get from xrandr command
-#workspace $ws1 output VGA-0
-#workspace $ws2 output VGA-0
-#workspace $ws3 output HDMI-0
-#workspace $ws4 output HDMI-0
-#workspace $ws5 output HDMI-0
+workspace $ws1 output DP-0
+workspace $ws2 output DP-2
+workspace $ws3 output HDMI-0
+workspace $ws4 output DP-0
+workspace $ws5 output DP-2
 
 # bind program to workspace and focus to them on startup:
 assign [class="ghostty"] $ws1
@@ -385,21 +385,21 @@ exec --no-startup-id dex --autostart --environment i3
 
 # start a script to setup displays
 # uncomment the next line, use arandr to setup displays and save the file as monitor:
-exec --no-startup-id ~/.screenlayout/asdf.sh
+exec --no-startup-id ~/.screenlayout/screenlayout.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
 exec --no-startup-id sleep 1 && feh --bg-fill /home/mfm/knuffi.jpg
 
 # set powersavings for display:
-exec --no-startup-id xset s 480 dpms 600 600 600
+exec --no-startup-id xset s 300 dpms 300 300 300
 
 # disable power saving (for example if using xscreensaver)
 #exec --no-startup-id xset -dpms
 
 # use xautolock to use autosuspend rules for mobile devices
 # https://wiki.archlinux.org/title/Session_lock#xautolock
-#exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
+exec --no-startup-id xautolock -time 5 -locker "systemctl suspend"
 
 
 # xscreensaver
@@ -505,18 +505,20 @@ bar {
 		font pango: Cascadia Code 11
 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	    	position top
-		height 30
+		height 32
+		workspace_min_width 24
+		padding 2px 8px 2px 8px
 		separator_symbol "  "
 #	    	i3bar_command i3bar --transparency
 # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
 # reference: https://i3wm.org/docs/userguide.html#_tray_output
 		    #tray_output primary
-		    tray_padding 2
+		    tray_padding 4
 
 # When strip_workspace_numbers is set to yes,
 # any workspace that has a name of the form
-# “[n][:][NAME]” will display only the name.
-strip_workspace_numbers yes
+# "[n][:][NAME]" will display only the name.
+strip_workspace_numbers no
 ##strip_workspace_name no
 
 		    colors {
