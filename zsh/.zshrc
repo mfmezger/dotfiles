@@ -113,4 +113,5 @@ eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 
 . "$HOME/.local/bin/env"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme
+
