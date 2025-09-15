@@ -15,13 +15,8 @@ echo ">>> Linking the files <<<"
 stow zsh nvim kitty yazi
 
 echo ">>>Installing Python. <<<"
-pyenv install 3.11
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-pyenv global 3.11
-
-pip install poetry
-
-poetry config virtualenvs.in-project true
 
 echo ">>>Installing Oh my Zsh! <<<"
 
