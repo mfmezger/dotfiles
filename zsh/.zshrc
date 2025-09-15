@@ -2,6 +2,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Configure zoxide to override cd command directly
+export ZOXIDE_CMD_OVERRIDE="cd"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -76,7 +79,6 @@ alias ls="eza -l --icons"
 alias l="eza -lah --icons"
 alias ll="eza -lah --icons"
 alias cat="bat"
-alias cd="z"
 
 # docker
 alias dcb="docker compose build"
@@ -94,7 +96,6 @@ alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
 alias au="sudo pacman -Syyu --noconfirm && yay && tldr --update && sudo clamav"
 
 # ZSH Tools
-eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
 
 
@@ -112,5 +113,5 @@ function yy() {
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 
-. "$HOME/.local/bin/env"
-source source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme
+# . "$HOME/.local/bin/env"
+source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme
