@@ -135,6 +135,3 @@ The configuration is designed to be both functional and aesthetically pleasing:
 - On Arch, make sure yay AUR helper is installed
 - Restart your terminal after installation for changes to take effect
 
----
-
-*Built with ❤️ for cross-platform development*
