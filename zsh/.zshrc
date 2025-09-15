@@ -10,8 +10,8 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# Base plugins for all systems
 plugins=(
-    brew
     colored-man-pages
     eza
 	git
@@ -21,8 +21,6 @@ plugins=(
     # dotenv
     helm
     history
-    iterm2
-    macos
     pre-commit
     colorize
     ssh
@@ -34,6 +32,12 @@ plugins=(
     zoxide
     zsh-autosuggestions
 )
+
+# Platform-specific plugins
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS specific plugins
+    plugins+=(brew iterm2 macos)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,9 +95,14 @@ alias tt="tilt down; tilt up"
 alias k="kubectl"
 alias kgp='kubectl get pods'
 
-# update everything
-alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
-alias au="sudo pacman -Syyu --noconfirm && yay && tldr --update && sudo clamav"
+# Platform-specific update aliases
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS update command
+    alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Arch Linux update command
+    alias uu="sudo pacman -Syyu --noconfirm && yay && tldr --update && sudo freshclam"
+fi
 
 # ZSH Tools
 eval "$(atuin init zsh)"
@@ -114,4 +123,3 @@ eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 
 # . "$HOME/.local/bin/env"
-source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme

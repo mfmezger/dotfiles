@@ -37,3 +37,7 @@ sudo ufw enable
 sudo pacman -S opensnitch
 sudo systemctl enable --now opensnitchd
 
+echo ">>> Linking the dotfiles <<<"
+stow zsh nvim kitty yazi git i3 screenlayout
+
+echo ">>>Installation successful completed! <<<"

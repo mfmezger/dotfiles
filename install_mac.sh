@@ -23,6 +23,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 
 echo ">>> Linking the files <<<"
-stow zsh nvim kitty yazi
+stow zsh nvim kitty yazi git
 
 echo ">>>Installation succesful completed! <<<"
