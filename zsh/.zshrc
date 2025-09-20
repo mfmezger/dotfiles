@@ -67,7 +67,6 @@ alias c="clear"
 alias av=". .venv/bin/activate"
 
 # GITHUB & GIT
-alias ghcs="gh copilot suggest"
 alias gs="git status"
 alias gg="git add . && git commit -m"
 alias gp="git push"
@@ -121,5 +120,3 @@ function yy() {
 # UV Python Management
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
-
-# . "$HOME/.local/bin/env"
