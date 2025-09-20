@@ -101,7 +101,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    alias uu="sudo pacman -Syyu --noconfirm && yay && tldr --update && sudo freshclam"
+    alias uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && sudo freshclam"
 fi
 
 # ZSH Tools
