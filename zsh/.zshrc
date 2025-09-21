@@ -65,6 +65,7 @@ alias c="clear"
 
 # PYTHON VIRTUAL ENV
 alias av=". .venv/bin/activate"
+alias us="uv sync"
 
 # GITHUB & GIT
 alias gs="git status"
