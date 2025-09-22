@@ -7,12 +7,20 @@ Cross-platform dotfiles for macOS and Linux with modern CLI tools and developmen
 ```bash
 git clone https://github.com/mfmezger/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
+```
 
-# macOS
+### macOS
+```bash
 ./install_mac.sh
-
-# Arch Linux
+```
+### Arch Linux
+```bash
 ./install_linux.sh
+```
+
+### Ubuntu (Minimal Setup)
+```bash
+./install_ubuntu_server.sh
 ```
 
 ## Key Tools
@@ -26,16 +34,17 @@ cd ~/.dotfiles
 
 ```
 ~/.dotfiles/
-├── zsh/           # Zsh configuration
-├── nvim/          # Neovim configuration  
-├── kitty/         # Kitty terminal config
-├── ghostty/       # Ghostty terminal config
-├── git/           # Git configuration
-├── yazi/          # Yazi file manager
-├── i3/            # i3 window manager (Linux)
-├── Brewfile       # macOS packages
-├── install_mac.sh # macOS installer
-└── install_linux.sh # Linux installer
+├── zsh/                    # Zsh configuration
+├── nvim/                   # Neovim configuration  
+├── kitty/                  # Kitty terminal config
+├── ghostty/                # Ghostty terminal config
+├── git/                    # Git configuration
+├── yazi/                   # Yazi file manager
+├── i3/                     # i3 window manager (Linux)
+├── Brewfile                # macOS packages
+├── install_mac.sh          # macOS installer
+├── install_linux.sh        # Arch Linux installer
+└── install_ubuntu_server.sh # Ubuntu terminal setup
 ```
 
 ## Manual Linking
@@ -44,5 +53,9 @@ cd ~/.dotfiles
 # macOS
 stow zsh nvim kitty yazi git
 
-# Linux  
+# Arch Linux  
 stow zsh nvim kitty yazi git i3 screenlayout
+
+# Ubuntu (minimal)
+stow zsh git nvim
+```
