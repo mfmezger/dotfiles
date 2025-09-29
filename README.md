@@ -23,6 +23,15 @@ cd ~/.dotfiles
 ./install_ubuntu_server.sh
 ```
 
+## Change Git Name and Email
+
+If you use my dotfiles, don't forget to change the git user name and email in `git/.gitconfig.local`. Otherwise your commits will be signed with my name and email.
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
 ## Key Tools
 
 - **Shell**: Zsh + Oh My Zsh + Powerlevel10k
