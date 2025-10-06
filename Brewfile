@@ -56,6 +56,7 @@ brew "git-delta"
 brew "tokei"
 brew "onefetch"
 brew "uv"
+brew "commitizen"
 
 # ==============================================================================
 # DEVOPS & CLOUD TOOLS
@@ -144,3 +145,4 @@ cask "whatsapp@beta"
 # WINDOW SWITCHER
 # ==============================================================================
 brew "alt-tab"
+

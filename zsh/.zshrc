@@ -68,8 +68,10 @@ alias av=". .venv/bin/activate"
 alias us="uv sync"
 
 # GITHUB & GIT
+alias init="pre-commit install && cz init"
 alias gs="git status"
 alias gg="git add . && git commit -m"
+alias ggp="git add . && pre-commit run --all-files && cz commit && cz bump && git push"
 alias gp="git push"
 alias gpl="git pull"
 alias gcb="git checkout -b"
