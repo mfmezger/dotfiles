@@ -10,15 +10,19 @@ cd ~/.dotfiles
 ```
 
 ### macOS
+
 ```bash
 ./install_mac.sh
 ```
+
 ### Arch Linux
+
 ```bash
 ./install_linux.sh
 ```
 
 ### Ubuntu (Minimal Setup)
+
 ```bash
 ./install_ubuntu_server.sh
 ```
@@ -41,7 +45,7 @@ git config --global user.email "your.email@example.com"
 
 ## Structure
 
-```
+```bash
 ~/.dotfiles/
 ├── zsh/                    # Zsh configuration
 ├── nvim/                   # Neovim configuration  
