@@ -71,7 +71,7 @@ alias us="uv sync"
 alias init="pre-commit install && cz init"
 alias gs="git status"
 alias gg="git add . && git commit -m"
-alias ggp="git add . && pre-commit run --all-files && cz commit && cz bump && git push"
+alias ggp="git add . && pre-commit run --all-files && cz commit && cz bump"
 alias gp="git push"
 alias gpl="git pull"
 alias gcb="git checkout -b"
@@ -100,10 +100,10 @@ alias kgp='kubectl get pods'
 # Platform-specific update aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
-    alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update"
+    alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    alias uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && sudo freshclam"
+    alias uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && sudo freshclam && omz update"
 fi
 
 # ZSH Tools
