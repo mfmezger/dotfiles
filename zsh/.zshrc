@@ -78,6 +78,7 @@ alias gcb="git checkout -b"
 alias gc="git checkout"
 alias pcr="pre-commit run --all-files"
 alias pcu="pre-commit autoupdate"
+alias test="coverage run -m pytest -o log_cli=true -vvv tests"
 
 # FANCY NEW TOOLS
 alias ff="fastfetch"
