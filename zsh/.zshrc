@@ -12,22 +12,26 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Base plugins for all systems
 plugins=(
-    colored-man-pages
-    eza
+    # Git
 	git
     git-hubflow
+    gh
+    # Docker
     docker
     docker-compose
-    # dotenv
-    helm
-    history
     pre-commit
-    colorize
+    # SSH
     ssh
     ssh-agent
-    sudo
-    gh
+    # Kubernetes
+    helm
 	golang
+    # terminal
+    colorize
+    colored-man-pages
+    eza
+    sudo
+    history
     rsync
     zoxide
     zsh-autosuggestions
@@ -82,9 +86,9 @@ alias test="uv run coverage run -m pytest -o log_cli=true -vvv tests"
 
 # FANCY NEW TOOLS
 alias ff="fastfetch"
-alias ls="eza -l --icons"
-alias l="eza -lah --icons"
-alias ll="eza -lah --icons"
+alias ls="eza -l --icons --group-directories-first"
+alias l="eza -lah --icons --group-directories-first"
+alias ll="eza -lah --icons --group-directories-first"
 alias cat="bat"
 
 # docker
@@ -124,3 +128,6 @@ function yy() {
 # UV Python Management
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+
+# Added by Antigravity
+export PATH="/Users/mfm/.antigravity/antigravity/bin:$PATH"
