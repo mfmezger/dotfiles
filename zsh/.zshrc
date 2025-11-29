@@ -36,7 +36,6 @@ plugins=(
     zoxide
     zsh-autosuggestions
 )
-
 # Platform-specific plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS specific plugins
@@ -55,6 +54,14 @@ setopt HIST_IGNORE_DUPS   # Don't save duplicate lines
 setopt SHARE_HISTORY      # Share history between sessions
 
 # User configuration
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
+    source /opt/homebrew/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    source /usr/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh
+    source $HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+fi
+ZSH_AUTOSUGGEST_STRATEGY=( abbreviations $ZSH_AUTOSUGGEST_STRATEGY )
 export LANG=en_US.UTF-8
 
 export EDITOR="nvim"
@@ -63,52 +70,52 @@ export EDITOR="nvim"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # BASIC STUFF
-alias e="exit"
-alias v="$EDITOR"
-alias c="clear"
+abbr --quiet e="exit"
+abbr --quiet v="$EDITOR"
+abbr --quiet c="clear"
 
 # PYTHON VIRTUAL ENV
-alias av=". .venv/bin/activate"
-alias us="uv sync"
+abbr --quiet av=". .venv/bin/activate"
+abbr --quiet us="uv sync"
 
 # GITHUB & GIT
-alias init="pre-commit install && cz init"
-alias gs="git status"
-alias gg="git add . && git commit -m"
-alias ggp="git add . && pre-commit run --all-files && cz commit && cz bump"
-alias gp="git push"
-alias gpl="git pull"
-alias gcb="git checkout -b"
-alias gc="git checkout"
-alias pcr="pre-commit run --all-files"
-alias pcu="pre-commit autoupdate"
-alias test="uv run coverage run -m pytest -o log_cli=true -vvv tests"
+abbr --quiet init="pre-commit install && cz init"
+abbr --quiet gs="git status"
+abbr --quiet gg="git add . && git commit -m"
+abbr --quiet ggp="git add . && pre-commit run --all-files && cz commit && cz bump"
+abbr --quiet gp="git push"
+abbr --quiet gpl="git pull"
+abbr --quiet gcb="git checkout -b"
+abbr --quiet gc="git checkout"
+abbr --quiet pcr="pre-commit run --all-files"
+abbr --quiet pcu="pre-commit autoupdate"
+abbr --quieter --force test="uv run coverage run -m pytest -o log_cli=true -vvv tests"
 
 # FANCY NEW TOOLS
-alias ff="fastfetch"
-alias ls="eza -l --icons --group-directories-first"
-alias l="eza -lah --icons --group-directories-first"
-alias ll="eza -lah --icons --group-directories-first"
-alias cat="bat"
+abbr --quiet ff="fastfetch"
+abbr --quiet ls="eza -l --icons --group-directories-first"
+abbr --quiet l="eza -lah --icons --group-directories-first"
+abbr --quiet ll="eza -lah --icons --group-directories-first"
+abbr --quieter --force cat="bat"
 
 # docker
-alias dcb="docker compose build"
-alias dcu="docker compose up"
-alias dd="docker compose up --build -d"
-alias dl="docker compose logs -f -t"
+abbr --quiet dcb="docker compose build"
+abbr --quiet dcu="docker compose up"
+abbr --quieter --force dd="docker compose up --build -d"
+abbr --quiet dl="docker compose logs -f -t"
 
 # kubernetes
-alias tt="tilt down; tilt up"
-alias k="kubectl"
-alias kgp='kubectl get pods'
+abbr --quiet tt="tilt down; tilt up"
+abbr --quiet k="kubectl"
+abbr --quiet kgp='kubectl get pods'
 
 # Platform-specific update aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
-    alias uu="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
+    abbr --quiet uu="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    alias uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && sudo freshclam && omz update"
+    abbr --quiet uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && sudo freshclam && omz update"
 fi
 
 # ZSH Tools

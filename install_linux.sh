@@ -13,7 +13,12 @@ sudo systemctl enable docker.service
 sudo usermod -aG docker $USER
 yay -S visual-studio-code-bin
 yay -Sy brave-bin
+yay -S --noconfirm zsh-abbr
 
+# Install zsh-autosuggestions-abbreviations-strategy
+if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
+    git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy"
+fi
 
 # update virus database
 sudo freshclam
