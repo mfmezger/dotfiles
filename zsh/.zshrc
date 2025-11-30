@@ -89,11 +89,11 @@ abbr --quiet gcb="git checkout -b"
 abbr --quiet gc="git checkout"
 abbr --quiet pcr="pre-commit run --all-files"
 abbr --quiet pcu="pre-commit autoupdate"
-abbr --quieter --force test="uv run coverage run -m pytest -o log_cli=true -vvv tests"
+abbr --quieter --force test="uv run coverage run -m pytest -o log_cli=true -vvv tests && uv run coverage report && uv run coverage html"
 
 # FANCY NEW TOOLS
 abbr --quiet ff="fastfetch"
-abbr --quiet ls="eza -l --icons --group-directories-first"
+abbr --quiet ls="eza -l -a --icons --group-directories-first"
 abbr --quiet l="eza -lah --icons --group-directories-first"
 abbr --quiet ll="eza -lah --icons --group-directories-first"
 abbr --quieter --force cat="bat"
