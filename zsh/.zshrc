@@ -101,6 +101,7 @@ abbr --quieter --force cat="bat"
 # docker
 abbr --quiet dcb="docker compose build"
 abbr --quiet dcu="docker compose up"
+abbr --quiet dcub="docker compose up --build"
 abbr --quieter --force dd="docker compose up --build -d"
 abbr --quiet dl="docker compose logs -f -t"
 
