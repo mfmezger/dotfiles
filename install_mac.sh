@@ -3,12 +3,17 @@ echo ">>>Installing homebrew <<<"
 # Install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-echo ">>> Adding Homebrew to PATH for this session... <<<"
-# Check standard install locations and load the environment
-if [ -f "/opt/homebrew/bin/brew" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [ -f "/usr/local/bin/brew" ]; then
-    eval "$(/usr/local/bin/brew shellenv)"
+# Check if brew is available, if not try to find it in standard locations
+if ! command -v brew &> /dev/null; then
+    echo ">>> Adding Homebrew to PATH for this session... <<<"
+    if [ -x "/opt/homebrew/bin/brew" ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [ -x "/usr/local/bin/brew" ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    else
+        echo ">>> Error: Homebrew installation failed or not found. <<<"
+        exit 1
+    fi
 fi
 
 echo ">>>Installing brew packages.<<<"
