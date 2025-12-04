@@ -56,7 +56,7 @@ brew "gh"
 brew "git-delta"
 brew "tokei"
 brew "onefetch"
-brew "uv"
+# uv is installed via curl in install_mac.sh for latest version
 brew "commitizen"
 
 # ==============================================================================
@@ -140,5 +140,5 @@ cask "eurkey"
 # ==============================================================================
 # WINDOW SWITCHER
 # ==============================================================================
-brew "alt-tab"
+cask "alt-tab"
 

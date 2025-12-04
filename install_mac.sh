@@ -68,6 +68,13 @@ else
     echo ">>> zsh-autosuggestions already installed <<<"
 fi
 
+echo ">>> Installing zsh-syntax-highlighting <<<"
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+else
+    echo ">>> zsh-syntax-highlighting already installed <<<"
+fi
+
 # 6. Generate Static Completions (Speed up shell startup)
 echo ">>> Generating shell completions <<<"
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"

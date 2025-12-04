@@ -35,6 +35,7 @@ plugins=(
     rsync
     zoxide
     zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 # Platform-specific plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then
