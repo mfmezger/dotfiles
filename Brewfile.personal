@@ -1,0 +1,13 @@
+# ==============================================================================
+# PERSONAL BREWFILE
+# Packages for personal use only (not for work machines)
+# ==============================================================================
+
+cask "obsidian"
+cask "whatsapp@beta"
+cask "cyberduck"
+cask "vlc"
+cask "obs"
+cask "shotcut"
+cask "appcleaner"
+cask "arc"

@@ -120,7 +120,11 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 # ZSH Tools
-eval "$(atuin init zsh)"
+if [[ -f "$HOME/.local/share/zsh/completions/atuin-init.zsh" ]]; then
+    source "$HOME/.local/share/zsh/completions/atuin-init.zsh"
+else
+    eval "$(atuin init zsh)"
+fi
 
 
 # YAZI
@@ -134,8 +138,17 @@ function yy() {
 }
 
 # UV Python Management
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
+if [[ -f "$HOME/.local/share/zsh/completions/_uv" ]]; then
+    source "$HOME/.local/share/zsh/completions/_uv"
+    source "$HOME/.local/share/zsh/completions/_uvx"
+else
+    eval "$(uv generate-shell-completion zsh)"
+    eval "$(uvx --generate-shell-completion zsh)"
+fi
 
 # Added by Antigravity
-export PATH="/Users/mfm/.antigravity/antigravity/bin:$PATH"
+if [[ -d "$HOME/.antigravity/antigravity/bin" ]]; then
+    export PATH="$HOME/.dotfiles/scripts:$HOME/.antigravity/antigravity/bin:$PATH"
+else
+    export PATH="$HOME/.dotfiles/scripts:$PATH"
+fi

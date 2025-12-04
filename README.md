@@ -29,11 +29,14 @@ cd ~/.dotfiles
 
 ## Change Git Name and Email
 
-If you use my dotfiles, don't forget to change the git user name and email in `git/.gitconfig.local`. Otherwise your commits will be signed with my name and email.
+Create a `~/.gitconfig.local` file to set your user details without modifying the tracked config:
 
 ```bash
-git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
+cat <<EOF > ~/.gitconfig.local
+[user]
+    name = Your Name
+    email = your.email@example.com
+EOF
 ```
 
 ## Key Tools
