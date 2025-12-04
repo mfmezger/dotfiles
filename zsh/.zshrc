@@ -81,6 +81,7 @@ abbr --quiet us="uv sync"
 
 # GITHUB & GIT
 abbr --quiet init="pre-commit install && cz init"
+abbr --quiet ga="git add -A"
 abbr --quiet gs="git status"
 abbr --quiet gg="git add . && git commit -m"
 abbr --quiet ggp="git add . && pre-commit run --all-files && cz commit && cz bump"
