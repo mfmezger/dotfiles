@@ -66,6 +66,61 @@ EOF
 └── install_ubuntu_server.sh # Ubuntu terminal setup
 ```
 
+## Shortcuts
+
+Shell abbreviations defined in `.zshrc` (type and press space to expand):
+
+### Basic
+
+| Shortcut | Expands To       |
+| -------- | ---------------- |
+| `e`      | `exit`           |
+| `v`      | `$EDITOR` (nvim) |
+| `c`      | `clear`          |
+
+### Python / UV
+
+| Shortcut | Expands To                      |
+| -------- | ------------------------------- |
+| `av`     | `. .venv/bin/activate`          |
+| `us`     | `uv sync`                       |
+| `test`   | Run pytest with coverage report |
+
+### Git
+
+| Shortcut | Expands To                            |
+| -------- | ------------------------------------- |
+| `ga`     | `git add -A`                          |
+| `gs`     | `git status`                          |
+| `gg`     | `git add . && git commit -m`          |
+| `gp`     | `git push`                            |
+| `gpl`    | `git pull`                            |
+| `gc`     | `git checkout`                        |
+| `gcb`    | `git checkout -b`                     |
+| `pcr`    | `pre-commit run --all-files`          |
+| `pcu`    | `pre-commit autoupdate`               |
+| `init`   | `pre-commit install && cz init`       |
+
+
+### Docker
+
+| Shortcut | Expands To                     |
+| -------- | ------------------------------ |
+| `dcb`    | `docker compose build`         |
+| `dcu`    | `docker compose up`            |
+| `dcub`   | `docker compose up --build`    |
+| `dd`     | `docker compose up --build -d` |
+| `dl`     | `docker compose logs -f -t`    |
+
+
+### System Update
+
+| Shortcut | Description                                                 |
+| -------- | ----------------------------------------------------------- |
+| `uu`     | Update all packages (Homebrew on macOS, pacman/yay on Arch) |
+
+---
+
 ## Stow Usage
 
 This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs to your home directory.
