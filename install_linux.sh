@@ -1,48 +1,173 @@
-# arch based systems
-sudo pacman -Syyu
+#!/bin/bash
+set -e  # Exit immediately if a command exits with a non-zero status
 
-sudo pacman -Sy zsh kitty stow atuin eza zoxide docker docker-compose btop bat discord onefetch fastfetch neovim  obsidian dust tokei git-delta ttf-cascadia-code-nerd ttf-cascadia-mono-nerd xautolock
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-yay -S --noconfirm zsh-theme-powerlevel10k-git
-sudo pacman -Sy github-cli ghostty
-sudo pacman -S clamav
-# Enableling the docker service on system start.
-sudo systemctl start docker.service
-sudo systemctl enable docker.service
+# Get the directory of this script
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-sudo usermod -aG docker $USER
-yay -S visual-studio-code-bin
-yay -Sy brave-bin
-yay -S --noconfirm zsh-abbr
+echo ">>> Starting Arch Linux Installation from $DOTFILES_DIR <<<"
 
-# Install zsh-autosuggestions-abbreviations-strategy
-if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
-    git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy"
+# ==============================================================================
+# 1. System Update
+# ==============================================================================
+echo ">>> Updating system packages <<<"
+sudo pacman -Syyu --noconfirm
+
+# ==============================================================================
+# 2. Install Core Packages via Pacman
+# ==============================================================================
+echo ">>> Installing core packages <<<"
+sudo pacman -S --needed --noconfirm \
+    zsh \
+    kitty \
+    stow \
+    atuin \
+    eza \
+    zoxide \
+    docker \
+    docker-compose \
+    btop \
+    bat \
+    onefetch \
+    fastfetch \
+    neovim \
+    dust \
+    tokei \
+    git-delta \
+    github-cli \
+    ghostty \
+    ttf-cascadia-code-nerd \
+    ttf-cascadia-mono-nerd \
+    xautolock
+
+# ==============================================================================
+# 3. Install AUR Packages via Yay
+# ==============================================================================
+echo ">>> Installing AUR packages <<<"
+
+# Ensure yay is installed
+if ! command -v yay &> /dev/null; then
+    echo ">>> Installing yay AUR helper <<<"
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    cd /tmp/yay && makepkg -si --noconfirm
+    cd "$DOTFILES_DIR"
 fi
 
-# update virus database
-sudo freshclam
+yay -S --needed --noconfirm \
+    zsh-theme-powerlevel10k-git \
+    visual-studio-code-bin \
+    brave-bin \
+    zsh-abbr \
+    discord \
+    obsidian
 
-# Real-time monitoring setup
+# ==============================================================================
+# 4. Install Oh My Zsh & Plugins
+# ==============================================================================
+echo ">>> Installing Oh My Zsh <<<"
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+else
+    echo ">>> Oh My Zsh already installed <<<"
+fi
+
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+
+echo ">>> Installing zsh-autosuggestions <<<"
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+else
+    echo ">>> zsh-autosuggestions already installed <<<"
+fi
+
+echo ">>> Installing zsh-syntax-highlighting <<<"
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+else
+    echo ">>> zsh-syntax-highlighting already installed <<<"
+fi
+
+echo ">>> Installing zsh-autosuggestions-abbreviations-strategy <<<"
+if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
+    git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git \
+        "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy"
+else
+    echo ">>> zsh-autosuggestions-abbreviations-strategy already installed <<<"
+fi
+
+# ==============================================================================
+# 5. Configure Docker
+# ==============================================================================
+echo ">>> Configuring Docker <<<"
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+sudo usermod -aG docker "$USER"
+
+# ==============================================================================
+# 6. Security: ClamAV Antivirus
+# ==============================================================================
+echo ">>> Setting up ClamAV antivirus <<<"
+sudo pacman -S --needed --noconfirm clamav
 sudo systemctl enable clamav-freshclam
+sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next boot <<<"
 
+# ==============================================================================
+# 7. Security: Firewall (UFW)
+# ==============================================================================
+echo ">>> Configuring UFW firewall <<<"
+sudo pacman -S --needed --noconfirm ufw
 
-# Firewall
-sudo pacman -S ufw
 sudo systemctl enable ufw.service
 sudo systemctl start ufw.service
 
-# Basic configuration
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow ssh
-sudo ufw enable
+sudo ufw --force enable
 
-# Application Firewall - OpenSnitch
-sudo pacman -S opensnitch
+# ==============================================================================
+# 8. Security: Application Firewall (OpenSnitch)
+# ==============================================================================
+echo ">>> Setting up OpenSnitch application firewall <<<"
+sudo pacman -S --needed --noconfirm opensnitch
 sudo systemctl enable --now opensnitchd
 
-echo ">>> Linking the dotfiles <<<"
+# ==============================================================================
+# 9. Link Dotfiles
+# ==============================================================================
+echo ">>> Linking dotfiles <<<"
+cd "$DOTFILES_DIR"
+
+# Function to backup if file exists and is not a symlink
+backup_if_exists() {
+    local target="$HOME/$1"
+    if [ -e "$target" ] && [ ! -L "$target" ]; then
+        echo "Backing up existing $target to $target.backup"
+        mv "$target" "$target.backup"
+    fi
+}
+
+# Backup common conflict files
+backup_if_exists ".zshrc"
+backup_if_exists ".p10k.zsh"
+backup_if_exists ".gitconfig"
+backup_if_exists ".config/nvim"
+backup_if_exists ".config/kitty"
+backup_if_exists ".config/yazi"
+backup_if_exists ".config/i3"
+
+# Run stow
 stow zsh nvim kitty yazi git i3 screenlayout
 
-echo ">>>Installation successful completed! <<<"
+# ==============================================================================
+# 10. Set Default Shell
+# ==============================================================================
+echo ">>> Setting zsh as default shell <<<"
+if [ "$SHELL" != "$(which zsh)" ]; then
+    chsh -s "$(which zsh)"
+fi
+
+echo ">>> Installation successfully completed! <<<"
+echo ""
+echo "Please log out and log back in to:"
+echo "  - Use zsh as your default shell"
+echo "  - Apply Docker group membership"
