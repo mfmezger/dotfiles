@@ -2,7 +2,7 @@
 
 Cross-platform dotfiles for macOS and Linux with modern CLI tools and development environment.
 
-My recommended extensions for ai engineering can be installed via the vs-code extensions pack: [AI Engineering Extensions Pack](https://marketplace.visualstudio.com/items?itemName=mfmezger.ai-engineering-pack).
+My recommended extensions for ai engineering can be installed via the vs-code extensions pack: [AI Engineering Extensions Pack](https://marketplace.visualstudio.com/items?itemName=mfmezger.python-ai-engineering).
 
 ## Quick Install
 
