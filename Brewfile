@@ -107,7 +107,6 @@ cask "maccy"
 cask "aerospace"
 cask "rectangle"
 cask "jordanbaird-ice"
-cask "command-x"
 
 # ==============================================================================
 # MEDIA & GRAPHICS
