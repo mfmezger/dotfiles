@@ -64,6 +64,7 @@ brew "commitizen"
 # ==============================================================================
 brew "helm"
 brew "kubectl"
+brew "k9s"
 
 # ==============================================================================
 # NETWORK & DOWNLOAD TOOLS
@@ -107,7 +108,6 @@ cask "maccy"
 cask "aerospace"
 cask "rectangle"
 cask "jordanbaird-ice"
-cask "command-x"
 
 # ==============================================================================
 # MEDIA & GRAPHICS
