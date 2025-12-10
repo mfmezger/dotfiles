@@ -389,7 +389,7 @@ exec --no-startup-id ~/.screenlayout/screenlayout.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
-exec --no-startup-id sleep 1 && feh --bg-fill /home/mfm/knuffi.jpg
+exec --no-startup-id sleep 1 && feh --bg-fill /home/mfm/wallpaper.png
 
 # set powersavings for display:
 exec --no-startup-id xset s 300 dpms 300 300 300
