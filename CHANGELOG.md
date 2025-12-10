@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.21.6 (2025-12-10)
+
+### Fix
+
+- **i3**: Changing location and name of wallpaper
+
 ## 0.21.5 (2025-12-10)
 
 ### Fix
