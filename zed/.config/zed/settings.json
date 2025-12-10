@@ -1,0 +1,91 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "search": {
+    "include_ignored": true
+  }, 
+  "icon_theme": "FantastIcons Icon Theme",
+  "vim_mode": true,
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": true
+  },
+  "base_keymap": "VSCode",
+  "preview_tabs": {
+    "enabled": false
+  },
+  "minimap": {
+    "show": "always"
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "buffer_font_fallbacks": ["CascadiaCove Mono", "monospace"],
+  "buffer_font_family": "CaskaydiaCove Nerd Font Mono",
+  "file_types": {},
+  "auto_indent_on_paste": true,
+  "show_edit_predictions": true,
+  "soft_wrap": "editor_width",
+  "ui_font_size": 16,
+  "buffer_font_size": 13.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Penumbra Dark",
+    "dark": "Ayu Dark"
+  },
+  "snippet_sort_order": "top",
+  "file_scan_exclusions": [
+    "**/.ruff_cache",
+    "__pycache__",
+    // default values below
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings"
+  ],
+  "tabs": {
+    "close_position": "right",
+    "file_icons": true,
+    "git_status": true,
+    "activate_on_close": "history",
+    "show_close_button": "hover",
+    "show_diagnostics": "off"
+  },
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 1,
+    "active_line_width": 1,
+    "coloring": "fixed",
+    "background_coloring": "indent_aware"
+  },
+  "auto_install_extensions": {
+    "toml": true,
+    "html": true,
+    "dockerfile": true,
+    "python-snippets": true,
+    "penumbra": true,
+    "git-firefly": true,
+    "material-icon-theme": true,
+    "make": true,
+    "csv": true,
+    "nix": true,
+    "gosum": true,
+    "github-actions": true,
+    "fastapi-snippets":true,
+    "go-snippets": true,
+    "fantasticons-icons-theme": true
+    
+  }
+}

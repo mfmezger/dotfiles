@@ -189,9 +189,10 @@ backup_if_exists ".config/kitty"
 backup_if_exists ".config/yazi"
 backup_if_exists ".config/i3"
 backup_if_exists ".config/ghostty"
+backup_if_exists ".config/zed"
 
 # Run stow (use --no-folding for i3 to allow scripts folder to be separate)
-stow zsh nvim kitty yazi git screenlayout ghostty
+stow zsh nvim kitty yazi git screenlayout ghostty zed
 stow --no-folding i3
 
 # Copy i3 scripts from system skeleton (not tracked in dotfiles)

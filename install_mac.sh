@@ -114,6 +114,6 @@ backup_if_exists ".config/yazi"
 backup_if_exists ".config/ghostty"
 
 # Run stow
-stow zsh nvim kitty yazi git ghostty
+stow zsh nvim kitty yazi git ghostty zed
 
 echo ">>> Installation successfully completed! <<<"
