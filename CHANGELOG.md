@@ -2,6 +2,13 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.22.0 (2025-12-10)
+
+### Feat
+
+- **Zed**: Adding zed config
+- **zed**: adding zed alias
+
 ## 0.21.8 (2025-12-10)
 
 ### Fix
