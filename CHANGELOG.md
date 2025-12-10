@@ -1,8 +1,131 @@
-## 0.1.0 (2025-11-23)
+# Changelog
+
+All notable changes to this dotfiles repository will be documented in this file.
+
+## 0.21.5 (2025-12-10)
+
+### Fix
+
+- **Linux**: Fixing Abbr on linux
+
+## 0.21.4 (2025-12-08)
+
+### Fix
+
+- **Brewfile**: Remove disabled command-x
+
+## 0.21.3 (2025-12-07)
+
+### Fix
+
+- **Readme**: Fix link
+
+## 0.21.2 (2025-11-29)
+
+### Fix
+
+- **NVIM**: User lua config
+
+## 0.21.1 (2025-11-23)
+
+### Fix
+
+- **Commitizen**: Adding Commitizen
+
+## 0.21.0 (2025-12-08)
 
 ### Feat
 
-- **Zshrc**: ordering and adding folders first for eza
-- changing the test command to use uv.
-- adding test alias.
-- adding omz update and removing git push for ggp.
+- **Brewfile**: Adding k9s
+
+## 0.20.0 (2025-12-04)
+
+### Feat
+
+- **ZSHRC**: Adding git all shortcut
+- **Mac**: Updating installation and zshrc
+- **Linux**: Updating Linux install script
+- **DockerVM**: Making sure on the vm is always the newest docker version installed
+- **Separation**: Separating into personal and work items
+
+## 0.15.0 (2025-12-03)
+
+### Feat
+
+- **Brewfile**: Adding new dependencies for abbreviations
+- **MacInstall**: Adding brew executable
+
+## 0.13.0 (2025-11-30)
+
+### Feat
+
+- **ZSH**: Adding coverage report generation and storing as html
+- **Zshrc**: Adding shortcut for docker compose build
+
+## 0.11.0 (2025-11-29)
+
+### Feat
+
+- **Zshrc**: Reworking alias to abbreviations
+
+## 0.10.0 (2025-11-23)
+
+### Feat
+
+- **Zshrc**: Ordering and adding folders first for eza
+
+## 0.9.0 (2025-10-29)
+
+### Feat
+
+- Changing the test command to use uv
+
+## 0.8.0 (2025-10-27)
+
+### Feat
+
+- Adding test alias
+
+## 0.7.0 (2025-10-26)
+
+### Feat
+
+- Adding omz update and removing git push for ggp
+
+## 0.6.0 (2025-09-22)
+
+### Feat
+
+- Adding ubuntu server version
+
+## 0.5.0 (2025-09-21)
+
+### Feat
+
+- Adding new shortcut for uv sync
+
+## 0.4.0 (2025-09-07)
+
+### Feat
+
+- Adding ghostty and i3 configs
+- Adding Arch Linux config
+
+## 0.2.0 (2024-08-01)
+
+### Feat
+
+- Adding yazi configurations
+- Adding kitty and nvim configs
+
+## 0.1.0 (2024-03-31)
+
+### Feat
+
+- Adding brewfile and zshrc setup
+
+## 0.0.0 (2024-02-28)
+
+### Initial
+
+- Initial commit with chezmoi setup
