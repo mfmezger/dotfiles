@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.22.1 (2025-12-10)
+
+### Fix
+
+- **Zed**: Fixing theme and adding new settings and extensions
+
 ## 0.22.0 (2025-12-10)
 
 ### Feat
