@@ -189,8 +189,15 @@ backup_if_exists ".config/yazi"
 backup_if_exists ".config/i3"
 backup_if_exists ".config/ghostty"
 
-# Run stow
-stow zsh nvim kitty yazi git i3 screenlayout ghostty
+# Run stow (use --no-folding for i3 to allow scripts folder to be separate)
+stow zsh nvim kitty yazi git screenlayout ghostty
+stow --no-folding i3
+
+# Copy i3 scripts from system skeleton (not tracked in dotfiles)
+if [ -d "/etc/skel/.config/i3/scripts" ]; then
+    echo ">>> Copying i3 scripts from system skeleton <<<"
+    cp -r /etc/skel/.config/i3/scripts "$HOME/.config/i3/"
+fi
 
 # ==============================================================================
 # 12. Set Default Shell

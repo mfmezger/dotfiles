@@ -1,106 +1,56 @@
-EndeavourOS i3wm Keybindings cheat sheet:
+i3wm Keybindings Cheat Sheet
+=============================
 
---> to update this run the following command:
-wget --backups=1 https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/main/.config/i3/keybindings -P ~/.config/i3/
+ = Super/Windows key
 
-All sources and updates are available at GitHub:
-https://github.com/endeavouros-team/endeavouros-i3wm-setup
+## Window Management
++Return         Start ghostty terminal
++q              Kill focused window
++f              Toggle fullscreen
 
-For reference consult our WIKI:
-https://discovery.endeavouros.com/window-tiling-managers/i3-wm/
+## Focus
++j/k/b/o        Focus left/down/up/right
++Left/Down/Up/Right  Focus with arrow keys
++a              Focus parent container
++space          Toggle focus tiling/floating
 
- = windows key
+## Move Windows
++Shift+j/k/b/o  Move window left/down/up/right
++Shift+Arrows   Move window with arrow keys
 
-# start xfce4-terminal
-+Return 
+## Layout
++h              Split horizontal
++v              Split vertical
++s              Stacking layout
++g              Tabbed layout
++e              Toggle split
++Shift+space    Toggle floating
++r              Resize mode (use arrows, Esc to exit)
 
-# kill focused window
-+q
+## Workspaces
++1-0            Switch to workspace 1-10
++Shift+1-0      Move window to workspace 1-10
++Tab            Next workspace
++Shift+Tab      Previous workspace
++Shift+n        Open new empty workspace
 
-# Application menu search by typing (fancy Rofi menu):
-+d
+## Applications
++w              Open Brave browser
++n              Open Thunar file manager
++d              Rofi app launcher
++t              Rofi window switcher
++p              Switch audio output
++Shift+p        Power profiles menu
+Print           Screenshot
 
-# Window switcher menu (fancy Rofi menu):
-+t
+## System
++l              Lock screen (blur)
++Shift+c        Reload i3 config
++Shift+r        Restart i3
++Shift+e        Power/exit menu
+F1              Keybindings help (rofi)
 
-# fancy exit-menu on bottom right:
-+Shift+e
-
-# Lock the system
-# lock with a picture or blurring the screen (options in config)
-+l
-
-# reload the configuration file
-+Shift+c
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-+Shift+r
-
-# keybinding in fancy rofi (automated)
-F1
-
-# full keybinding list in editor:
-+F1
-
-# change window focus
-+j focus left
-+k focus down
-+b focus up
-+o focus right
-
-# alternatively, you can use the cursor keys:
-+Left focus left
-+Down focus down
-+Up focus up
-+Right focus right
-
-# move a focused window
-+Shift+j move left
-+Shift+k move down
-+Shift+b move up
-+Shift+o move right
-
-# alternatively, you can use the cursor keys:
-+Shift+Left move left
-+Shift+Down move down
-+Shift+Up move up
-+Shift+Right move right
-
-# split in horizontal orientation
-+h split h
-
-# split in vertical orientation
-+v split v
-
-# enter fullscreen mode for the focused container
-+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-+s layout stacking
-+g layout tabbed
-+e layout toggle split
-
-# toggle tiling / floating
-+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-+space focus mode_toggle
-
-# focus the parent container
-+a focus parent
-
-# focus the child container
-#+d focus child
-
-# resize floating window
-+right mouse button
-
-## Multimedia Keys
-
-# Redirect sound to headphones
-+p
-
-## App shortcuts
-+w starts Firefox
-+n starts Thunar
- Button screenshot
+## Media Keys
+XF86Audio*      Volume up/down/mute
+XF86MonBrightness*  Brightness up/down
+XF86AudioPlay/Next/Prev  Media controls
