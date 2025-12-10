@@ -59,7 +59,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
     source /opt/homebrew/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    source /usr/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh
+    # zsh-abbr: check Arch path first, then oh-my-zsh custom path
+    if [[ -f /usr/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh ]]; then
+        source /usr/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh
+    elif [[ -f ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-abbr/zsh-abbr.zsh ]]; then
+        source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-abbr/zsh-abbr.zsh
+    fi
     source $HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
 fi
 ZSH_AUTOSUGGEST_STRATEGY=( abbreviations $ZSH_AUTOSUGGEST_STRATEGY )

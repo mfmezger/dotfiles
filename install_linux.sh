@@ -37,7 +37,6 @@ sudo pacman -S --needed --noconfirm \
     ghostty \
     ttf-cascadia-code-nerd \
     ttf-cascadia-mono-nerd \
-    xautolock
 
 # ==============================================================================
 # 3. Install AUR Packages via Yay
@@ -95,7 +94,41 @@ else
 fi
 
 # ==============================================================================
-# 5. Configure Docker
+# 5. Install Python Tools (uv & commitizen)
+# ==============================================================================
+echo ">>> Installing uv <<<"
+if ! command -v uv &> /dev/null; then
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+else
+    echo ">>> uv already installed <<<"
+fi
+
+# Ensure uv is in PATH for this session
+export PATH="$HOME/.local/bin:$PATH"
+
+echo ">>> Installing commitizen via uv <<<"
+uv tool install commitizen
+
+# ==============================================================================
+# 6. Generate Shell Completions
+# ==============================================================================
+echo ">>> Generating shell completions <<<"
+COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
+mkdir -p "$COMPLETIONS_DIR"
+
+# Generate uv completions
+if command -v uv &> /dev/null; then
+    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
+fi
+
+# Generate atuin init script
+if command -v atuin &> /dev/null; then
+    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+fi
+
+# ==============================================================================
+# 7. Configure Docker
 # ==============================================================================
 echo ">>> Configuring Docker <<<"
 sudo systemctl enable docker.service
@@ -103,7 +136,7 @@ sudo systemctl start docker.service
 sudo usermod -aG docker "$USER"
 
 # ==============================================================================
-# 6. Security: ClamAV Antivirus
+# 8. Security: ClamAV Antivirus
 # ==============================================================================
 echo ">>> Setting up ClamAV antivirus <<<"
 sudo pacman -S --needed --noconfirm clamav
@@ -111,7 +144,7 @@ sudo systemctl enable clamav-freshclam
 sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next boot <<<"
 
 # ==============================================================================
-# 7. Security: Firewall (UFW)
+# 9. Security: Firewall (UFW)
 # ==============================================================================
 echo ">>> Configuring UFW firewall <<<"
 sudo pacman -S --needed --noconfirm ufw
@@ -125,14 +158,14 @@ sudo ufw allow ssh
 sudo ufw --force enable
 
 # ==============================================================================
-# 8. Security: Application Firewall (OpenSnitch)
+# 10. Security: Application Firewall (OpenSnitch)
 # ==============================================================================
 echo ">>> Setting up OpenSnitch application firewall <<<"
 sudo pacman -S --needed --noconfirm opensnitch
 sudo systemctl enable --now opensnitchd
 
 # ==============================================================================
-# 9. Link Dotfiles
+# 11. Link Dotfiles
 # ==============================================================================
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
@@ -154,12 +187,13 @@ backup_if_exists ".config/nvim"
 backup_if_exists ".config/kitty"
 backup_if_exists ".config/yazi"
 backup_if_exists ".config/i3"
+backup_if_exists ".config/ghostty"
 
 # Run stow
-stow zsh nvim kitty yazi git i3 screenlayout
+stow zsh nvim kitty yazi git i3 screenlayout ghostty
 
 # ==============================================================================
-# 10. Set Default Shell
+# 12. Set Default Shell
 # ==============================================================================
 echo ">>> Setting zsh as default shell <<<"
 if [ "$SHELL" != "$(which zsh)" ]; then

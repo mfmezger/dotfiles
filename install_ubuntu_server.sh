@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e  # Exit on any error
 
-echo "🚀 Starting beautiful terminal setup..."
+# Get the directory of this script
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo "🚀 Starting beautiful terminal setup from $DOTFILES_DIR..."
 
 # Update package lists
 echo "📦 Updating package lists..."
@@ -83,6 +86,19 @@ if ! command -v atuin &> /dev/null; then
     sudo mv ~/.cargo/bin/atuin /usr/local/bin/ 2>/dev/null || true
 fi
 
+# Install uv (Python package manager)
+echo "🐍 Installing uv..."
+if ! command -v uv &> /dev/null; then
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+fi
+
+# Ensure uv is in PATH for this session
+export PATH="$HOME/.local/bin:$PATH"
+
+# Install commitizen via uv
+echo "📝 Installing commitizen..."
+uv tool install commitizen
+
 # Install Oh My Zsh
 echo "🎨 Installing Oh My Zsh..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -109,6 +125,35 @@ if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 fi
 
+# zsh-abbr (for abbreviations)
+echo "🔌 Installing zsh-abbr..."
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-abbr" ]; then
+    git clone https://github.com/olets/zsh-abbr.git $ZSH_CUSTOM/plugins/zsh-abbr
+fi
+
+# zsh-autosuggestions-abbreviations-strategy
+echo "🔌 Installing zsh-autosuggestions-abbreviations-strategy..."
+if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
+    git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git \
+        "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy"
+fi
+
+# Generate Shell Completions
+echo "📝 Generating shell completions..."
+COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
+mkdir -p "$COMPLETIONS_DIR"
+
+# Generate uv completions
+if command -v uv &> /dev/null; then
+    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
+fi
+
+# Generate atuin init script
+if command -v atuin &> /dev/null; then
+    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+fi
+
 # Set zsh as default shell
 echo "🐚 Setting zsh as default shell..."
 if [ "$SHELL" != "/usr/bin/zsh" ]; then
@@ -117,6 +162,24 @@ fi
 
 # Link dotfiles using stow
 echo "🔗 Linking dotfiles..."
+cd "$DOTFILES_DIR"
+
+# Function to backup if file exists and is not a symlink
+backup_if_exists() {
+    local target="$HOME/$1"
+    if [ -e "$target" ] && [ ! -L "$target" ]; then
+        echo "Backing up existing $target to $target.backup"
+        mv "$target" "$target.backup"
+    fi
+}
+
+# Backup common conflict files
+backup_if_exists ".zshrc"
+backup_if_exists ".p10k.zsh"
+backup_if_exists ".gitconfig"
+backup_if_exists ".config/nvim"
+
+# Run stow for available configs
 if [ -d "zsh" ]; then
     stow zsh
     echo "✅ Zsh configuration linked"
@@ -134,4 +197,7 @@ fi
 
 echo ""
 echo "🎉 Installation completed successfully!"
+echo ""
+echo "Please log out and log back in to:"
+echo "  - Use zsh as your default shell"
 echo ""
