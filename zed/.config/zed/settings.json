@@ -36,11 +36,7 @@
   "soft_wrap": "editor_width",
   "ui_font_size": 16,
   "buffer_font_size": 13.0,
-  "theme": {
-    "mode": "dark",
-    "light": "Penumbra Dark",
-    "dark": "Ayu Dark"
-  },
+  "theme": "Ayu Dark",
   "snippet_sort_order": "top",
   "file_scan_exclusions": [
     "**/.ruff_cache",
@@ -83,9 +79,37 @@
     "nix": true,
     "gosum": true,
     "github-actions": true,
-    "fastapi-snippets":true,
+    "fastapi-snippets": true,
     "go-snippets": true,
-    "fantasticons-icons-theme": true
-    
+    "fantasticons-icons-theme": true,
+    "ruff": true,
+    "basher": true,
+    "codebook": true,
+    "docker-compose": true,
+    "rainbow-csv": true,
+    "ini": true
+  },
+  "format_on_save": "on",
+  "relative_line_numbers": "enabled",
+  "preferred_line_length": 120,
+  "show_wrap_guides": true,
+  "git": {
+    "git_gutter": "tracked_files",
+    "inline_blame": { "enabled": true },
+    "hunk_style": "staged_hollow"
+  },
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true
+  },
+  "terminal": {
+    "detect_venv": {
+      "on": {
+        "directories": [".venv", "venv", ".env", "env"],
+        "activate_script": "default"
+      }
+    }
   }
 }
