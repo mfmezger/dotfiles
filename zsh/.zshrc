@@ -124,6 +124,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
     abbr --quiet uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && sudo freshclam && omz update"
+    # Zed editor is called 'zeditor' on Linux
+    alias zed="zeditor"
 fi
 
 # ZSH Tools
