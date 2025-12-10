@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.21.8 (2025-12-10)
+
+### Fix
+
+- **i3**: Fixing spacing and scripts
+
 ## 0.21.7 (2025-12-10)
 
 ### Fix
