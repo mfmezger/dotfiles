@@ -41,7 +41,7 @@ i3wm Keybindings Cheat Sheet
 +t              Rofi window switcher
 +p              Switch audio output
 +Shift+p        Power profiles menu
-Print           Screenshot
+Print           Screenshot (select region)
 
 ## System
 +l              Lock screen (blur)

@@ -37,6 +37,7 @@ sudo pacman -S --needed --noconfirm \
     ghostty \
     ttf-cascadia-code-nerd \
     ttf-cascadia-mono-nerd \
+    xclip \
     zed
 
 # ==============================================================================
