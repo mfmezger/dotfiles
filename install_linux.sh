@@ -58,11 +58,34 @@ yay -S --needed --noconfirm \
     visual-studio-code-bin \
     brave-bin \
     zsh-abbr \
-    discord \
-    obsidian
+    discord
 
 # ==============================================================================
-# 4. Install Oh My Zsh & Plugins
+# 4. Install Personal Applications (Optional)
+# ==============================================================================
+echo ""
+read -p ">>> Do you want to install personal packages (Obsidian, Steam, etc.)? (y/N) " -n 1 -r
+echo    # move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # Enable multilib repository for Steam (requires 32-bit libraries)
+    if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
+        echo ">>> Enabling multilib repository for Steam <<<"
+        sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
+        sudo pacman -Sy --noconfirm
+    else
+        echo ">>> multilib repository already enabled <<<"
+    fi
+
+    echo ">>> Installing personal AUR packages <<<"
+    yay -S --needed --noconfirm \
+        obsidian \
+        steam
+else
+    echo ">>> Skipping personal packages <<<"
+fi
+
+# ==============================================================================
+# 5. Install Oh My Zsh & Plugins
 # ==============================================================================
 echo ">>> Installing Oh My Zsh <<<"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -96,7 +119,7 @@ else
 fi
 
 # ==============================================================================
-# 5. Install Python Tools (uv & commitizen)
+# 6. Install Python Tools (uv & commitizen)
 # ==============================================================================
 echo ">>> Installing uv <<<"
 if ! command -v uv &> /dev/null; then
@@ -112,7 +135,7 @@ echo ">>> Installing commitizen via uv <<<"
 uv tool install commitizen
 
 # ==============================================================================
-# 6. Generate Shell Completions
+# 7. Generate Shell Completions
 # ==============================================================================
 echo ">>> Generating shell completions <<<"
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
@@ -130,7 +153,7 @@ if command -v atuin &> /dev/null; then
 fi
 
 # ==============================================================================
-# 7. Configure Docker
+# 8. Configure Docker
 # ==============================================================================
 echo ">>> Configuring Docker <<<"
 sudo systemctl enable docker.service
@@ -138,7 +161,7 @@ sudo systemctl start docker.service
 sudo usermod -aG docker "$USER"
 
 # ==============================================================================
-# 8. Security: ClamAV Antivirus
+# 9. Security: ClamAV Antivirus
 # ==============================================================================
 echo ">>> Setting up ClamAV antivirus <<<"
 sudo pacman -S --needed --noconfirm clamav
@@ -146,7 +169,7 @@ sudo systemctl enable clamav-freshclam
 sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next boot <<<"
 
 # ==============================================================================
-# 9. Security: Firewall (UFW)
+# 10. Security: Firewall (UFW)
 # ==============================================================================
 echo ">>> Configuring UFW firewall <<<"
 sudo pacman -S --needed --noconfirm ufw
@@ -160,14 +183,14 @@ sudo ufw allow ssh
 sudo ufw --force enable
 
 # ==============================================================================
-# 10. Security: Application Firewall (OpenSnitch)
+# 11. Security: Application Firewall (OpenSnitch)
 # ==============================================================================
 echo ">>> Setting up OpenSnitch application firewall <<<"
 sudo pacman -S --needed --noconfirm opensnitch
 sudo systemctl enable --now opensnitchd
 
 # ==============================================================================
-# 11. Link Dotfiles
+# 12. Link Dotfiles
 # ==============================================================================
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
@@ -203,7 +226,7 @@ if [ -d "/etc/skel/.config/i3/scripts" ]; then
 fi
 
 # ==============================================================================
-# 12. Set Default Shell
+# 13. Set Default Shell
 # ==============================================================================
 echo ">>> Setting zsh as default shell <<<"
 if [ "$SHELL" != "$(which zsh)" ]; then
