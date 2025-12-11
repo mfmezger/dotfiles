@@ -2,6 +2,16 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.23.0 (2025-12-11)
+
+### Feat
+
+- **Linux**: Adding personal applications for linux
+
+### Fix
+
+- **i3**: Improving screenshot util
+
 ## 0.22.2 (2025-12-11)
 
 ### Fix
