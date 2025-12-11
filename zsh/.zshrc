@@ -123,7 +123,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     abbr --quiet uu="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    abbr --quiet uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && sudo freshclam && omz update"
+    abbr --quiet uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update"
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
 fi
