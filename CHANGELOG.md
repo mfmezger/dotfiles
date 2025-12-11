@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.22.2 (2025-12-11)
+
+### Fix
+
+- **Linux**: Removing unnecessary update for freshclam
+
 ## 0.22.1 (2025-12-10)
 
 ### Fix
