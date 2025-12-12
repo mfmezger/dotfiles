@@ -104,6 +104,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo ">>> Installing CUDA toolkit <<<"
     sudo pacman -S --needed --noconfirm cuda
 
+    echo ">>> Installing cuSPARSELt library <<<"
+    yay -S --needed --noconfirm cusparselt
+
     echo ">>> Installing NVIDIA Container Toolkit for Docker <<<"
     sudo pacman -S --needed --noconfirm nvidia-container-toolkit
 
