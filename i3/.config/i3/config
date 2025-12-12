@@ -343,5 +343,5 @@ bindsym $mod+d exec --no-startup-id albert toggle
 bindsym $mod+t exec --no-startup-id rofi -show window \
 		-config ~/.config/rofi/rofidmenu.rasi
 
-# Start Albert as a service on login
-exec --no-startup-id albert
+# Start Albert as a background service on login
+exec --no-startup-id setsid -f albert
