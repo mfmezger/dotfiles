@@ -85,7 +85,40 @@ else
 fi
 
 # ==============================================================================
-# 5. Install Oh My Zsh & Plugins
+# 5. GPU Support: NVIDIA & CUDA (Optional)
+# ==============================================================================
+echo ""
+read -p ">>> Do you want to install NVIDIA drivers and CUDA toolkit? (y/N) " -n 1 -r
+echo    # move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo ">>> Installing NVIDIA drivers via nvidia-inst (EndeavourOS) <<<"
+    # nvidia-inst automatically detects and installs the correct NVIDIA driver
+    if command -v nvidia-inst &> /dev/null; then
+        nvidia-inst
+    else
+        echo ">>> nvidia-inst not found, installing nvidia package directly <<<"
+        sudo pacman -S --needed --noconfirm nvidia nvidia-utils nvidia-settings
+    fi
+
+    echo ">>> Installing CUDA toolkit <<<"
+    sudo pacman -S --needed --noconfirm cuda
+
+    echo ">>> Installing NVIDIA Container Toolkit for Docker <<<"
+    sudo pacman -S --needed --noconfirm nvidia-container-toolkit
+
+    # Configure Docker to use NVIDIA runtime
+    echo ">>> Configuring Docker for NVIDIA GPU support <<<"
+    sudo nvidia-ctk runtime configure --runtime=docker
+    sudo systemctl restart docker
+
+    echo ">>> CUDA installed! The following paths have been added to your .zshrc: <<<"
+    echo ">>> A reboot is recommended after NVIDIA driver installation. <<<"
+else
+    echo ">>> Skipping NVIDIA/CUDA installation <<<"
+fi
+
+# ==============================================================================
+# 6. Install Oh My Zsh & Plugins
 # ==============================================================================
 echo ">>> Installing Oh My Zsh <<<"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -119,7 +152,7 @@ else
 fi
 
 # ==============================================================================
-# 6. Install Python Tools (uv & commitizen)
+# 7. Install Python Tools (uv & commitizen)
 # ==============================================================================
 echo ">>> Installing uv <<<"
 if ! command -v uv &> /dev/null; then
@@ -135,7 +168,7 @@ echo ">>> Installing commitizen via uv <<<"
 uv tool install commitizen
 
 # ==============================================================================
-# 7. Generate Shell Completions
+# 8. Generate Shell Completions
 # ==============================================================================
 echo ">>> Generating shell completions <<<"
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
@@ -153,7 +186,7 @@ if command -v atuin &> /dev/null; then
 fi
 
 # ==============================================================================
-# 8. Configure Docker
+# 9. Configure Docker
 # ==============================================================================
 echo ">>> Configuring Docker <<<"
 sudo systemctl enable docker.service
@@ -161,7 +194,7 @@ sudo systemctl start docker.service
 sudo usermod -aG docker "$USER"
 
 # ==============================================================================
-# 9. Security: ClamAV Antivirus
+# 10. Security: ClamAV Antivirus
 # ==============================================================================
 echo ">>> Setting up ClamAV antivirus <<<"
 sudo pacman -S --needed --noconfirm clamav
@@ -169,7 +202,7 @@ sudo systemctl enable clamav-freshclam
 sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next boot <<<"
 
 # ==============================================================================
-# 10. Security: Firewall (UFW)
+# 11. Security: Firewall (UFW)
 # ==============================================================================
 echo ">>> Configuring UFW firewall <<<"
 sudo pacman -S --needed --noconfirm ufw
@@ -183,14 +216,14 @@ sudo ufw allow ssh
 sudo ufw --force enable
 
 # ==============================================================================
-# 11. Security: Application Firewall (OpenSnitch)
+# 12. Security: Application Firewall (OpenSnitch)
 # ==============================================================================
 echo ">>> Setting up OpenSnitch application firewall <<<"
 sudo pacman -S --needed --noconfirm opensnitch
 sudo systemctl enable --now opensnitchd
 
 # ==============================================================================
-# 12. Link Dotfiles
+# 13. Link Dotfiles
 # ==============================================================================
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
@@ -226,7 +259,7 @@ if [ -d "/etc/skel/.config/i3/scripts" ]; then
 fi
 
 # ==============================================================================
-# 13. Set Default Shell
+# 14. Set Default Shell
 # ==============================================================================
 echo ">>> Setting zsh as default shell <<<"
 if [ "$SHELL" != "$(which zsh)" ]; then
