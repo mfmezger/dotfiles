@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.25.0 (2025-12-12)
+
+### Feat
+
+- **Albert**: Replacing Rofi with albert for linux
+
 ## 0.24.0 (2025-12-12)
 
 ### Feat
