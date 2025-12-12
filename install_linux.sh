@@ -58,7 +58,8 @@ yay -S --needed --noconfirm \
     visual-studio-code-bin \
     brave-bin \
     zsh-abbr \
-    discord
+    discord \
+    albert
 
 # ==============================================================================
 # 4. Install Personal Applications (Optional)
@@ -247,9 +248,10 @@ backup_if_exists ".config/yazi"
 backup_if_exists ".config/i3"
 backup_if_exists ".config/ghostty"
 backup_if_exists ".config/zed"
+backup_if_exists ".config/albert"
 
 # Run stow (use --no-folding for i3 to allow scripts folder to be separate)
-stow zsh nvim kitty yazi git screenlayout ghostty zed
+stow zsh nvim kitty yazi git screenlayout ghostty zed albert
 stow --no-folding i3
 
 # Copy i3 scripts from system skeleton (not tracked in dotfiles)

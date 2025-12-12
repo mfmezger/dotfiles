@@ -333,13 +333,15 @@ bar {
 }
 
 #####################################
-# Application menu handled by rofi: #
+# Application menu handled by Albert #
 #####################################
 
-# Rofi application launcher
-bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
-		-config ~/.config/rofi/rofidmenu.rasi
+# Albert launcher (Spotlight-like: apps, calculator, files, etc.)
+bindsym $mod+d exec --no-startup-id albert toggle
 
-# Rofi window switcher
+# Rofi window switcher (keep rofi for this, it's great at it)
 bindsym $mod+t exec --no-startup-id rofi -show window \
 		-config ~/.config/rofi/rofidmenu.rasi
+
+# Start Albert as a service on login
+exec --no-startup-id albert
