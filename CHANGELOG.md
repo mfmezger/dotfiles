@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.25.1 (2025-12-12)
+
+### Fix
+
+- **Cuda**: Adding libraries for deepseek ocr
+
 ## 0.25.0 (2025-12-12)
 
 ### Feat
