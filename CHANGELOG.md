@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.24.0 (2025-12-12)
+
+### Feat
+
+- **Cuda**: Adding cuda and cuda docker support for the linux setup
+
 ## 0.23.1 (2025-12-12)
 
 ### Fix
