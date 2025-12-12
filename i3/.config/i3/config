@@ -171,6 +171,9 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
+# Quick escape from fullscreen (useful for games)
+bindsym $mod+Escape fullscreen disable; focus output right
+
 # Redirect sound to headphones
 bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
 
@@ -256,6 +259,9 @@ exec --no-startup-id sleep 3 && ghostty
 
 # Set keyboard layout to EU
 exec "setxkbmap -layout eu"
+
+# Set NVIDIA digital vibrance to 75% on all monitors
+exec --no-startup-id nvidia-settings -a "[DPY-0]/DigitalVibrance=767" -a "[DPY-1]/DigitalVibrance=767" -a "[DPY-3]/DigitalVibrance=767"
 
 ##################
 # floating rules #
