@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.23.1 (2025-12-12)
+
+### Fix
+
+- **i3**: Add shortcut to exit gaming mode
+
 ## 0.23.0 (2025-12-11)
 
 ### Feat
