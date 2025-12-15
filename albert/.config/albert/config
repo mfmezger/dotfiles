@@ -18,6 +18,7 @@ enabled=true
 
 [clipboard]
 enabled=true
+history_length=200
 
 [datetime]
 enabled=true
