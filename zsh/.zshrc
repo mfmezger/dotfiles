@@ -126,6 +126,8 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     abbr --quiet uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update"
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
+    abbr --quiet nvitop="uvx nvitop"
+    
     # CUDA
     export PATH=/opt/cuda/bin:$PATH
     export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
