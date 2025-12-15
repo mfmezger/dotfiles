@@ -2,6 +2,18 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.26.0 (2025-12-15)
+
+### Feat
+
+- **Nvitop**: Adding nvitop abbr for linux
+
+### Fix
+
+- **Albert**: Setting history of clipboard to 200
+- **Zed**: Adding devstral as default
+- **Albert**: Fixing background start of albert
+
 ## 0.25.1 (2025-12-12)
 
 ### Fix
