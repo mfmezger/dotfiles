@@ -79,6 +79,10 @@ export EDITOR="nvim"
 abbr --quiet e="exit"
 abbr --quiet v="$EDITOR"
 abbr --quiet c="clear"
+abbr --quiet k="kubernetes"
+abbr --quiet g="git"
+abbr --quiet d="docker"
+abbr --quiet dc="docker compose"
 
 # PYTHON VIRTUAL ENV
 abbr --quiet av=". .venv/bin/activate"
