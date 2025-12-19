@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.28.0 (2025-12-19)
+
+### Feat
+
+- **Diff**: Adding shortcut for git diff
+
 ## 0.27.1 (2025-12-16)
 
 ### Fix
