@@ -78,6 +78,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     fi
 
     echo ">>> Installing personal AUR packages <<<"
+    sudo pacman -S qbittorrent
     yay -S --needed --noconfirm \
         obsidian \
         steam
