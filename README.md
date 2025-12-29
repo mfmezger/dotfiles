@@ -45,8 +45,14 @@ EOF
 
 - **Shell**: Zsh + Oh My Zsh + Powerlevel10k
 - **Terminal**: Ghostty (macOS), Kitty (Linux)
-- **Editor**: Neovim
-- **CLI Tools**: eza, bat, zoxide, atuin, yazi, git-delta, btop
+- **Editor**: Neovim, Zed
+- **File Navigation**: eza, yazi, zoxide, fd
+- **Text & Viewers**: bat, glow, chroma, jq
+- **System Monitoring**: btop, htop, dust, duf, fastfetch
+- **Git**: git-delta, gh, onefetch, commitizen
+- **History & Docs**: atuin, tealdeer
+- **DevOps**: k9s, kubectl, helm
+- **Utilities**: tokei, witr
 
 ## Structure
 
@@ -58,6 +64,7 @@ EOF
 ├── ghostty/                # Ghostty terminal config
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
+├── zed/                    # Zed editor config
 ├── i3/                     # i3 window manager (Linux)
 ├── screenlayout/           # Screen layout scripts (Linux)
 ├── scripts/                # Utility scripts
@@ -90,19 +97,18 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 
 ### Git
 
-| Shortcut | Expands To                            |
-| -------- | ------------------------------------- |
-| `ga`     | `git add -A`                          |
-| `gs`     | `git status`                          |
-| `gg`     | `git add . && git commit -m`          |
-| `gp`     | `git push`                            |
-| `gpl`    | `git pull`                            |
-| `gc`     | `git checkout`                        |
-| `gcb`    | `git checkout -b`                     |
-| `pcr`    | `pre-commit run --all-files`          |
-| `pcu`    | `pre-commit autoupdate`               |
-| `init`   | `pre-commit install && cz init`       |
-
+| Shortcut | Expands To                      |
+| -------- | ------------------------------- |
+| `ga`     | `git add -A`                    |
+| `gs`     | `git status`                    |
+| `gg`     | `git add . && git commit -m`    |
+| `gp`     | `git push`                      |
+| `gpl`    | `git pull`                      |
+| `gc`     | `git checkout`                  |
+| `gcb`    | `git checkout -b`               |
+| `pcr`    | `pre-commit run --all-files`    |
+| `pcu`    | `pre-commit autoupdate`         |
+| `init`   | `pre-commit install && cz init` |
 
 ### Docker
 
@@ -113,7 +119,6 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | `dcub`   | `docker compose up --build`    |
 | `dd`     | `docker compose up --build -d` |
 | `dl`     | `docker compose logs -f -t`    |
-
 
 ### System Update
 
@@ -137,6 +142,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `ghostty`      | `~/.config/ghostty`       |
 | `kitty`        | `~/.config/kitty`         |
 | `yazi`         | `~/.config/yazi`          |
+| `zed`          | `~/.config/zed`           |
 | `i3`           | `~/.config/i3`            |
 | `screenlayout` | `~/.screenlayout`         |
 
