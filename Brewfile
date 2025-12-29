@@ -27,6 +27,7 @@ brew "zoxide"
 brew "tealdeer"
 brew "olets/tap/zsh-abbr"
 brew "olets/tap/zsh-autosuggestions-abbreviations-strategy"
+brew "witr"
 # ==============================================================================
 # FILE MANAGEMENT & NAVIGATION
 # ==============================================================================

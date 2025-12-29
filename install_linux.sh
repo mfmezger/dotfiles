@@ -59,7 +59,8 @@ yay -S --needed --noconfirm \
     brave-bin \
     zsh-abbr \
     discord \
-    albert
+    albert \
+    witr-bin
 
 # ==============================================================================
 # 4. Install Personal Applications (Optional)

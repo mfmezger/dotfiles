@@ -99,6 +99,12 @@ export PATH="$HOME/.local/bin:$PATH"
 echo "📝 Installing commitizen..."
 uv tool install commitizen
 
+# Install witr (weather tool)
+echo "🌤️ Installing witr..."
+if ! command -v witr &> /dev/null; then
+    curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
+fi
+
 # Install Oh My Zsh
 echo "🎨 Installing Oh My Zsh..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
