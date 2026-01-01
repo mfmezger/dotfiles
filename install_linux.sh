@@ -38,7 +38,8 @@ sudo pacman -S --needed --noconfirm \
     ttf-cascadia-code-nerd \
     ttf-cascadia-mono-nerd \
     xclip \
-    zed
+    zed \
+    go
 
 # ==============================================================================
 # 3. Install AUR Packages via Yay
