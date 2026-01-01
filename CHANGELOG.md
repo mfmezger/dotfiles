@@ -2,6 +2,17 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.29.0 (2026-01-01)
+
+### Feat
+
+- **Go**: Adding go for the installation on linux
+- **Witr**: Adding why is this running tool
+
+### Fix
+
+- **Brewfile**: Adding Tap for Abbreviations
+
 ## 0.28.0 (2025-12-19)
 
 ### Feat
