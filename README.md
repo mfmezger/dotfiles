@@ -91,6 +91,8 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | `g`      | `git`            |
 | `d`      | `docker`         |
 | `k`      | `kubectl`        |
+| `pbcopy` | Copy to clipboard (Linux) |
+| `pbpaste`| Paste from clipboard (Linux) |
 
 ### Python / UV
 
@@ -159,6 +161,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `zed`          | `~/.config/zed`           |
 | `i3`           | `~/.config/i3`            |
 | `albert`       | `~/.config/albert`        |
+| `dunst`        | `~/.config/dunst`         |
 | `screenlayout` | `~/.screenlayout`         |
 
 ### Apply Configs
