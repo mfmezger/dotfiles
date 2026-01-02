@@ -2,6 +2,17 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.31.0 (2026-01-02)
+
+### Feat
+
+- **Shell**: Add pbcopy/pbpaste aliases for Linux
+- **Desktop**: Add screenshot script, persistent clipboard, and Dunst config
+
+### Perf
+
+- **zsh**: reduce shell startup time by 58%
+
 ## 0.30.1 (2026-01-02)
 
 ### Perf
