@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.29.1 (2026-01-02)
+
+### Fix
+
+- **Kubectl**: Removing wrong and duplicate shortcut
+
 ## 0.29.0 (2026-01-01)
 
 ### Feat
