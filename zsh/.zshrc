@@ -75,63 +75,63 @@ export EDITOR="nvim"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# BASIC STUFF
-abbr --quiet e="exit"
-abbr --quiet v="$EDITOR"
-abbr --quiet c="clear"
-abbr --quiet g="git"
-abbr --quiet d="docker"
-abbr --quiet dc="docker compose"
-abbr --quiet k="kubectl"
+# BASIC STUFF (session-only for faster shell startup)
+abbr --quiet --session e="exit"
+abbr --quiet --session v="$EDITOR"
+abbr --quiet --session c="clear"
+abbr --quiet --session g="git"
+abbr --quiet --session d="docker"
+abbr --quiet --session dc="docker compose"
+abbr --quiet --session k="kubectl"
 
 # PYTHON VIRTUAL ENV
-abbr --quiet av=". .venv/bin/activate"
-abbr --quiet us="uv sync"
+abbr --quiet --session av=". .venv/bin/activate"
+abbr --quiet --session us="uv sync"
 
 # GITHUB & GIT
-abbr --quiet init="pre-commit install && cz init"
-abbr --quiet ga="git add -A"
-abbr --quiet gs="git status"
-abbr --quiet gd="git diff"
+abbr --quiet --session init="pre-commit install && cz init"
+abbr --quiet --session ga="git add -A"
+abbr --quiet --session gs="git status"
+abbr --quiet --session gd="git diff"
 
-abbr --quiet gg="git add . && git commit -m"
-abbr --quiet ggp="git add . && pre-commit run --all-files && cz commit && cz bump"
-abbr --quiet gp="git push"
-abbr --quiet gpl="git pull"
-abbr --quiet gcb="git checkout -b"
-abbr --quiet gc="git checkout"
-abbr --quiet pcr="pre-commit run --all-files"
-abbr --quiet pcu="pre-commit autoupdate"
-abbr --quieter --force test="uv run coverage run -m pytest -o log_cli=true -vvv tests && uv run coverage report && uv run coverage html"
+abbr --quiet --session gg="git add . && git commit -m"
+abbr --quiet --session ggp="git add . && pre-commit run --all-files && cz commit && cz bump"
+abbr --quiet --session gp="git push"
+abbr --quiet --session gpl="git pull"
+abbr --quiet --session gcb="git checkout -b"
+abbr --quiet --session gc="git checkout"
+abbr --quiet --session pcr="pre-commit run --all-files"
+abbr --quiet --session pcu="pre-commit autoupdate"
+abbr --quiet --session pt="uv run coverage run -m pytest -o log_cli=true -vvv tests && uv run coverage report && uv run coverage html"
 
 # FANCY NEW TOOLS
-abbr --quiet ff="fastfetch"
-abbr --quiet ls="eza -l -a --icons --group-directories-first"
-abbr --quiet l="eza -lah --icons --group-directories-first"
-abbr --quiet ll="eza -lah --icons --group-directories-first"
-abbr --quieter --force cat="bat"
+abbr --quiet --session ff="fastfetch"
+abbr --quiet --session ls="eza -l -a --icons --group-directories-first"
+abbr --quiet --session l="eza -lah --icons --group-directories-first"
+abbr --quiet --session ll="eza -lah --icons --group-directories-first"
+abbr --quiet --session cat="bat"
 
 # docker
-abbr --quiet dcb="docker compose build"
-abbr --quiet dcu="docker compose up"
-abbr --quiet dcub="docker compose up --build"
-abbr --quieter --force dd="docker compose up --build -d"
-abbr --quiet dl="docker compose logs -f -t"
+abbr --quiet --session dcb="docker compose build"
+abbr --quiet --session dcu="docker compose up"
+abbr --quiet --session dcub="docker compose up --build"
+abbr --quiet --session dd="docker compose up --build -d"
+abbr --quiet --session dl="docker compose logs -f -t"
 
 # kubernetes
-abbr --quiet tt="tilt down; tilt up"
-abbr --quiet kgp='kubectl get pods'
+abbr --quiet --session tt="tilt down; tilt up"
+abbr --quiet --session kgp='kubectl get pods'
 
 # Platform-specific update aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
-    abbr --quiet uu="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
+    abbr --quiet --session uu="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    abbr --quiet uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update"
+    abbr --quiet --session uu="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update"
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
-    abbr --quiet nvitop="uvx nvitop"
+    abbr --quiet --session nvitop="uvx nvitop"
     
     # CUDA
     export PATH=/opt/cuda/bin:$PATH
