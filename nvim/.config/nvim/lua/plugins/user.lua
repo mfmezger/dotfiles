@@ -14,6 +14,30 @@ return {
     config = function() require("lsp_signature").setup() end,
   },
 
+  -- Oil.nvim: Edit filesystem like a buffer
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "Oil",
+    keys = {
+      { "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
+    },
+    opts = {
+      default_file_explorer = false, -- Keep neo-tree as default, use Oil with `-`
+      view_options = {
+        show_hidden = true,
+      },
+    },
+  },
+
+  -- nvim-surround: Add/change/delete surrounding pairs
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+  },
+
   -- == Examples of Overriding Plugins ==
 
   -- customize alpha options
