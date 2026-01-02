@@ -44,7 +44,7 @@ EOF
 ## Key Tools
 
 - **Shell**: Zsh + Oh My Zsh + Powerlevel10k
-- **Terminal**: Ghostty (macOS), Kitty (Linux)
+- **Terminal**: Ghostty, Kitty (backup)
 - **Editor**: Neovim, Zed
 - **File Navigation**: eza, yazi, zoxide, fd
 - **Text & Viewers**: bat, glow, chroma, jq
@@ -52,6 +52,7 @@ EOF
 - **Git**: git-delta, gh, onefetch, commitizen
 - **History & Docs**: atuin, tealdeer
 - **DevOps**: k9s, kubectl, helm
+- **Launcher**: Albert (Linux), Raycast (macOS)
 - **Utilities**: tokei, witr
 
 ## Structure
@@ -66,6 +67,7 @@ EOF
 ├── yazi/                   # Yazi file manager
 ├── zed/                    # Zed editor config
 ├── i3/                     # i3 window manager (Linux)
+├── albert/                 # Albert launcher config (Linux)
 ├── screenlayout/           # Screen layout scripts (Linux)
 ├── scripts/                # Utility scripts
 ├── Brewfile                # macOS packages (work)
@@ -86,6 +88,9 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | `e`      | `exit`           |
 | `v`      | `$EDITOR` (nvim) |
 | `c`      | `clear`          |
+| `g`      | `git`            |
+| `d`      | `docker`         |
+| `k`      | `kubectl`        |
 
 ### Python / UV
 
@@ -101,6 +106,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | -------- | ------------------------------- |
 | `ga`     | `git add -A`                    |
 | `gs`     | `git status`                    |
+| `gd`     | `git diff`                      |
 | `gg`     | `git add . && git commit -m`    |
 | `gp`     | `git push`                      |
 | `gpl`    | `git pull`                      |
@@ -109,6 +115,14 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | `pcr`    | `pre-commit run --all-files`    |
 | `pcu`    | `pre-commit autoupdate`         |
 | `init`   | `pre-commit install && cz init` |
+
+### Kubernetes
+
+| Shortcut | Expands To                      |
+| -------- | ------------------------------- |
+| `k`      | `kubectl`                       |
+| `kgp`    | `kubectl get pods`              |
+| `tt`     | `tilt down; tilt up`            |
 
 ### Docker
 
@@ -144,6 +158,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
 | `i3`           | `~/.config/i3`            |
+| `albert`       | `~/.config/albert`        |
 | `screenlayout` | `~/.screenlayout`         |
 
 ### Apply Configs
@@ -152,10 +167,11 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 cd ~/dotfiles
 
 # macOS
-stow zsh git nvim ghostty yazi
+stow zsh git nvim ghostty yazi zed
 
 # Arch Linux  
-stow zsh git nvim kitty yazi i3 screenlayout
+stow zsh git nvim kitty yazi ghostty zed albert
+stow --no-folding i3  # Preserves scripts folder
 
 # Ubuntu (minimal)
 stow zsh git nvim
