@@ -23,8 +23,7 @@ plugins=(
     # SSH
     ssh
     ssh-agent
-    # Kubernetes
-    helm
+    # Kubernetes (kubectl/helm are lazy-loaded below for speed)
     golang
     # terminal
     colorize
@@ -42,6 +41,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS specific plugins
     plugins+=(brew iterm2 macos)
 fi
+
+# OPTIMIZATION: Manually handle completion initialization
+# Moved ugly logic to separate file to keep .zshrc clean
+source $HOME/dotfiles/zsh/fast_init.zsh
 
 source $ZSH/oh-my-zsh.sh
 
@@ -144,12 +147,8 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias pbpaste="xclip -selection clipboard -o"
 fi
 
-# ZSH Tools
-if [[ -f "$HOME/.local/share/zsh/completions/atuin-init.zsh" ]]; then
-    source "$HOME/.local/share/zsh/completions/atuin-init.zsh"
-else
-    eval "$(atuin init zsh)"
-fi
+# Pre-cached completions (moved to separate file for cleaner .zshrc)
+source $HOME/dotfiles/zsh/completions.zsh
 
 
 # YAZI
@@ -162,16 +161,9 @@ function yy() {
     rm -f -- "$tmp"
 }
 
-# UV Python Management
-if [[ -f "$HOME/.local/share/zsh/completions/_uv" ]]; then
-    source "$HOME/.local/share/zsh/completions/_uv"
-    source "$HOME/.local/share/zsh/completions/_uvx"
-else
-    eval "$(uv generate-shell-completion zsh)"
-    eval "$(uvx --generate-shell-completion zsh)"
-fi
 
-# Added by Antigravity
+
+# Antigravity
 if [[ -d "$HOME/.antigravity/antigravity/bin" ]]; then
     export PATH="$HOME/dotfiles/scripts:$HOME/.antigravity/antigravity/bin:$PATH"
 else

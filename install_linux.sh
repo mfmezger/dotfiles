@@ -177,7 +177,7 @@ echo ">>> Installing commitizen via uv <<<"
 uv tool install commitizen
 
 # ==============================================================================
-# 8. Generate Shell Completions
+# 8. Generate Shell Completions (Pre-cached for faster shell startup)
 # ==============================================================================
 echo ">>> Generating shell completions <<<"
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
@@ -185,13 +185,39 @@ mkdir -p "$COMPLETIONS_DIR"
 
 # Generate uv completions
 if command -v uv &> /dev/null; then
+    echo ">>> Generating uv/uvx completions <<<"
     uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
     uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
 if command -v atuin &> /dev/null; then
+    echo ">>> Generating atuin completions <<<"
     atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+fi
+
+# Generate GitHub CLI completions
+if command -v gh &> /dev/null; then
+    echo ">>> Generating gh completions <<<"
+    gh completion -s zsh > "$COMPLETIONS_DIR/_gh"
+fi
+
+# Generate Docker completions
+if command -v docker &> /dev/null; then
+    echo ">>> Generating docker completions <<<"
+    docker completion zsh > "$COMPLETIONS_DIR/_docker"
+fi
+
+# Generate kubectl completions (if installed)
+if command -v kubectl &> /dev/null; then
+    echo ">>> Generating kubectl completions <<<"
+    kubectl completion zsh > "$COMPLETIONS_DIR/_kubectl"
+fi
+
+# Generate helm completions (if installed)
+if command -v helm &> /dev/null; then
+    echo ">>> Generating helm completions <<<"
+    helm completion zsh > "$COMPLETIONS_DIR/_helm"
 fi
 
 # ==============================================================================
