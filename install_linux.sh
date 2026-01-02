@@ -39,7 +39,9 @@ sudo pacman -S --needed --noconfirm \
     ttf-cascadia-mono-nerd \
     xclip \
     zed \
-    go
+    go \
+    scrot \
+    dunst
 
 # ==============================================================================
 # 3. Install AUR Packages via Yay
@@ -257,7 +259,7 @@ backup_if_exists ".config/zed"
 backup_if_exists ".config/albert"
 
 # Run stow (use --no-folding for i3 to allow scripts folder to be separate)
-stow zsh nvim kitty yazi git screenlayout ghostty zed albert
+stow zsh nvim kitty yazi git screenlayout ghostty zed albert dunst
 stow --no-folding i3
 
 # Copy i3 scripts from system skeleton (not tracked in dotfiles)
