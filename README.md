@@ -98,7 +98,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | -------- | ------------------------------- |
 | `av`     | `. .venv/bin/activate`          |
 | `us`     | `uv sync`                       |
-| `test`   | Run pytest with coverage report |
+| `pt`     | Run pytest with coverage report |
 
 ### Git
 
