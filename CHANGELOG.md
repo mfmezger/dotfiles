@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.29.3 (2026-01-02)
+
+### Fix
+
+- **Homedirectory**: Fixing not correct home directories
+
 ## 0.29.2 (2026-01-02)
 
 ### Fix
