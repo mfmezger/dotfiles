@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.30.1 (2026-01-02)
+
+### Perf
+
+- **Zshrc**: Speeding up zshrc init by 2.8 times
+
 ## 0.30.0 (2026-01-02)
 
 ### Feat
