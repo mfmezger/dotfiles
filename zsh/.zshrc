@@ -13,7 +13,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Base plugins for all systems
 plugins=(
     # Git
-	git
+    git
     git-hubflow
     gh
     # Docker
@@ -25,7 +25,7 @@ plugins=(
     ssh-agent
     # Kubernetes
     helm
-	golang
+    golang
     # terminal
     colorize
     colored-man-pages
