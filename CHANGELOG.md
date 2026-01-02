@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.30.0 (2026-01-02)
+
+### Feat
+
+- **Nvim**: Updating plugins and navigation for nvim
+
 ## 0.29.3 (2026-01-02)
 
 ### Fix
