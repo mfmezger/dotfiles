@@ -1,3 +1,4 @@
+#!/bin/bash
 # install docker and docker compose on stackit
 
 sudo apt update

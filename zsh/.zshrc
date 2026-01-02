@@ -82,6 +82,7 @@ abbr --quiet c="clear"
 abbr --quiet g="git"
 abbr --quiet d="docker"
 abbr --quiet dc="docker compose"
+abbr --quiet k="kubectl"
 
 # PYTHON VIRTUAL ENV
 abbr --quiet av=". .venv/bin/activate"
@@ -119,7 +120,6 @@ abbr --quiet dl="docker compose logs -f -t"
 
 # kubernetes
 abbr --quiet tt="tilt down; tilt up"
-abbr --quiet k="kubectl"
 abbr --quiet kgp='kubectl get pods'
 
 # Platform-specific update aliases
@@ -169,7 +169,7 @@ fi
 
 # Added by Antigravity
 if [[ -d "$HOME/.antigravity/antigravity/bin" ]]; then
-    export PATH="$HOME/.dotfiles/scripts:$HOME/.antigravity/antigravity/bin:$PATH"
+    export PATH="$HOME/dotfiles/scripts:$HOME/.antigravity/antigravity/bin:$PATH"
 else
-    export PATH="$HOME/.dotfiles/scripts:$PATH"
+    export PATH="$HOME/dotfiles/scripts:$PATH"
 fi

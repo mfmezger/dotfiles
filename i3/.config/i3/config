@@ -243,7 +243,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id ~/.screenlayout/screenlayout.sh
 
 # Set wallpaper
-exec --no-startup-id sleep 1 && feh --bg-fill /home/mfm/wallpaper.png
+exec --no-startup-id sleep 1 && feh --bg-fill $HOME/wallpaper.png
 
 # Set powersavings for display (5 min)
 exec --no-startup-id xset s 300 dpms 300 300 300
