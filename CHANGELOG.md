@@ -2,6 +2,14 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.29.2 (2026-01-02)
+
+### Fix
+
+- **Ghostty**: Removing ghostty backup file
+- **Linux**: Adding correct flags
+- **Gitignore**: Adding more files to gitignore
+
 ## 0.29.1 (2026-01-02)
 
 ### Fix
