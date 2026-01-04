@@ -163,6 +163,9 @@ function yy() {
 
 
 
+# Go
+export PATH="$PATH:$HOME/go/bin"
+
 # Antigravity
 if [[ -d "$HOME/.antigravity/antigravity/bin" ]]; then
     export PATH="$HOME/dotfiles/scripts:$HOME/.antigravity/antigravity/bin:$PATH"
