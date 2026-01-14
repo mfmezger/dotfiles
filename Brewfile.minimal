@@ -1,0 +1,50 @@
+# ==============================================================================
+# MINIMAL BREWFILE - ESSENTIALS FOR ZSH SETUP
+# ==============================================================================
+# This includes only the packages required for the zsh configuration
+# to function properly with all its features and aliases.
+#
+# To install: brew bundle --file=Brewfile.minimal
+# ==============================================================================
+
+# ==============================================================================
+# TAPS
+# ==============================================================================
+tap "olets/tap"
+
+# ==============================================================================
+# SHELL & TERMINAL TOOLS (Core zsh functionality)
+# ==============================================================================
+brew "zsh"                                                     # Shell itself
+brew "atuin"                                                   # History search (completions.zsh)
+brew "zoxide"                                                  # cd replacement (used in .zshrc)
+brew "tealdeer"                                                # tldr (used in update alias)
+brew "olets/tap/zsh-abbr"                                     # Abbreviations (heavily used)
+brew "olets/tap/zsh-autosuggestions-abbreviations-strategy"  # Abbreviations strategy
+
+# ==============================================================================
+# FILE MANAGEMENT & NAVIGATION (Used in aliases)
+# ==============================================================================
+brew "eza"                                                     # ls replacement (aliases)
+brew "yazi"                                                    # File manager (yy function)
+brew "stow"                                                    # Dotfile symlink manager
+
+# ==============================================================================
+# TEXT PROCESSING & VIEWERS (Used in aliases)
+# ==============================================================================
+brew "bat"                                                     # cat replacement
+
+# ==============================================================================
+# DEVELOPMENT TOOLS (Referenced in zsh config)
+# ==============================================================================
+brew "go"                                                      # Go language (PATH in .zshrc)
+brew "gh"                                                      # GitHub CLI (completions)
+brew "git-delta"                                               # Git pager
+brew "fastfetch"                                               # System info (ff alias)
+brew "kubectl"                                                 # Kubernetes completions
+
+
+# ==============================================================================
+# FONTS (Required for Powerlevel10k icons)
+# ==============================================================================
+cask "font-caskaydia-cove-nerd-font"

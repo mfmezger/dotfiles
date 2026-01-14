@@ -22,17 +22,25 @@ else
 fi
 
 # 2. Install Packages
-echo ">>> Installing Brew packages <<<"
-brew bundle --file="$DOTFILES_DIR/Brewfile"
-
-# 2.1 Install Personal Packages (Optional)
-read -p ">>> Do you want to install personal packages (Obsidian, WhatsApp, VLC, etc.)? (y/N) " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo ">>> Installing Personal Brew packages <<<"
-    brew bundle --file="$DOTFILES_DIR/Brewfile.personal"
+read -p ">>> Do you want a minimal install (only zsh essentials)? (y/N) " -n 1 -r
+echo    # move to a new line
+MINIMAL_INSTALL=$REPLY
+if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
+    echo ">>> Installing minimal brew packages (zsh essentials only) <<<"
+    brew bundle --file="$DOTFILES_DIR/Brewfile.minimal"
 else
-    echo ">>> Skipping personal packages <<<"
+    echo ">>> Installing full brew packages <<<"
+    brew bundle --file="$DOTFILES_DIR/Brewfile"
+
+    # 2.1 Install Personal Packages (Optional - only for full install)
+    read -p ">>> Do you want to install personal packages (Obsidian, WhatsApp, VLC, etc.)? (y/N) " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo ">>> Installing Personal Brew packages <<<"
+        brew bundle --file="$DOTFILES_DIR/Brewfile.personal"
+    else
+        echo ">>> Skipping personal packages <<<"
+    fi
 fi
 
 # 3. Install Python tools (uv)
@@ -99,20 +107,20 @@ if command -v gh &> /dev/null; then
     gh completion -s zsh > "$COMPLETIONS_DIR/_gh"
 fi
 
-# Generate Docker completions
-if command -v docker &> /dev/null; then
+# Generate Docker completions (full install only)
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v docker &> /dev/null; then
     echo ">>> Generating docker completions <<<"
     docker completion zsh > "$COMPLETIONS_DIR/_docker"
 fi
 
-# Generate kubectl completions (if installed)
-if command -v kubectl &> /dev/null; then
+# Generate kubectl completions (full install only)
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v kubectl &> /dev/null; then
     echo ">>> Generating kubectl completions <<<"
     kubectl completion zsh > "$COMPLETIONS_DIR/_kubectl"
 fi
 
-# Generate helm completions (if installed)
-if command -v helm &> /dev/null; then
+# Generate helm completions (full install only)
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &> /dev/null; then
     echo ">>> Generating helm completions <<<"
     helm completion zsh > "$COMPLETIONS_DIR/_helm"
 fi
@@ -133,13 +141,37 @@ backup_if_exists() {
 # Backup common conflict files
 backup_if_exists ".zshrc"
 backup_if_exists ".p10k.zsh"
-backup_if_exists ".gitconfig"
-backup_if_exists ".config/nvim"
-backup_if_exists ".config/kitty"
-backup_if_exists ".config/yazi"
-backup_if_exists ".config/ghostty"
 
-# Run stow
-stow zsh nvim kitty yazi git ghostty zed
+# Run stow based on installation type
+if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
+    # Minimal install: only link zsh
+    stow zsh
+    echo ""
+    echo ">>> Minimal installation successfully completed! <<<"
+    echo ""
+    echo "What was installed:"
+    echo "  - Zsh with Oh My Zsh + Powerlevel10k theme"
+    echo "  - Essential plugins: zsh-autosuggestions, zsh-syntax-highlighting, zsh-abbr"
+    echo "  - Core tools: atuin, zoxide, eza, bat, yazi, stow"
+    echo "  - Development: go, gh, git-delta, uv, fastfetch"
+    echo "  - Nerd Font for Powerlevel10k icons"
+    echo ""
+    echo "What was NOT installed:"
+    echo "  - GUI applications (terminals, browsers, editors)"
+    echo "  - Docker/Kubernetes tools"
+    echo "  - System monitoring tools"
+    echo "  - Neovim, Kitty, Yazi, Git, Ghostty, Zed configs (not stowed)"
+    echo ""
+else
+    # Full install: link all dotfiles
+    backup_if_exists ".gitconfig"
+    backup_if_exists ".config/nvim"
+    backup_if_exists ".config/kitty"
+    backup_if_exists ".config/yazi"
+    backup_if_exists ".config/ghostty"
 
-echo ">>> Installation successfully completed! <<<"
+    stow zsh nvim kitty yazi git ghostty zed
+    echo ""
+    echo ">>> Full installation successfully completed! <<<"
+    echo ""
+fi
