@@ -2,6 +2,16 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.32.0 (2026-01-14)
+
+### Feat
+
+- **minimalsetup**: Adding a zsh only installation for mac
+
+### Fix
+
+- **Go**: Adding Go home
+
 ## 0.31.0 (2026-01-02)
 
 ### Feat
