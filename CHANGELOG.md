@@ -2,6 +2,16 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.34.0 (2026-01-18)
+
+### Feat
+
+- **git**: auto-push tags with commits
+
+### Fix
+
+- **i3**: persist EURkey layout after system updates
+
 ## 0.33.0 (2026-01-18)
 
 ### Feat
