@@ -2,6 +2,14 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.35.0 (2026-01-18)
+
+### Feat
+
+- add pre-commit hooks and configure tooling
+- **opencode**: allow todoread command
+- **opencode**: add grep and head permissions, document shell tool replacements
+
 ## 0.34.0 (2026-01-18)
 
 ### Feat
