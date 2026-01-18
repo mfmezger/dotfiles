@@ -2,6 +2,13 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## 0.33.0 (2026-01-18)
+
+### Feat
+
+- **zsh**: add git log abbreviation for last 10 commits
+- **ai**: add OpenCode and Claude Code AI tools support
+
 ## 0.32.0 (2026-01-14)
 
 ### Feat
