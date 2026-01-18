@@ -16,6 +16,21 @@ The OpenCode configuration in this repository is set up with specific permission
 - `git diff *` - View git diffs
 - `ls` - List directory contents
 - `find *` - Find files
+- `grep *` - Search file contents
+- `head` - View beginning of files
+
+### Shell Tool Configuration Notes
+
+#### cat → bat Replacement
+In this dotfiles repository, the `cat` command is replaced with `bat` via zsh-abbr:
+- `bat` provides syntax highlighting, line numbers, and Git integration
+- It's interactive with scrollable output and search (press `/`)
+- When AI agents use `cat`, they will invoke `bat` instead
+- For raw output (no coloring), use `bat --plain` or `bat -p`
+- Configuration: See `zsh/.zshrc` line 116
+
+#### eza → ls Replacement
+The `ls` command is replaced with `eza` for better icons and Git status
 
 ### Web Access
 - `websearch` - Allowed for searching the web

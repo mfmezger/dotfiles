@@ -15,7 +15,9 @@
       "git log *": "allow",
       "git diff *": "allow",
       "ls": "allow",
-      "find *": "allow"
+      "find *": "allow",
+      "grep *": "allow",
+      "head": "allow"
     },
     "edit": "ask",
     "read": "allow",
