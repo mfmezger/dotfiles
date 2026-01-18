@@ -17,7 +17,8 @@
       "ls": "allow",
       "find *": "allow",
       "grep *": "allow",
-      "head": "allow"
+      "head": "allow",
+      "todoread": "allow"
     },
     "edit": "ask",
     "read": "allow",
