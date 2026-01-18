@@ -1,0 +1,26 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [],
+  "permission": {
+    "*": "ask",
+    "bash": {
+      "*": "ask",
+      "uv sync": "allow",
+      "uv run pytest *": "allow",
+      "uv run pytest": "allow",
+      "go mod tidy": "allow",
+      "go test *": "allow",
+      "go test": "allow",
+      "git status": "allow",
+      "git log *": "allow",
+      "git diff *": "allow",
+      "ls": "allow",
+      "find *": "allow"
+    },
+    "edit": "ask",
+    "read": "allow",
+    "glob": "allow",
+    "websearch": "allow",
+    "codesearch": "allow"
+  }
+}

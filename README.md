@@ -66,12 +66,13 @@ EOF
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
 ├── zed/                    # Zed editor config
+├── opencode/               # OpenCode AI coding agent config (personal install only)
 ├── i3/                     # i3 window manager (Linux)
 ├── albert/                 # Albert launcher config (Linux)
 ├── screenlayout/           # Screen layout scripts (Linux)
 ├── scripts/                # Utility scripts
 ├── Brewfile                # macOS packages (work)
-├── Brewfile.personal       # macOS packages (personal)
+├── Brewfile.personal       # macOS packages (personal) - includes OpenCode & Claude Code
 ├── install_mac.sh          # macOS installer
 ├── install_linux.sh        # Arch Linux installer
 └── install_ubuntu_server.sh # Ubuntu terminal setup
@@ -159,6 +160,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `kitty`        | `~/.config/kitty`         |
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
+| `opencode`     | `~/.config/opencode`      | (personal install only)
 | `i3`           | `~/.config/i3`            |
 | `albert`       | `~/.config/albert`        |
 | `dunst`        | `~/.config/dunst`         |
@@ -171,8 +173,9 @@ cd ~/dotfiles
 
 # macOS
 stow zsh git nvim ghostty yazi zed
+stow opencode  # Only after installing personal packages
 
-# Arch Linux  
+# Arch Linux
 stow zsh git nvim kitty yazi ghostty zed albert
 stow --no-folding i3  # Preserves scripts folder
 

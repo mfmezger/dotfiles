@@ -114,6 +114,9 @@ abbr --quiet --session l="eza -lah --icons --group-directories-first"
 abbr --quiet --session ll="eza -lah --icons --group-directories-first"
 abbr --quiet --session cat="bat"
 
+# AI TOOLS
+abbr --quiet --session oc="opencode"
+
 # docker
 abbr --quiet --session dcb="docker compose build"
 abbr --quiet --session dcu="docker compose up"
@@ -172,3 +175,8 @@ if [[ -d "$HOME/.antigravity/antigravity/bin" ]]; then
 else
     export PATH="$HOME/dotfiles/scripts:$PATH"
 fi
+
+# Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

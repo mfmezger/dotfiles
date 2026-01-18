@@ -11,3 +11,7 @@ cask "obs"
 cask "shotcut"
 cask "appcleaner"
 cask "arc"
+
+# AI coding tools
+brew "opencode", tap: "anomalyco/tap"
+cask "claude-code"

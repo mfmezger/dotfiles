@@ -25,6 +25,7 @@ fi
 read -p ">>> Do you want a minimal install (only zsh essentials)? (y/N) " -n 1 -r
 echo    # move to a new line
 MINIMAL_INSTALL=$REPLY
+PERSONAL_INSTALL="no"
 if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo ">>> Installing minimal brew packages (zsh essentials only) <<<"
     brew bundle --file="$DOTFILES_DIR/Brewfile.minimal"
@@ -36,6 +37,7 @@ else
     read -p ">>> Do you want to install personal packages (Obsidian, WhatsApp, VLC, etc.)? (y/N) " -n 1 -r
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        PERSONAL_INSTALL="yes"
         echo ">>> Installing Personal Brew packages <<<"
         brew bundle --file="$DOTFILES_DIR/Brewfile.personal"
     else
@@ -171,6 +173,14 @@ else
     backup_if_exists ".config/ghostty"
 
     stow zsh nvim kitty yazi git ghostty zed
+
+    # Stow opencode config only if personal packages were installed
+    if [[ $PERSONAL_INSTALL == "yes" ]]; then
+        backup_if_exists ".config/opencode"
+        stow opencode
+        echo ">>> Stowing OpenCode configuration (personal install) <<<"
+    fi
+
     echo ""
     echo ">>> Full installation successfully completed! <<<"
     echo ""
