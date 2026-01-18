@@ -60,7 +60,7 @@ EOF
 ```bash
 ~/dotfiles/
 ├── zsh/                    # Zsh configuration (.zshrc, .p10k.zsh)
-├── nvim/                   # Neovim configuration  
+├── nvim/                   # Neovim configuration
 ├── kitty/                  # Kitty terminal config
 ├── ghostty/                # Ghostty terminal config
 ├── git/                    # Git configuration (.gitconfig)

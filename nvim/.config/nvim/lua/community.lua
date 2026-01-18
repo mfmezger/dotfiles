@@ -23,7 +23,7 @@ return {
   { import = "astrocommunity.scrolling.mini-animate" },
 
   -- Navigation & Motion
-  { import = "astrocommunity.motion.harpoon" },      -- ThePrimeagen/harpoon branch=harpoon2
+  { import = "astrocommunity.motion.harpoon" }, -- ThePrimeagen/harpoon branch=harpoon2
   { import = "astrocommunity.motion.flash-nvim" },
 
   -- Search & Replace

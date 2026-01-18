@@ -31,5 +31,5 @@ palette = 11=#ffd580
 palette = 12=#73d0ff
 palette = 13=#d4bfff
 palette = 14=#95e6cb
-palette = 15=#ffffff 
+palette = 15=#ffffff
 keybind = shift+enter=text:\x1b\r

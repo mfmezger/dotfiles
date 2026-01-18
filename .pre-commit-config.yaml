@@ -1,0 +1,58 @@
+repos:
+  # Shell script linting (for install scripts)
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+        args: [--severity=warning]
+        exclude: ^zsh/
+
+  # Lua formatting (for Neovim config)
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v2.0.2
+    hooks:
+      - id: stylua
+
+  # YAML linting and formatting
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.37.1
+    hooks:
+      - id: yamllint
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.20.0
+    hooks:
+      - id: yamlfmt
+
+  # Basic file validation (from your python_utils repo)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+        exclude: ^.*\.j2$
+      - id: check-yaml
+      - id: check-added-large-files
+        args: [--maxkb=5000]
+      - id: detect-private-key
+      - id: check-toml
+
+  # Validate GitHub Actions workflows
+  - repo: https://github.com/sirosen/check-jsonschema
+    rev: 0.35.0
+    hooks:
+      - id: check-github-workflows
+        args: [--verbose]
+
+  # Check for broken links in markdown
+  - repo: https://github.com/tcort/markdown-link-check
+    rev: v3.14.2
+    hooks:
+      - id: markdown-link-check
+        args: [-q]
+
+  # Detect typos
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.40.0
+    hooks:
+      - id: typos
+        args: [--config, .typos.toml, --check]

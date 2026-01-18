@@ -7,7 +7,7 @@ function compinit() {
   local _comp_dumpfile="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
   mkdir -p "${_comp_dumpfile:h}"
   local _comp_dump_age=999999
-  
+
   # Calculate file age with error handling\n
   if [[ -f "$_comp_dumpfile" ]]; then
       if [[ "$OSTYPE" == "darwin"* ]]; then

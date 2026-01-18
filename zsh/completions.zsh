@@ -7,7 +7,7 @@
 # Regenerate with:
 #   mkdir -p ~/.local/share/zsh/completions && cd ~/.local/share/zsh/completions
 #   atuin init zsh > atuin-init.zsh
-#   gh completion -s zsh > _gh  
+#   gh completion -s zsh > _gh
 #   docker completion zsh > _docker
 #   kubectl completion zsh > _kubectl
 #   helm completion zsh > _helm

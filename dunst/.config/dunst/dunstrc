@@ -11,7 +11,7 @@
 
     ### Geometry ###
     width = 300
-    
+
     # dynamic height from 0 to 300
     # The maximum height of a single notification, excluding the frame.
     height = (0, 300)
@@ -68,7 +68,7 @@
     min_icon_size = 0
     max_icon_size = 32
     icon_path = /usr/share/icons/Qogir/16/status:/usr/share/icons/Qogir/16/devices/:/usr/share/icons/Qogir/24/panel/:/usr/share/icons/Qogir/16/apps/:/usr/share/pixmaps/:/usr/share/icons/Qogir/scalable/apps/
-    
+
     ### History ###
     sticky_history = false
     history_length = 0

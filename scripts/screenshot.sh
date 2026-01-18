@@ -17,7 +17,7 @@ if scrot -s -f "$FILENAME"; then
     # -loop 1: keep xclip running to serve the selection (deprecated in some versions, but mostly harmless)
     # We silence output and background it properly
     xclip -selection clipboard -t image/png -i "$FILENAME" &
-    
+
     # Notify user
     notify-send "Screenshot taken" "Saved to $FILENAME and copied to clipboard" -i "$FILENAME"
 else

@@ -139,13 +139,13 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
     abbr --quiet --session nvitop="uvx nvitop"
-    
+
     # CUDA
     export PATH=/opt/cuda/bin:$PATH
     export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
     # cuSPARSELt
     export LD_LIBRARY_PATH=/opt/cusparselt/lib:$LD_LIBRARY_PATH
-    
+
     # Clipboard (macOS style)
     alias pbcopy="xclip -selection clipboard"
     alias pbpaste="xclip -selection clipboard -o"
