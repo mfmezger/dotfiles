@@ -18,7 +18,9 @@
       "find *": "allow",
       "grep *": "allow",
       "head": "allow",
-      "todoread": "allow"
+      "todoread": "allow",
+      "wc": "allow",
+      "rg": "allow"
     },
     "edit": "ask",
     "read": "allow",
