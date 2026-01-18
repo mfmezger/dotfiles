@@ -10,6 +10,8 @@
 [push]
     # Automatically set origin as the remote for current branch
     autoSetupRemote = true
+    # Push tags when pushing commits
+    followTags = true
 
 [core]
     pager = delta
