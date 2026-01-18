@@ -96,6 +96,7 @@ abbr --quiet --session init="pre-commit install && cz init"
 abbr --quiet --session ga="git add -A"
 abbr --quiet --session gs="git status"
 abbr --quiet --session gd="git diff"
+abbr --quiet --session gl="git log --oneline -10"
 
 abbr --quiet --session gg="git add . && git commit -m"
 abbr --quiet --session ggp="git add . && pre-commit run --all-files && cz commit && cz bump"
