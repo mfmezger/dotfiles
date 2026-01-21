@@ -99,7 +99,6 @@ abbr --quiet --session gd="git diff"
 abbr --quiet --session gl="git log --oneline -10"
 
 abbr --quiet --session gg="git add . && git commit -m"
-abbr --quiet --session ggp="git add . && pre-commit run --all-files && cz commit && cz bump"
 abbr --quiet --session gp="git push"
 abbr --quiet --session gpl="git pull"
 abbr --quiet --session gcb="git checkout -b"

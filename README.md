@@ -111,6 +111,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | `gs`     | `git status`                    |
 | `gd`     | `git diff`                      |
 | `gg`     | `git add . && git commit -m`    |
+| `gl`     | `git log --oneline -10`          |
 | `gp`     | `git push`                      |
 | `gpl`    | `git pull`                      |
 | `gc`     | `git checkout`                  |
@@ -136,6 +137,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | `dcub`   | `docker compose up --build`    |
 | `dd`     | `docker compose up --build -d` |
 | `dl`     | `docker compose logs -f -t`    |
+| `dc`     | `docker compose`               |
 
 ### System Update
 
