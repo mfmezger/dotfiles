@@ -4,7 +4,7 @@
 # ==============================================================================
 
 cask "obsidian"
-cask "whatsapp@beta"
+cask "whatsapp"
 cask "cyberduck"
 cask "vlc"
 cask "obs"
