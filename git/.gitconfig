@@ -13,6 +13,11 @@
     # Push tags when pushing commits
     followTags = true
 
+[fetch]
+    # Fetch all tags when fetching
+    prune = true
+    pruneTags = true
+
 [core]
     pager = delta
 	editor = nvim
