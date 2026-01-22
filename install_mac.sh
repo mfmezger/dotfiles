@@ -185,3 +185,12 @@ else
     echo ">>> Full installation successfully completed! <<<"
     echo ""
 fi
+
+echo ">>> Don't forget to set your git name and email! <<<"
+echo "Create ~/.gitconfig.local:"
+echo ""
+echo 'cat <<EOF > ~/.gitconfig.local'
+echo '[user]'
+echo '    name = Your Name'
+echo '    email = your.email@example.com'
+echo 'EOF'
