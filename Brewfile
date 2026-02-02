@@ -13,7 +13,6 @@ tap "olets/tap"
 # SYSTEM UTILITIES & MONITORING
 # ==============================================================================
 brew "btop"
-brew "htop"
 brew "zenith"
 brew "fastfetch"
 brew "dust"

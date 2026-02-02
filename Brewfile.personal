@@ -6,6 +6,7 @@
 cask "obsidian"
 cask "whatsapp"
 cask "cyberduck"
+cask "handy"
 cask "vlc"
 cask "obs"
 cask "shotcut"
