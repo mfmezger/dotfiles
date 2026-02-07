@@ -324,3 +324,90 @@ All notable changes to this dotfiles repository will be documented in this file.
 ### Initial
 
 - Initial commit with chezmoi setup
+
+## v0.36.0 (2026-02-07)
+
+### Feat
+
+- **update**: introducting update and setting uu as deprecated
+- **brew**: removing htop, and building a comparing script.
+- **coderoaster**: adding code roaster agent.
+- add pre-commit hooks and configure tooling
+- **opencode**: allow todoread command
+- **opencode**: add grep and head permissions, document shell tool replacements
+- **git**: auto-push tags with commits
+- **zsh**: add git log abbreviation for last 10 commits
+- **ai**: add OpenCode and Claude Code AI tools support
+- **minimalsetup**: Adding a zsh only installation for mac
+- **Shell**: Add pbcopy/pbpaste aliases for Linux
+- **Desktop**: Add screenshot script, persistent clipboard, and Dunst config
+- **Nvim**: Updating plugins and navigation for nvim
+- **Go**: Adding go for the installation on linux
+- **Witr**: Adding why is this running tool
+- **Diff**: Adding shortcut for git diff
+- **Nvitop**: Adding nvitop abbr for linux
+- **Albert**: Replacing Rofi with albert for linux
+- **Cuda**: Adding cuda and cuda docker support for the linux setup
+- **Linux**: Adding personal applications for linux
+- **Zed**: Adding zed config
+- **zed**: adding zed alias
+- **Brewfile**: adding k9s, and removing commandx. Merge pull request #4
+- **Brewfile**: Adding k9s
+- **ZSHRC**: Adding git all shortcut
+- **Mac**: Updating installation and zshrc
+- **Linux**: Updating Linux install script
+- **DockerVM**: Making sure on the vm is always the newest docker version installed
+- **MacInstall**: Adding brew executable
+- **MacInstall**: Adding brew executable
+- **Seperation**: Seperating into personal and work items. Making gitconfig easier updatable
+- **Brewfile**: Adding new dependencies for abbreviations
+- **ZSH**: adding coverage report generation and storing as html
+- **Zshrc**: Adding shortcut for docker compose build
+- **Zshrc**: Reworking alias to abbreviations
+- **Zshrc**: ordering and adding folders first for eza
+- changing the test command to use uv.
+- adding test alias.
+- adding omz update and removing git push for ggp.
+
+### Fix
+
+- **icons**: modifing space for icons in i3
+- **gitconfig**: adding pull tags
+- **gitconfig**: reminder to add the gitconfig added in install script.
+- **whatsapp**: replacing whatsapp beta with whatsapp
+- **minimal**: adding cask upgrade and iterm2 to minimal setup
+- **i3**: persist EURkey layout after system updates
+- **Go**: Adding Go home
+- **Homedirectory**: Fixing not correct home directories
+- **Ghostty**: Removing ghostty backup file
+- **Linux**: Adding correct flags
+- **Gitignore**: Adding more files to gitignore
+- **Kubectl**: Removing wrong and duplicate shortcut
+- **Brewfile**: Adding Tap for Abbreviations
+- **Git**: More shortcuts
+- **Albert**: Setting history of clipboard to 200
+- **Zed**: Adding devstral as default
+- **Albert**: Fixing background start of albert
+- **Cuda**: Adding libraries for deepseek ocr
+- **i3**: Add shortcut to exit gaming mode
+- **i3**: Improving screenshot util
+- **Linux**: Removing unnecessary update for freshclam
+- **Zed**: Fixing theme and adding new settings and extensions
+- **i3**: Fixing spacing and scripts
+- **i3**: Cleanup and fixing picom
+- **i3**: Changing location and name of wallpaper
+- **Linux**: Fixing Abbr on linux
+- **Brewfile**: Remove disabled command-x
+- **Readme**: Fix link
+- **NVIM**: User lua config
+- **Commitizen**: Adding Commitizen
+
+### Refactor
+
+- **eza**: refactoring eza/ls commands
+- **brew**: removing aerospace and evil helix
+
+### Perf
+
+- **zsh**: reduce shell startup time by 58%
+- **Zshrc**: Speeding up zshrc init by 2.8 times
