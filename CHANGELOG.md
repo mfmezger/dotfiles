@@ -2,6 +2,16 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## v0.37.0 (2026-02-07)
+
+### Feat
+
+- **installation**: moved always used script to common script
+
+### Refactor
+
+- **agents**: removing the agent stuff and moving to different repository
+
 ## v0.36.0 (2026-02-07)
 
 ### Feat
