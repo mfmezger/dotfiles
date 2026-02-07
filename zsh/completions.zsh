@@ -53,9 +53,11 @@ fi
 if [[ -f "$COMPLETIONS_DIR/_uv" ]]; then
     source "$COMPLETIONS_DIR/_uv"
     source "$COMPLETIONS_DIR/_uvx"
-else
-    eval "$(uv generate-shell-completion zsh)"
-    eval "$(uvx --generate-shell-completion zsh)"
+elif command -v uv &>/dev/null; then
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
+    source "$COMPLETIONS_DIR/_uv"
+    source "$COMPLETIONS_DIR/_uvx"
 fi
 
 # WT CLI

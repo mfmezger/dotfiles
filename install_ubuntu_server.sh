@@ -1,8 +1,8 @@
 #!/bin/bash
-set -e  # Exit on any error
+set -e # Exit on any error
 
 # Get the directory of this script
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "🚀 Starting beautiful terminal setup from $DOTFILES_DIR..."
 
@@ -64,7 +64,7 @@ if sudo apt install -y rust-eza 2>/dev/null; then
     fi
 else
     echo "📥 eza not available via apt, installing from binary..."
-    if ! command -v eza &> /dev/null; then
+    if ! command -v eza &>/dev/null; then
         wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
         echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
         sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
@@ -77,20 +77,20 @@ fi
 echo "🔧 Installing additional tools..."
 
 # Install zoxide (smart cd)
-if ! command -v zoxide &> /dev/null; then
+if ! command -v zoxide &>/dev/null; then
     curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
     sudo mv ~/.local/bin/zoxide /usr/local/bin/
 fi
 
 # Install atuin (better history)
-if ! command -v atuin &> /dev/null; then
+if ! command -v atuin &>/dev/null; then
     bash <(curl https://raw.githubusercontent.com/atuinsh/atuin/main/install.sh)
     sudo mv ~/.cargo/bin/atuin /usr/local/bin/ 2>/dev/null || true
 fi
 
 # Install uv (Python package manager)
 echo "🐍 Installing uv..."
-if ! command -v uv &> /dev/null; then
+if ! command -v uv &>/dev/null; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
 
@@ -103,7 +103,7 @@ uv tool install commitizen
 
 # Install witr (weather tool)
 echo "🌤️ Installing witr..."
-if ! command -v witr &> /dev/null; then
+if ! command -v witr &>/dev/null; then
     curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
 fi
 
@@ -152,14 +152,14 @@ COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"
 
 # Generate uv completions
-if command -v uv &> /dev/null; then
-    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
+if command -v uv &>/dev/null; then
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
-if command -v atuin &> /dev/null; then
-    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+if command -v atuin &>/dev/null; then
+    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
 fi
 
 # Set zsh as default shell

@@ -1,8 +1,8 @@
 #!/bin/bash
-set -e  # Exit immediately if a command exits with a non-zero status
+set -e # Exit immediately if a command exits with a non-zero status
 
 # Get the directory of this script
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo ">>> Starting Arch Linux Installation from $DOTFILES_DIR <<<"
 
@@ -51,7 +51,7 @@ sudo pacman -S --needed --noconfirm \
 echo ">>> Installing AUR packages <<<"
 
 # Ensure yay is installed
-if ! command -v yay &> /dev/null; then
+if ! command -v yay &>/dev/null; then
     echo ">>> Installing yay AUR helper <<<"
     git clone https://aur.archlinux.org/yay.git /tmp/yay
     cd /tmp/yay && makepkg -si --noconfirm
@@ -72,7 +72,7 @@ yay -S --needed --noconfirm \
 # ==============================================================================
 echo ""
 read -p ">>> Do you want to install personal packages (Obsidian, Steam, etc.)? (y/N) " -n 1 -r
-echo    # move to a new line
+echo # move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     # Enable multilib repository for Steam (requires 32-bit libraries)
     if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
@@ -97,11 +97,11 @@ fi
 # ==============================================================================
 echo ""
 read -p ">>> Do you want to install NVIDIA drivers and CUDA toolkit? (y/N) " -n 1 -r
-echo    # move to a new line
+echo # move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo ">>> Installing NVIDIA drivers via nvidia-inst (EndeavourOS) <<<"
     # nvidia-inst automatically detects and installs the correct NVIDIA driver
-    if command -v nvidia-inst &> /dev/null; then
+    if command -v nvidia-inst &>/dev/null; then
         nvidia-inst
     else
         echo ">>> nvidia-inst not found, installing nvidia package directly <<<"
@@ -166,7 +166,7 @@ fi
 # 7. Install Python Tools (uv & commitizen)
 # ==============================================================================
 echo ">>> Installing uv <<<"
-if ! command -v uv &> /dev/null; then
+if ! command -v uv &>/dev/null; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 else
     echo ">>> uv already installed <<<"
@@ -186,40 +186,40 @@ COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"
 
 # Generate uv completions
-if command -v uv &> /dev/null; then
+if command -v uv &>/dev/null; then
     echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
-if command -v atuin &> /dev/null; then
+if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
-    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
 fi
 
 # Generate GitHub CLI completions
-if command -v gh &> /dev/null; then
+if command -v gh &>/dev/null; then
     echo ">>> Generating gh completions <<<"
-    gh completion -s zsh > "$COMPLETIONS_DIR/_gh"
+    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
 fi
 
 # Generate Docker completions
-if command -v docker &> /dev/null; then
+if command -v docker &>/dev/null; then
     echo ">>> Generating docker completions <<<"
-    docker completion zsh > "$COMPLETIONS_DIR/_docker"
+    docker completion zsh >"$COMPLETIONS_DIR/_docker"
 fi
 
 # Generate kubectl completions (if installed)
-if command -v kubectl &> /dev/null; then
+if command -v kubectl &>/dev/null; then
     echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh > "$COMPLETIONS_DIR/_kubectl"
+    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
 fi
 
 # Generate helm completions (if installed)
-if command -v helm &> /dev/null; then
+if command -v helm &>/dev/null; then
     echo ">>> Generating helm completions <<<"
-    helm completion zsh > "$COMPLETIONS_DIR/_helm"
+    helm completion zsh >"$COMPLETIONS_DIR/_helm"
 fi
 
 # ==============================================================================

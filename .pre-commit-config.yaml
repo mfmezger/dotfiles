@@ -1,11 +1,18 @@
 repos:
-  # Shell script linting (for install scripts)
+  # Shell script linting (for install scripts only, bash/sh files)
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
       - id: shellcheck
         args: [--severity=warning]
-        exclude: ^zsh/
+        exclude: ^(zsh/|nvim/|kitty/|ghostty/|yazi/|zed/|i3/|albert/|screenlayout/)
+
+  # Shell script formatting
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.10.0-1
+    hooks:
+      - id: shfmt
+        args: [--indent, '4', --write]
 
   # Lua formatting (for Neovim config)
   - repo: https://github.com/JohnnyMorganz/StyLua
@@ -35,13 +42,6 @@ repos:
         args: [--maxkb=5000]
       - id: detect-private-key
       - id: check-toml
-
-  # Validate GitHub Actions workflows
-  - repo: https://github.com/sirosen/check-jsonschema
-    rev: 0.35.0
-    hooks:
-      - id: check-github-workflows
-        args: [--verbose]
 
   # Check for broken links in markdown
   - repo: https://github.com/tcort/markdown-link-check

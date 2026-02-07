@@ -2,14 +2,14 @@
 set -e # Exit immediately if a command exits with a non-zero status
 
 # Get the directory of this script
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo ">>> Starting Installation from $DOTFILES_DIR <<<"
 
 source "$DOTFILES_DIR/scripts/common.sh"
 
 # 1. Install Homebrew
-if ! command -v brew &> /dev/null; then
+if ! command -v brew &>/dev/null; then
     echo ">>> Installing Homebrew <<<"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -25,7 +25,7 @@ fi
 
 # 2. Install Packages
 read -p ">>> Do you want a minimal install (only zsh essentials)? (y/N) " -n 1 -r
-echo    # move to a new line
+echo # move to a new line
 MINIMAL_INSTALL=$REPLY
 PERSONAL_INSTALL="no"
 if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
@@ -37,7 +37,7 @@ else
 
     # 2.1 Install Personal Packages (Optional - only for full install)
     read -p ">>> Do you want to install personal packages (Obsidian, WhatsApp, VLC, etc.)? (y/N) " -n 1 -r
-    echo    # (optional) move to a new line
+    echo # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         PERSONAL_INSTALL="yes"
         echo ">>> Installing Personal Brew packages <<<"
@@ -49,7 +49,7 @@ fi
 
 # 3. Install Python tools (uv)
 echo ">>> Installing uv <<<"
-if ! command -v uv &> /dev/null; then
+if ! command -v uv &>/dev/null; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 else
     echo ">>> uv already installed <<<"
@@ -93,40 +93,40 @@ COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"
 
 # Generate uv completions
-if command -v uv &> /dev/null; then
+if command -v uv &>/dev/null; then
     echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
-if command -v atuin &> /dev/null; then
+if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
-    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
 fi
 
 # Generate GitHub CLI completions
-if command -v gh &> /dev/null; then
+if command -v gh &>/dev/null; then
     echo ">>> Generating gh completions <<<"
-    gh completion -s zsh > "$COMPLETIONS_DIR/_gh"
+    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
 fi
 
 # Generate Docker completions (full install only)
-if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v docker &> /dev/null; then
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v docker &>/dev/null; then
     echo ">>> Generating docker completions <<<"
-    docker completion zsh > "$COMPLETIONS_DIR/_docker"
+    docker completion zsh >"$COMPLETIONS_DIR/_docker"
 fi
 
 # Generate kubectl completions (full install only)
-if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v kubectl &> /dev/null; then
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v kubectl &>/dev/null; then
     echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh > "$COMPLETIONS_DIR/_kubectl"
+    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
 fi
 
 # Generate helm completions (full install only)
-if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &> /dev/null; then
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &>/dev/null; then
     echo ">>> Generating helm completions <<<"
-    helm completion zsh > "$COMPLETIONS_DIR/_helm"
+    helm completion zsh >"$COMPLETIONS_DIR/_helm"
 fi
 
 # 7. Link Dotfiles
