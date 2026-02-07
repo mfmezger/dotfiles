@@ -6,6 +6,8 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "🚀 Starting beautiful terminal setup from $DOTFILES_DIR..."
 
+source "$DOTFILES_DIR/scripts/common.sh"
+
 # Update package lists
 echo "📦 Updating package lists..."
 sudo apt update
@@ -169,15 +171,6 @@ fi
 # Link dotfiles using stow
 echo "🔗 Linking dotfiles..."
 cd "$DOTFILES_DIR"
-
-# Function to backup if file exists and is not a symlink
-backup_if_exists() {
-    local target="$HOME/$1"
-    if [ -e "$target" ] && [ ! -L "$target" ]; then
-        echo "Backing up existing $target to $target.backup"
-        mv "$target" "$target.backup"
-    fi
-}
 
 # Backup common conflict files
 backup_if_exists ".zshrc"

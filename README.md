@@ -55,6 +55,8 @@ EOF
 - **Launcher**: Albert (Linux), Raycast (macOS)
 - **Utilities**: tokei, witr
 
+> **AI Coding Agents**: See [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) for Claude Code and OpenCode configurations.
+
 ## Structure
 
 ```bash
@@ -66,17 +68,18 @@ EOF
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
 ├── zed/                    # Zed editor config
-├── opencode/               # OpenCode AI coding agent config (personal install only)
 ├── i3/                     # i3 window manager (Linux)
 ├── albert/                 # Albert launcher config (Linux)
 ├── screenlayout/           # Screen layout scripts (Linux)
 ├── scripts/                # Utility scripts
 ├── Brewfile                # macOS packages (work)
-├── Brewfile.personal       # macOS packages (personal) - includes OpenCode & Claude Code
+├── Brewfile.personal       # macOS packages (personal)
 ├── install_mac.sh          # macOS installer
 ├── install_linux.sh        # Arch Linux installer
 └── install_ubuntu_server.sh # Ubuntu terminal setup
 ```
+
+> **Note**: AI coding agent configurations (Claude Code, OpenCode) are managed in a separate repository: [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles). This keeps AI tool configs separate from general development dotfiles.
 
 ## Shortcuts
 
@@ -173,11 +176,12 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `kitty`        | `~/.config/kitty`         |
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
-| `opencode`     | `~/.config/opencode`      | (personal install only)
 | `i3`           | `~/.config/i3`            |
 | `albert`       | `~/.config/albert`        |
 | `dunst`        | `~/.config/dunst`         |
 | `screenlayout` | `~/.screenlayout`         |
+
+> **AI Agents**: Claude Code and OpenCode configs are managed in the separate [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) repository.
 
 ### Apply Configs
 
@@ -186,7 +190,6 @@ cd ~/dotfiles
 
 # macOS
 stow zsh git nvim ghostty yazi zed
-stow opencode  # Only after installing personal packages
 
 # Arch Linux
 stow zsh git nvim kitty yazi ghostty zed albert
@@ -195,6 +198,13 @@ stow --no-folding i3  # Preserves scripts folder
 # Ubuntu (minimal)
 stow zsh git nvim
 ```
+
+> **After installing main dotfiles**, set up AI agent configs from the separate repository:
+> ```bash
+> git clone https://github.com/mfmezger/ai_agent_dotfiles.git ~/ai_agent_dotfiles
+> cd ~/ai_agent_dotfiles
+> ./install.sh
+> ```
 
 ### Dry Run (Preview Changes)
 
