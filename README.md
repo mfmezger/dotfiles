@@ -145,6 +145,17 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | -------- | ----------------------------------------------------------- |
 | `uu`     | Update all packages (Homebrew on macOS, pacman/yay on Arch) |
 
+### File Listing (eza)
+
+| Shortcut | Expands To                                  |
+| -------- | ------------------------------------------- |
+| `ls`     | `eza -1 -a --icons --group-directories-first` |
+| `l`      | `eza -lah --icons --group-directories-first` |
+| `ll`     | `eza -lah --icons --group-directories-first` |
+| `lt`     | `eza --tree --level 2`                     |
+| `lg`     | `eza -lah --git --icons --group-directories-first` |
+| `cat`    | `bat` (syntax-highlighted cat)             |
+
 ---
 
 ## Stow Usage

@@ -57,3 +57,12 @@ else
     eval "$(uv generate-shell-completion zsh)"
     eval "$(uvx --generate-shell-completion zsh)"
 fi
+
+# WT CLI
+if [[ -f "$COMPLETIONS_DIR/wt-init.zsh" ]]; then
+    source "$COMPLETIONS_DIR/wt-init.zsh"
+else
+    if command -v wt >/dev/null 2>&1; then
+        eval "$(command wt config shell init zsh)"
+    fi
+fi

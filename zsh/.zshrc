@@ -109,9 +109,11 @@ abbr --quiet --session pt="uv run coverage run -m pytest -o log_cli=true -vvv te
 
 # FANCY NEW TOOLS
 abbr --quiet --session ff="fastfetch"
-abbr --quiet --session ls="eza -l -a --icons --group-directories-first"
+abbr --quiet --session ls="eza -1 -a --icons --group-directories-first"
 abbr --quiet --session l="eza -lah --icons --group-directories-first"
 abbr --quiet --session ll="eza -lah --icons --group-directories-first"
+abbr --quiet --session lt="eza --tree --level 2"
+abbr --quiet --session lg="eza -lah --git --icons --group-directories-first"
 abbr --quiet --session cat="bat"
 
 # AI TOOLS
@@ -188,3 +190,5 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
