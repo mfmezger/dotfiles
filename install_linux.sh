@@ -34,6 +34,7 @@ sudo pacman -S --needed --noconfirm \
     neovim \
     dust \
     tokei \
+    tree \
     git-delta \
     github-cli \
     ghostty \
