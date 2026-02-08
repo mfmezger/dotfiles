@@ -5,6 +5,9 @@ fi
 # Configure zoxide to override cd command directly
 export ZOXIDE_CMD_OVERRIDE="cd"
 
+# Echo the matched directory before navigating
+export _ZO_ECHO=1
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
