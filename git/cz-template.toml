@@ -1,0 +1,64 @@
+# Commitizen Template for .cz.toml
+# Usage: cp ~/dotfiles/git/cz-template.toml /path/to/project/.cz.toml
+
+[tool.commitizen]
+name = "cz_customize"
+version = "0.1.0"
+version_files = [".cz.toml:version"]
+tag_format = "v$version"
+
+[tool.commitizen.customize]
+bump_pattern = "^(feat|fix|chore|refactor|perf)"
+bump_map = { "feat" = "MINOR", "fix" = "PATCH", "chore" = "PATCH", "refactor" = "PATCH", "perf" = "PATCH" }
+message_template = "{{type}}{% if scope %}({{scope}}){% endif %}: {{subject}}\n\n{{body}}\n\n{{footer}}"
+example = "feat(api): add new user endpoint"
+schema = """
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+"""
+
+[[tool.commitizen.customize.questions]]
+type = "list"
+name = "type"
+message = "Select the type of change you're committing:"
+choices = [
+    { value = "feat", name = "feat:     A new feature" },
+    { value = "fix", name = "fix:      A bug fix" },
+    { value = "chore", name = "chore:    Maintenance" },
+    { value = "docs", name = "docs:     Documentation only changes" },
+    { value = "style", name = "style:    Code style changes (no logic change)" },
+    { value = "refactor", name = "refactor: Code refactor (no new feature, no bug fix)" },
+    { value = "perf", name = "perf:     Performance improvement" },
+    { value = "test", name = "test:     Adding or fixing tests" },
+    { value = "build", name = "build:    Build system or dependency changes" },
+    { value = "ci", name = "ci:       CI configuration changes" },
+]
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "scope"
+message = "Scope of this change (e.g., component or file name)? (enter to skip)\n"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "subject"
+message = "Short, imperative tense description:\n"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "body"
+message = "Longer description (enter to skip):\n"
+
+[[tool.commitizen.customize.questions]]
+type = "confirm"
+name = "is_breaking_change"
+message = "Any breaking changes?"
+default = false
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "footer"
+message = "Breaking changes or closed issues (enter to skip):\n"
