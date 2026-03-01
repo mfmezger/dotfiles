@@ -101,7 +101,9 @@ abbr --quiet --session gs="git status"
 abbr --quiet --session gd="git diff"
 abbr --quiet --session gl="git log --oneline -10"
 
-abbr --quiet --session gg="git add . && git commit -m"
+
+abbr --quiet --session gg="git add -A && git commit -m"
+abbr --quiet --session gcm="git commit -m"
 abbr --quiet --session gp="git push"
 abbr --quiet --session gpl="git pull"
 abbr --quiet --session gcb="git checkout -b"
