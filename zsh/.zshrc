@@ -118,6 +118,7 @@ abbr --quiet --session ls="eza -1 -a --icons --group-directories-first"
 abbr --quiet --session l="eza -lah --icons --group-directories-first"
 abbr --quiet --session ll="eza -lah --icons --group-directories-first"
 abbr --quiet --session lt="eza --tree --level 2"
+abbr --quiet --session tree="eza --tree"
 abbr --quiet --session lg="eza -lah --git --icons --group-directories-first"
 abbr --quiet --session cat="bat"
 
