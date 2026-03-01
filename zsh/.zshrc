@@ -180,6 +180,63 @@ function yy() {
     rm -f -- "$tmp"
 }
 
+# Git Worktree in tmp directory
+# Unalias gwt if it exists (conflicts with oh-my-zsh git plugin)
+unalias gwt 2>/dev/null
+
+function gwt() {
+    local repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ -z "$repo_root" ]]; then
+        echo "Error: Not a git repository."
+        return 1
+    fi
+
+    local name="$1"
+    if [[ -z "$name" ]]; then
+        echo "Usage: gwt <name>"
+        return 1
+    fi
+
+    local target="HEAD"
+    local worktree_dir="/tmp/worktrees/$name"
+
+    # Ensure parent directory exists
+    mkdir -p "/tmp/worktrees"
+
+    echo "Creating worktree '$name' for '$target' at '$worktree_dir'..."
+    if git worktree add --detach "$worktree_dir" "$target"; then
+        if [[ -f "$repo_root/.env" ]]; then
+            cp "$repo_root/.env" "$worktree_dir/.env"
+            echo "✓ Copied .env"
+        fi
+        if [[ -f "$repo_root/gcloud.json" ]]; then
+            cp "$repo_root/gcloud.json" "$worktree_dir/gcloud.json"
+            echo "✓ Copied gcloud.json"
+        fi
+        cd "$worktree_dir"
+    else
+        return 1
+    fi
+}
+
+# Clean up temporary git worktree
+function gwtc() {
+    local wt_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ -z "$wt_root" ]]; then
+        echo "Error: Not in a git repository."
+        return 1
+    fi
+
+    if [[ -d "$wt_root/.git" ]]; then
+        echo "Error: This is the main repository. Use 'git worktree remove' manually if needed."
+        return 1
+    fi
+
+    local main_repo=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null)/..
+    echo "Removing worktree at '$wt_root' and returning to main repo..."
+    cd "$main_repo" && git worktree remove "$wt_root"
+}
+
 
 
 # Go
