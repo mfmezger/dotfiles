@@ -154,6 +154,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
     abbr --quiet --session nvitop="uvx nvitop"
+    abbr --quiet --session audio="pavucontrol"
 
     # CUDA
     export PATH=/opt/cuda/bin:$PATH
