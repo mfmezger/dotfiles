@@ -167,13 +167,6 @@ else
 
     stow zsh nvim kitty yazi git ghostty zed
 
-    # 7.1 macOS Settings
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        echo ">>> Configuring iTerm2: Load preferences from dotfiles <<<"
-        defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_DIR/iterm2"
-        defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-    fi
-
     # Stow opencode config only if personal packages were installed
     if [[ $PERSONAL_INSTALL == "yes" ]]; then
         backup_if_exists ".config/opencode"
@@ -184,6 +177,13 @@ else
     echo ""
     echo ">>> Full installation successfully completed! <<<"
     echo ""
+fi
+
+# 8. macOS Settings (applies to both minimal and full install)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo ">>> Configuring iTerm2: Load preferences from dotfiles <<<"
+    defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_DIR/iterm2"
+    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 fi
 
 echo ">>> Don't forget to set your git name and email! <<<"
