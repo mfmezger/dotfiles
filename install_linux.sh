@@ -4,7 +4,7 @@ set -e # Exit immediately if a command exits with a non-zero status
 # Get the directory of this script
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo ">>> Starting Arch Linux Installation from $DOTFILES_DIR <<<"
+echo ">>> Starting Arch Linux / CachyOS Installation from $DOTFILES_DIR <<<"
 
 source "$DOTFILES_DIR/scripts/common.sh"
 
@@ -44,29 +44,71 @@ sudo pacman -S --needed --noconfirm \
     zed \
     go \
     scrot \
-    dunst
+    dunst \
+    hyprland \
+    hypridle \
+    hyprlock \
+    waybar \
+    xdg-desktop-portal-hyprland \
+    qt5-wayland \
+    qt6-wayland \
+    rofi-wayland \
+    wlogout \
+    grim \
+    slurp \
+    wl-clipboard \
+    brightnessctl \
+    playerctl \
+    thunar \
+    pavucontrol \
+    power-profiles-daemon \
+    polkit-gnome \
+    gnome-keyring
+
+# Install the packaged Powerlevel10k when available to avoid AUR conflicts
+POWERLEVEL10K_INSTALLED_FROM_REPO=0
+if pacman -Q zsh-theme-powerlevel10k &>/dev/null; then
+    echo ">>> zsh-theme-powerlevel10k already installed <<<"
+    POWERLEVEL10K_INSTALLED_FROM_REPO=1
+elif sudo pacman -Si zsh-theme-powerlevel10k &>/dev/null; then
+    echo ">>> Installing zsh-theme-powerlevel10k from pacman <<<"
+    sudo pacman -S --needed --noconfirm zsh-theme-powerlevel10k
+    POWERLEVEL10K_INSTALLED_FROM_REPO=1
+fi
 
 # ==============================================================================
-# 3. Install AUR Packages via Yay
+# 3. Install AUR Packages via AUR Helper
 # ==============================================================================
 echo ">>> Installing AUR packages <<<"
 
-# Ensure yay is installed
-if ! command -v yay &>/dev/null; then
-    echo ">>> Installing yay AUR helper <<<"
-    git clone https://aur.archlinux.org/yay.git /tmp/yay
-    cd /tmp/yay && makepkg -si --noconfirm
+# Prefer paru on CachyOS, fall back to yay on other Arch-based systems
+if command -v paru &>/dev/null; then
+    AUR_HELPER="paru"
+elif command -v yay &>/dev/null; then
+    AUR_HELPER="yay"
+else
+    echo ">>> Installing paru AUR helper <<<"
+    sudo pacman -S --needed --noconfirm base-devel git
+    git clone https://aur.archlinux.org/paru.git /tmp/paru
+    cd /tmp/paru && makepkg -si --noconfirm
     cd "$DOTFILES_DIR"
+    AUR_HELPER="paru"
 fi
 
-yay -S --needed --noconfirm \
-    zsh-theme-powerlevel10k-git \
-    visual-studio-code-bin \
-    brave-bin \
-    zsh-abbr \
-    discord \
-    albert \
+AUR_PACKAGES=(
+    visual-studio-code-bin
+    brave-bin
+    zsh-abbr
+    discord
     witr-bin
+    cliphist
+)
+
+if [ "$POWERLEVEL10K_INSTALLED_FROM_REPO" -eq 0 ]; then
+    AUR_PACKAGES+=(zsh-theme-powerlevel10k-git)
+fi
+
+"$AUR_HELPER" -S --needed --noconfirm "${AUR_PACKAGES[@]}"
 
 # ==============================================================================
 # 4. Install Personal Applications (Optional)
@@ -86,7 +128,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
     echo ">>> Installing personal AUR packages <<<"
     sudo pacman -S --needed --noconfirm qbittorrent
-    yay -S --needed --noconfirm \
+    "$AUR_HELPER" -S --needed --noconfirm \
         obsidian \
         steam
 else
@@ -100,20 +142,24 @@ echo ""
 read -p ">>> Do you want to install NVIDIA drivers and CUDA toolkit? (y/N) " -n 1 -r
 echo # move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo ">>> Installing NVIDIA drivers via nvidia-inst (EndeavourOS) <<<"
-    # nvidia-inst automatically detects and installs the correct NVIDIA driver
-    if command -v nvidia-inst &>/dev/null; then
-        nvidia-inst
+    if pacman -Qq | grep -Eq '^(linux-cachyos.*nvidia|linux-cachyos.*nvidia-open|nvidia-dkms|nvidia-open-dkms|nvidia-open|nvidia)$'; then
+        echo ">>> Existing NVIDIA driver stack detected, skipping driver installation <<<"
     else
-        echo ">>> nvidia-inst not found, installing nvidia package directly <<<"
-        sudo pacman -S --needed --noconfirm nvidia nvidia-utils nvidia-settings
+        echo ">>> Installing NVIDIA drivers via distro tooling when available <<<"
+        # nvidia-inst exists on some Arch-based distros and picks a suitable stack.
+        if command -v nvidia-inst &>/dev/null; then
+            nvidia-inst
+        else
+            echo ">>> nvidia-inst not found, installing generic nvidia packages <<<"
+            sudo pacman -S --needed --noconfirm nvidia nvidia-utils nvidia-settings
+        fi
     fi
 
     echo ">>> Installing CUDA toolkit <<<"
     sudo pacman -S --needed --noconfirm cuda
 
     echo ">>> Installing cuSPARSELt library <<<"
-    yay -S --needed --noconfirm cusparselt
+    "$AUR_HELPER" -S --needed --noconfirm cusparselt
 
     echo ">>> Installing NVIDIA Container Toolkit for Docker <<<"
     sudo pacman -S --needed --noconfirm nvidia-container-toolkit
@@ -134,12 +180,16 @@ fi
 # ==============================================================================
 echo ">>> Installing Oh My Zsh <<<"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    export RUNZSH=no
+    export CHSH=no
+    export KEEP_ZSHRC=yes
+    export ZSH="$HOME/.oh-my-zsh"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 else
     echo ">>> Oh My Zsh already installed <<<"
 fi
 
-ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 echo ">>> Installing zsh-autosuggestions <<<"
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
@@ -274,19 +324,18 @@ backup_if_exists ".config/nvim"
 backup_if_exists ".config/kitty"
 backup_if_exists ".config/yazi"
 backup_if_exists ".config/i3"
+backup_if_exists ".config/hypr"
 backup_if_exists ".config/ghostty"
 backup_if_exists ".config/zed"
-backup_if_exists ".config/albert"
+backup_if_exists ".config/dunst"
+backup_if_exists ".config/waybar"
+backup_if_exists ".config/rofi"
+backup_if_exists ".config/gtk-3.0"
+backup_if_exists ".config/gtk-4.0"
+backup_if_exists ".gtkrc-2.0"
 
-# Run stow (use --no-folding for i3 to allow scripts folder to be separate)
-stow zsh nvim kitty yazi git screenlayout ghostty zed albert dunst
-stow --no-folding i3
-
-# Copy i3 scripts from system skeleton (not tracked in dotfiles)
-if [ -d "/etc/skel/.config/i3/scripts" ]; then
-    echo ">>> Copying i3 scripts from system skeleton <<<"
-    cp -r /etc/skel/.config/i3/scripts "$HOME/.config/i3/"
-fi
+# Run stow
+stow zsh nvim kitty yazi git ghostty zed dunst hypr waybar rofi gtk
 
 # ==============================================================================
 # 14. Set Default Shell
