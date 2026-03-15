@@ -1,0 +1,13 @@
+configuration {
+  modi: "drun,window,run";
+  show-icons: true;
+  display-drun: "apps";
+  display-window: "windows";
+  display-run: "run";
+  drun-display-format: "{name}";
+  window-format: "{w} · {c}";
+  font: "Noto Sans 12";
+  icon-theme: "Adwaita";
+}
+
+@theme "~/.config/rofi/theme.rasi"

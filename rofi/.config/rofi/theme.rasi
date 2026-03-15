@@ -1,0 +1,113 @@
+* {
+  background: #101216ee;
+  background-alt: #161a20ff;
+  foreground: #e6e9ef;
+  foreground-muted: #98a2b3;
+  border: #2a2f3a;
+  selected: #7aa2f7ff;
+  urgent: #f7768eff;
+  selected-foreground: #111318;
+  font: "Noto Sans 12";
+}
+
+window {
+  width: 44%;
+  location: center;
+  anchor: center;
+  fullscreen: false;
+  background-color: @background;
+  border: 1px;
+  border-color: @border;
+  border-radius: 18px;
+  padding: 18px;
+}
+
+mainbox {
+  background-color: transparent;
+  spacing: 14px;
+  children: [ inputbar, listview ];
+}
+
+inputbar {
+  background-color: @background-alt;
+  border: 0px;
+  border-radius: 14px;
+  padding: 12px 14px;
+  spacing: 10px;
+  children: [ prompt, entry ];
+}
+
+prompt {
+  background-color: transparent;
+  text-color: @selected;
+  font: "CaskaydiaCove Nerd Font 13";
+  str: ">";
+}
+
+entry {
+  background-color: transparent;
+  text-color: @foreground;
+  placeholder: "Search applications";
+  placeholder-color: @foreground-muted;
+}
+
+listview {
+  background-color: transparent;
+  lines: 10;
+  columns: 1;
+  fixed-height: false;
+  dynamic: true;
+  cycle: true;
+  scrollbar: false;
+  layout: vertical;
+  spacing: 8px;
+}
+
+element {
+  background-color: transparent;
+  text-color: @foreground;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+element normal.normal {
+  background-color: transparent;
+  text-color: @foreground;
+}
+
+element selected.normal {
+  background-color: @selected;
+  text-color: @selected-foreground;
+}
+
+element normal.urgent {
+  background-color: transparent;
+  text-color: @urgent;
+}
+
+element selected.urgent {
+  background-color: @urgent;
+  text-color: @selected-foreground;
+}
+
+element-icon {
+  background-color: transparent;
+  size: 28px;
+  border: 0px;
+}
+
+element-text {
+  background-color: transparent;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-text normal.normal {
+  background-color: transparent;
+  text-color: @foreground;
+}
+
+element-text selected.normal {
+  background-color: transparent;
+  text-color: @selected-foreground;
+}

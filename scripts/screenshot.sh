@@ -1,24 +1,28 @@
 #!/bin/bash
+set -e
 
-# Create screenshots directory if it doesn't exist
-mkdir -p ~/Pictures/Screenshots
+SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
+FILENAME="$SCREENSHOT_DIR/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
 
-# Generate filename with timestamp
-FILENAME=~/Pictures/Screenshots/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png
+mkdir -p "$SCREENSHOT_DIR"
 
-# Take screenshot with selection
-# -s: select window or rectangle
-# -f: freeze screen while selecting (helps avoid capturing the selection tool itself sometimes)
-if scrot -s -f "$FILENAME"; then
-    # Copy to clipboard
-    # We use xclip to read the file and put it in clipboard
-    # -selection clipboard: use the Ctrl+V clipboard
-    # -t image/png: specify mime type
-    # -loop 1: keep xclip running to serve the selection (deprecated in some versions, but mostly harmless)
-    # We silence output and background it properly
+take_wayland_screenshot() {
+    grim -g "$(slurp)" "$FILENAME"
+    wl-copy <"$FILENAME"
+}
+
+take_x11_screenshot() {
+    scrot -s -f "$FILENAME"
     xclip -selection clipboard -t image/png -i "$FILENAME" &
+}
 
-    # Notify user
+if [ -n "$WAYLAND_DISPLAY" ]; then
+    SCREENSHOT_CMD="take_wayland_screenshot"
+else
+    SCREENSHOT_CMD="take_x11_screenshot"
+fi
+
+if $SCREENSHOT_CMD; then
     notify-send "Screenshot taken" "Saved to $FILENAME and copied to clipboard" -i "$FILENAME"
 else
     notify-send "Screenshot aborted" "No screenshot taken"

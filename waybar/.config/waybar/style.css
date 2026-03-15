@@ -1,0 +1,88 @@
+* {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: "Noto Sans", "CaskaydiaCove Nerd Font", sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: #e6e9ef;
+}
+
+tooltip {
+  background: #16181d;
+  border: 1px solid #2a2f3a;
+  color: #e6e9ef;
+  border-radius: 12px;
+}
+
+#custom-launcher,
+#clock,
+#pulseaudio,
+#backlight,
+#network,
+#battery,
+#cpu,
+#memory,
+#tray,
+#custom-power,
+#window,
+#workspaces {
+  background: rgba(22, 24, 29, 0.94);
+  color: #d9dde7;
+  margin: 2px 0;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+}
+
+#custom-launcher,
+#custom-power {
+  background: #e6e9ef;
+  color: #111318;
+  font-weight: 700;
+}
+
+#window {
+  color: #aeb6c7;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+#workspaces {
+  padding: 2px 6px;
+}
+
+#workspaces button {
+  background: transparent;
+  color: #7f8797;
+  margin: 0 1px;
+  padding: 0 8px;
+  border-radius: 6px;
+}
+
+#workspaces button.active {
+  background: #7aa2f7;
+  color: #111318;
+}
+
+#workspaces button.urgent {
+  background: #f7768e;
+  color: #111318;
+}
+
+#battery.warning,
+#network.disconnected {
+  color: #e0af68;
+}
+
+#battery.critical {
+  color: #f7768e;
+}
+
+#tray {
+  padding-right: 14px;
+}

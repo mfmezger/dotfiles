@@ -1,0 +1,94 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 3,
+  "margin-top": 4,
+  "margin-left": 6,
+  "margin-right": 6,
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "backlight",
+    "network",
+    "battery",
+    "cpu",
+    "memory",
+    "custom/power"
+  ],
+  "custom/launcher": {
+    "format": "apps",
+    "tooltip": false,
+    "on-click": "rofi -show drun -show-icons"
+  },
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": true,
+    "format": "{name}",
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "*": 10
+    }
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "rewrite": {
+      "(.*) - Brave": "$1",
+      "(.*) - Ghostty": "$1",
+      "(.*) - Mozilla Firefox": "$1"
+    },
+    "separate-outputs": true,
+    "max-length": 48
+  },
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt>{calendar}</tt>"
+  },
+  "tray": {
+    "spacing": 8
+  },
+  "pulseaudio": {
+    "format": "vol {volume}%",
+    "format-muted": "vol mute",
+    "tooltip": false,
+    "on-click": "pavucontrol"
+  },
+  "backlight": {
+    "format": "bri {percent}%",
+    "tooltip": false
+  },
+  "network": {
+    "format-wifi": "{essid}",
+    "format-ethernet": "wired",
+    "format-disconnected": "offline",
+    "tooltip-format": "{ifname} via {gwaddr}"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "bat {capacity}%",
+    "format-charging": "bat {capacity}%+",
+    "format-plugged": "bat {capacity}%="
+  },
+  "cpu": {
+    "format": "cpu {usage}%"
+  },
+  "memory": {
+    "format": "ram {}%"
+  },
+  "custom/power": {
+    "format": "power",
+    "tooltip": false,
+    "on-click": "wlogout"
+  }
+}

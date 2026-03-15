@@ -17,7 +17,7 @@ cd ~/dotfiles
 ./install_mac.sh
 ```
 
-### Arch Linux
+### Arch Linux / CachyOS
 
 ```bash
 ./install_linux.sh
@@ -68,8 +68,9 @@ EOF
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
 ├── zed/                    # Zed editor config
-├── i3/                     # i3 window manager (Linux)
-├── albert/                 # Albert launcher config (Linux)
+├── i3/                     # i3 window manager (legacy Linux setup)
+├── hypr/                   # Hyprland configuration (CachyOS/Linux)
+├── waybar/                 # Waybar top bar (Hyprland/Linux)
 ├── screenlayout/           # Screen layout scripts (Linux)
 ├── scripts/                # Utility scripts
 ├── Brewfile                # macOS packages (work)
@@ -177,8 +178,9 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
 | `i3`           | `~/.config/i3`            |
-| `albert`       | `~/.config/albert`        |
+| `hypr`         | `~/.config/hypr`          |
 | `dunst`        | `~/.config/dunst`         |
+| `waybar`       | `~/.config/waybar`        |
 | `screenlayout` | `~/.screenlayout`         |
 
 > **AI Agents**: Claude Code and OpenCode configs are managed in the separate [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) repository.
@@ -191,9 +193,8 @@ cd ~/dotfiles
 # macOS
 stow zsh git nvim ghostty yazi zed
 
-# Arch Linux
-stow zsh git nvim kitty yazi ghostty zed albert
-stow --no-folding i3  # Preserves scripts folder
+# Arch Linux / CachyOS
+stow zsh git nvim kitty yazi ghostty zed dunst hypr waybar
 
 # Ubuntu (minimal)
 stow zsh git nvim

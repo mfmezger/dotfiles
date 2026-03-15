@@ -11,7 +11,13 @@ export _ZO_ECHO=1
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
+    ZSH_THEME=""
+    POWERLEVEL10K_THEME_PATH="/usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme"
+else
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+    POWERLEVEL10K_THEME_PATH=""
+fi
 
 # Base plugins for all systems
 plugins=(
@@ -25,7 +31,6 @@ plugins=(
     pre-commit
     # SSH
     ssh
-    ssh-agent
     # Kubernetes (kubectl/helm are lazy-loaded below for speed)
     golang
     # terminal
@@ -39,6 +44,9 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
+if [[ -d "$HOME/.ssh" ]]; then
+    plugins+=(ssh-agent)
+fi
 # Platform-specific plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS specific plugins
@@ -50,6 +58,10 @@ fi
 source $HOME/dotfiles/zsh/fast_init.zsh
 
 source $ZSH/oh-my-zsh.sh
+
+if [[ -n "$POWERLEVEL10K_THEME_PATH" ]]; then
+    source "$POWERLEVEL10K_THEME_PATH"
+fi
 
 # HISTORY SETTINGS
 HISTFILE=~/.zsh_history
@@ -146,7 +158,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     }
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    abbr --quiet --session update="sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update"
+    abbr --quiet --session update="sudo paru -Syyu --noconfirm && tldr --update && omz update"
     function uu() {
         echo "⚠️  'uu' is deprecated, please use 'update' instead"
         sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update
@@ -254,5 +266,4 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
