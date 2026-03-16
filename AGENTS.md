@@ -16,7 +16,7 @@ This is a personal dotfiles repository for cross-platform (macOS/Linux) developm
 
 # Apply specific configs using stow
 stow zsh git nvim ghostty yazi zed  # macOS
-stow zsh git nvim kitty yazi ghostty zed albert  # Arch Linux
+stow zsh git nvim kitty yazi ghostty zed  # Arch Linux
 stow -n zsh  # Dry run to preview changes
 stow -R zsh  # Restow to refresh symlinks
 ```
@@ -84,8 +84,6 @@ Place configs in appropriate directories:
 - `yazi/.config/yazi/` - Yazi file manager config
 - `zed/.config/zed/` - Zed editor config
 - `opencode/.config/opencode/` - OpenCode AI coding agent config (personal install only)
-- `i3/.config/i3/` - i3 window manager config (Linux)
-- `albert/.config/albert/` - Albert launcher config (Linux)
 - `scripts/` - Utility scripts
 
 ### Platform-Specific Handling
@@ -131,7 +129,6 @@ Lua linting uses selene with neovim standard. Format with stylua.
 ## Stow Notes
 
 - Stow creates symlinks from package directories to home directory
-- Use `--no-folding` for packages with scripts folders (e.g., `i3`)
 - Conflicts occur when files exist at target location
 - Backup and remove conflicting files before stowing
 

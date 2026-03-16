@@ -43,7 +43,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ### Fix
 
-- **i3**: persist EURkey layout after system updates
 
 ## 0.33.0 (2026-01-18)
 
@@ -136,7 +135,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ### Fix
 
-- **Albert**: Setting history of clipboard to 200
 - **Zed**: Adding devstral as default
 
 ## 0.26.0 (2025-12-15)
@@ -147,9 +145,7 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ### Fix
 
-- **Albert**: Setting history of clipboard to 200
 - **Zed**: Adding devstral as default
-- **Albert**: Fixing background start of albert
 
 ## 0.25.1 (2025-12-12)
 
@@ -161,7 +157,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ### Feat
 
-- **Albert**: Replacing Rofi with albert for linux
 
 ## 0.24.0 (2025-12-12)
 
@@ -173,7 +168,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ### Fix
 
-- **i3**: Add shortcut to exit gaming mode
 
 ## 0.23.0 (2025-12-11)
 
@@ -183,7 +177,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ### Fix
 
-- **i3**: Improving screenshot util
 
 ## 0.22.2 (2025-12-11)
 
@@ -208,19 +201,16 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ### Fix
 
-- **i3**: Fixing spacing and scripts
 
 ## 0.21.7 (2025-12-10)
 
 ### Fix
 
-- **i3**: Cleanup and fixing picom
 
 ## 0.21.6 (2025-12-10)
 
 ### Fix
 
-- **i3**: Changing location and name of wallpaper
 
 ## 0.21.5 (2025-12-10)
 
@@ -328,7 +318,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ### Feat
 
-- Adding ghostty and i3 configs
 - Adding Arch Linux config
 
 ## 0.2.0 (2024-08-01)

@@ -52,7 +52,7 @@ EOF
 - **Git**: git-delta, gh, onefetch, commitizen
 - **History & Docs**: atuin, tealdeer
 - **DevOps**: k9s, kubectl, helm
-- **Launcher**: Albert (Linux), Raycast (macOS)
+- **Launcher**: Rofi (Linux), Raycast (macOS)
 - **Utilities**: tokei, witr
 
 > **AI Coding Agents**: See [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) for Claude Code and OpenCode configurations.
@@ -68,7 +68,6 @@ EOF
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
 ├── zed/                    # Zed editor config
-├── i3/                     # i3 window manager (legacy Linux setup)
 ├── hypr/                   # Hyprland configuration (CachyOS/Linux)
 ├── waybar/                 # Waybar top bar (Hyprland/Linux)
 ├── screenlayout/           # Screen layout scripts (Linux)
@@ -177,7 +176,6 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `kitty`        | `~/.config/kitty`         |
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
-| `i3`           | `~/.config/i3`            |
 | `hypr`         | `~/.config/hypr`          |
 | `dunst`        | `~/.config/dunst`         |
 | `waybar`       | `~/.config/waybar`        |
