@@ -33,10 +33,7 @@
     "disable-scroll": false,
     "all-outputs": true,
     "format": "{name}",
-    "sort-by-number": true,
-    "persistent-workspaces": {
-      "*": 10
-    }
+    "sort-by-number": true
   },
   "hyprland/window": {
     "format": "{}",

@@ -1,9 +1,12 @@
 configuration {
-  modi: "drun,window,run";
+  modi: "combi,drun,window,run,calc";
   show-icons: true;
+  combi-modes: "drun,run,calc";
+  display-combi: "launcher";
   display-drun: "apps";
   display-window: "windows";
   display-run: "run";
+  display-calc: "calc";
   drun-display-format: "{name}";
   window-format: "{w} · {c}";
   font: "Noto Sans 12";

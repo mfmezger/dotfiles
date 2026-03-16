@@ -53,6 +53,7 @@ sudo pacman -S --needed --noconfirm \
     qt5-wayland \
     qt6-wayland \
     rofi-wayland \
+    rofi-calc \
     wlogout \
     grim \
     slurp \
