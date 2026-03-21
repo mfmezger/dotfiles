@@ -11,6 +11,14 @@ export _ZO_ECHO=1
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+LINUX_DISTRO_ID=""
+if [[ -r /etc/os-release ]]; then
+    LINUX_DISTRO_ID="$(
+        . /etc/os-release
+        printf '%s' "${ID:-}"
+    )"
+fi
+
 if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
     ZSH_THEME=""
     POWERLEVEL10K_THEME_PATH="/usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme"
@@ -83,7 +91,9 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     elif [[ -f ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-abbr/zsh-abbr.zsh ]]; then
         source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-abbr/zsh-abbr.zsh
     fi
-    source $HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+    if [[ -f $HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh ]]; then
+        source $HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+    fi
 fi
 ZSH_AUTOSUGGEST_STRATEGY=( abbreviations $ZSH_AUTOSUGGEST_STRATEGY )
 export LANG=en_US.UTF-8
@@ -93,90 +103,107 @@ export EDITOR="nvim"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# BASIC STUFF (session-only for faster shell startup)
-abbr --quiet --session e="exit"
-abbr --quiet --session v="$EDITOR"
-abbr --quiet --session c="clear"
-abbr --quiet --session g="git"
-abbr --quiet --session d="docker"
-abbr --quiet --session dc="docker compose"
-abbr --quiet --session k="kubectl"
+if (( $+commands[abbr] )); then
+    # BASIC STUFF (session-only for faster shell startup)
+    abbr --quiet --session e="exit"
+    abbr --quiet --session v="$EDITOR"
+    abbr --quiet --session c="clear"
+    abbr --quiet --session g="git"
+    abbr --quiet --session d="docker"
+    abbr --quiet --session dc="docker compose"
+    abbr --quiet --session k="kubectl"
 
-# PYTHON VIRTUAL ENV
-abbr --quiet --session av=". .venv/bin/activate"
-abbr --quiet --session us="uv sync"
+    # PYTHON VIRTUAL ENV
+    abbr --quiet --session av=". .venv/bin/activate"
+    abbr --quiet --session us="uv sync"
 
-# GITHUB & GIT
-abbr --quiet --session init="pre-commit install && cz init"
-abbr --quiet --session ga="git add -A"
-abbr --quiet --session gs="git status"
-abbr --quiet --session gd="git diff"
-abbr --quiet --session gl="git log --oneline -10"
+    # GITHUB & GIT
+    abbr --quiet --session init="pre-commit install && cz init"
+    abbr --quiet --session ga="git add -A"
+    abbr --quiet --session gs="git status"
+    abbr --quiet --session gd="git diff"
+    abbr --quiet --session gl="git log --oneline -10"
+    abbr --quiet --session gg="git add -A && git commit -m"
+    abbr --quiet --session gcm="git commit -m"
+    abbr --quiet --session gp="git push"
+    abbr --quiet --session gpl="git pull"
+    abbr --quiet --session gcb="git checkout -b"
+    abbr --quiet --session gc="git checkout"
+    abbr --quiet --session pcr="pre-commit run --all-files"
+    abbr --quiet --session pcu="pre-commit autoupdate"
+    abbr --quiet --session pt="uv run coverage run -m pytest -o log_cli=true -vvv tests && uv run coverage report && uv run coverage html"
 
+    # FANCY NEW TOOLS
+    abbr --quiet --session ff="fastfetch"
+    abbr --quiet --session ls="eza -1 -a --icons --group-directories-first"
+    abbr --quiet --session l="eza -lah --icons --group-directories-first"
+    abbr --quiet --session ll="eza -lah --icons --group-directories-first"
+    abbr --quiet --session lt="eza --tree --level 2"
+    abbr --quiet --session tree="eza --tree"
+    abbr --quiet --session lg="eza -lah --git --icons --group-directories-first"
+    abbr --quiet --session cat="bat"
 
-abbr --quiet --session gg="git add -A && git commit -m"
-abbr --quiet --session gcm="git commit -m"
-abbr --quiet --session gp="git push"
-abbr --quiet --session gpl="git pull"
-abbr --quiet --session gcb="git checkout -b"
-abbr --quiet --session gc="git checkout"
-abbr --quiet --session pcr="pre-commit run --all-files"
-abbr --quiet --session pcu="pre-commit autoupdate"
-abbr --quiet --session pt="uv run coverage run -m pytest -o log_cli=true -vvv tests && uv run coverage report && uv run coverage html"
+    # AI TOOLS
+    abbr --quiet --session oc="opencode"
 
-# FANCY NEW TOOLS
-abbr --quiet --session ff="fastfetch"
-abbr --quiet --session ls="eza -1 -a --icons --group-directories-first"
-abbr --quiet --session l="eza -lah --icons --group-directories-first"
-abbr --quiet --session ll="eza -lah --icons --group-directories-first"
-abbr --quiet --session lt="eza --tree --level 2"
-abbr --quiet --session tree="eza --tree"
-abbr --quiet --session lg="eza -lah --git --icons --group-directories-first"
-abbr --quiet --session cat="bat"
+    # docker
+    abbr --quiet --session dcb="docker compose build"
+    abbr --quiet --session dcu="docker compose up"
+    abbr --quiet --session dcub="docker compose up --build"
+    abbr --quiet --session dd="docker compose up --build -d"
+    abbr --quiet --session dl="docker compose logs -f -t"
 
-# AI TOOLS
-abbr --quiet --session oc="opencode"
-
-# docker
-abbr --quiet --session dcb="docker compose build"
-abbr --quiet --session dcu="docker compose up"
-abbr --quiet --session dcub="docker compose up --build"
-abbr --quiet --session dd="docker compose up --build -d"
-abbr --quiet --session dl="docker compose logs -f -t"
-
-# kubernetes
-abbr --quiet --session tt="tilt down; tilt up"
-abbr --quiet --session kgp='kubectl get pods'
+    # kubernetes
+    abbr --quiet --session tt="tilt down; tilt up"
+    abbr --quiet --session kgp='kubectl get pods'
+fi
 
 # Platform-specific update aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
-    abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
+    (( $+commands[abbr] )) && abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
     function uu() {
         echo "⚠️  'uu' is deprecated, please use 'update' instead"
         brew update && brew upgrade && brew cu -f -a && tldr --update && omz update
     }
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Arch Linux update command
-    abbr --quiet --session update="sudo paru -Syyu --noconfirm && tldr --update && omz update"
-    function uu() {
-        echo "⚠️  'uu' is deprecated, please use 'update' instead"
-        sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update
-    }
-    # Zed editor is called 'zeditor' on Linux
-    alias zed="zeditor"
-    abbr --quiet --session nvitop="uvx nvitop"
-    abbr --quiet --session audio="pavucontrol"
+    if [[ "$LINUX_DISTRO_ID" == "arch" || "$LINUX_DISTRO_ID" == "cachyos" ]]; then
+        (( $+commands[abbr] )) && abbr --quiet --session update="sudo paru -Syyu --noconfirm && tldr --update && omz update"
+        function uu() {
+            echo "⚠️  'uu' is deprecated, please use 'update' instead"
+            sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update
+        }
 
-    # CUDA
-    export PATH=/opt/cuda/bin:$PATH
-    export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
-    # cuSPARSELt
-    export LD_LIBRARY_PATH=/opt/cusparselt/lib:$LD_LIBRARY_PATH
+        if command -v zeditor &>/dev/null; then
+            alias zed="zeditor"
+        fi
+        (( $+commands[abbr] )) && abbr --quiet --session nvitop="uvx nvitop"
+        (( $+commands[abbr] )) && abbr --quiet --session audio="pavucontrol"
 
-    # Clipboard (macOS style)
-    alias pbcopy="xclip -selection clipboard"
-    alias pbpaste="xclip -selection clipboard -o"
+        if [[ -d /opt/cuda/bin ]]; then
+            export PATH=/opt/cuda/bin:$PATH
+        fi
+        if [[ -d /opt/cuda/lib64 ]]; then
+            export LD_LIBRARY_PATH=/opt/cuda/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+        fi
+        if [[ -d /opt/cusparselt/lib ]]; then
+            export LD_LIBRARY_PATH=/opt/cusparselt/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+        fi
+    else
+        (( $+commands[abbr] )) && abbr --quiet --session update="sudo apt update && sudo apt upgrade -y && tldr --update && omz update"
+        function uu() {
+            echo "⚠️  'uu' is deprecated, please use 'update' instead"
+            sudo apt update && sudo apt upgrade -y && tldr --update && omz update
+        }
+    fi
+
+    if command -v xclip &>/dev/null; then
+        alias pbcopy="xclip -selection clipboard"
+        alias pbpaste="xclip -selection clipboard -o"
+    elif command -v wl-copy &>/dev/null && command -v wl-paste &>/dev/null; then
+        alias pbcopy="wl-copy"
+        alias pbpaste="wl-paste"
+    fi
 fi
 
 # Pre-cached completions (moved to separate file for cleaner .zshrc)
@@ -266,4 +293,3 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-

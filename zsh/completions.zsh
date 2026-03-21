@@ -17,7 +17,7 @@ COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 # Atuin (history search)
 if [[ -f "$COMPLETIONS_DIR/atuin-init.zsh" ]]; then
     source "$COMPLETIONS_DIR/atuin-init.zsh"
-else
+elif command -v atuin &>/dev/null; then
     eval "$(atuin init zsh)"
 fi
 
