@@ -1,5 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -40,12 +38,28 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      -- "pyright"
+      "ty",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      ruff = {
+        init_options = {
+          settings = {
+            organizeImports = true,
+          },
+        },
+      },
+      ty = {
+        cmd = { "ty", "server" },
+        filetypes = { "python" },
+        root_dir = function(fname)
+          return require("lspconfig.util").root_pattern("pyproject.toml", "ty.toml", "setup.py", "setup.cfg", ".git")(
+            fname
+          )
+        end,
+        single_file_support = true,
+      },
     },
     -- customize how language servers are attached
     handlers = {
@@ -55,6 +69,10 @@ return {
       -- the key is the server that is being setup with `lspconfig`
       -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
       -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
+      basedpyright = false,
+      pyright = false,
+      ruff = function(_, opts) require("lspconfig").ruff.setup(opts) end,
+      ty = function(_, opts) require("lspconfig").ty.setup(opts) end,
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
@@ -99,8 +117,7 @@ return {
     -- A custom `on_attach` function to be run after the default `on_attach` function
     -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
     on_attach = function(client, bufnr)
-      -- this would disable semanticTokensProvider for all clients
-      -- client.server_capabilities.semanticTokensProvider = nil
+      if client.name == "ruff" then client.server_capabilities.hoverProvider = false end
     end,
   },
 }
