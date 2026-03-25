@@ -13,7 +13,8 @@ return {
 
   -- Language Packs
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.python.base" },
+  { import = "astrocommunity.pack.python.ruff" },
 
   -- Fuzzy Finding
   { import = "astrocommunity.fuzzy-finder.telescope-zoxide" },
