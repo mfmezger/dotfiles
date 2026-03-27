@@ -249,7 +249,7 @@ if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
     atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
     echo ">>> Importing shell history into atuin <<<"
-    atuin import auto
+    atuin import auto || echo ">>> Warning: Failed to import shell history into atuin. Please check atuin logs or run 'atuin import auto' manually. <<<"
 fi
 
 # Generate GitHub CLI completions
