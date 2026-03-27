@@ -160,6 +160,11 @@ fi
 # Generate atuin init script
 if command -v atuin &>/dev/null; then
     atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
+    echo ">>> Importing shell history into atuin <<<"
+    atuin import auto -y || {
+        echo ">>> Warning: Failed to import shell history into atuin."
+        echo ">>> Please check atuin logs or run 'atuin import auto' manually."
+    }
 fi
 
 # Set zsh as default shell
