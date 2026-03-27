@@ -103,6 +103,8 @@ fi
 if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
     atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
+    echo ">>> Importing shell history into atuin <<<"
+    atuin import auto
 fi
 
 # Generate GitHub CLI completions
