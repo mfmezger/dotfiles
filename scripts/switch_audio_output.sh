@@ -17,7 +17,7 @@ fi
 NEXT_SINK="${SINKS[0]}"
 for INDEX in "${!SINKS[@]}"; do
     if [ "${SINKS[$INDEX]}" = "$CURRENT_SINK" ]; then
-        NEXT_INDEX=$(( (INDEX + 1) % ${#SINKS[@]} ))
+        NEXT_INDEX=$(((INDEX + 1) % ${#SINKS[@]}))
         NEXT_SINK="${SINKS[$NEXT_INDEX]}"
         break
     fi
