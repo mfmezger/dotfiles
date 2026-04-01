@@ -158,10 +158,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     }
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    abbr --quiet --session update="sudo paru -Syyu --noconfirm && tldr --update && omz update"
+    abbr --quiet --session update="paru -Syyu --noconfirm && tldr --update && omz update"
     function uu() {
         echo "⚠️  'uu' is deprecated, please use 'update' instead"
-        sudo pacman -Syyu --noconfirm && yay --noconfirm && tldr --update && omz update
+        paru -Syyu --noconfirm && tldr --update && omz update
     }
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
@@ -266,4 +266,4 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+source /usr/share/nvm/init-nvm.sh
