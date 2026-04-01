@@ -2,6 +2,41 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## v0.38.0 (2026-04-01)
+
+### Feat
+
+- **config**: add hyprpaper startup and fix update alias
+- **install**: import shell history into atuin during setup
+- **config**: switch AstroNvim Python tooling to ty and ruff
+- **hypr**: add F1 keybinding cheatsheet
+- **linux**: add rofi calc launcher
+- **hyprlock**: refresh lock screen styling
+- **linux**: add hyprland desktop setup
+- **brewfile**: add maccy to minimal installation
+- **zsh**: add audio abbreviation for pavucontrol
+- **zsh**: add git worktree helper functions
+- **zshrc**: add tree abbreviation for eza
+- **zshrc**: changing shortcuts for git
+- **ghostty**: match iTerm color scheme with Cascadia Cove NF font
+- **git**: add commitizen configuration templates
+- **iterm2**: adding iterm configuration file
+- **kitty**: enable copy on select
+
+### Fix
+
+- **atuin**: adding y flag in case for interactive.
+- **install**: add error handling for atuin history import
+- **iterm2**: apply iTerm2 config for both minimal and full install
+- **iterm2**: apply iTerm2 config for both minimal and full install
+- **iterm2**: apply iTerm2 config for both minimal and full install
+- **zoxide**: echo the directory to allow for better visualization of the jump
+- **tree**: adding tree for linux
+
+### Refactor
+
+- **linux**: remove legacy albert and i3 configs
+
 ## v0.37.0 (2026-02-07)
 
 ### Feat
