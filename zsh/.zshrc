@@ -182,6 +182,17 @@ fi
 # Pre-cached completions (moved to separate file for cleaner .zshrc)
 source $HOME/dotfiles/zsh/completions.zsh
 
+# Normalize trailing slashes for zoxide-backed `cd` queries.
+# Without this, `cd project/` falls through to `zoxide query "project/"`,
+# which does not match entries stored without the trailing slash.
+function cd() {
+    if [[ "$#" -eq 1 ]] && [[ "$1" != "/" ]] && [[ ! -d "$1" ]] && [[ "$1" == */ ]]; then
+        __zoxide_z "${1%/}"
+        return $?
+    fi
+
+    __zoxide_z "$@"
+}
 
 # YAZI
 function yy() {
