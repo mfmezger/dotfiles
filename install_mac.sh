@@ -185,6 +185,22 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 fi
 
+# 9. Set Default Shell
+echo ">>> Setting zsh as default shell <<<"
+ZSH_PATH="$(command -v zsh)"
+if [ "$SHELL" != "$ZSH_PATH" ]; then
+    if grep -qx "$ZSH_PATH" /etc/shells; then
+        chsh -s "$ZSH_PATH"
+    else
+        echo ">>> Warning: $ZSH_PATH is not listed in /etc/shells, so the default shell was not changed. <<<"
+        echo ">>> To set it manually, run: <<<"
+        echo "sudo sh -c 'echo $ZSH_PATH >> /etc/shells'"
+        echo "chsh -s $ZSH_PATH"
+    fi
+else
+    echo ">>> zsh is already the default shell <<<"
+fi
+
 echo ">>> Don't forget to set your git name and email! <<<"
 echo "Create ~/.gitconfig.local:"
 echo ""
@@ -193,3 +209,6 @@ echo '[user]'
 echo '    name = Your Name'
 echo '    email = your.email@example.com'
 echo 'EOF'
+
+echo ""
+echo ">>> Please log out and log back in for any shell changes to take effect. <<<"
