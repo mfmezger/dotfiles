@@ -169,15 +169,9 @@ else
     backup_if_exists ".config/kitty"
     backup_if_exists ".config/yazi"
     backup_if_exists ".config/ghostty"
+    backup_if_exists ".config/zed"
 
     stow zsh nvim kitty yazi git ghostty zed
-
-    # Stow opencode config only if personal packages were installed
-    if [[ $PERSONAL_INSTALL == "yes" ]]; then
-        backup_if_exists ".config/opencode"
-        stow opencode
-        echo ">>> Stowing OpenCode configuration (personal install) <<<"
-    fi
 
     echo ""
     echo ">>> Full installation successfully completed! <<<"
