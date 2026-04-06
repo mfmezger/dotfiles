@@ -1,34 +1,130 @@
-# AstroNvim Template
+# Neovim config
 
-**NOTE:** This is for AstroNvim v4+
+Personal AstroNvim v4 configuration managed in this dotfiles repo.
 
-A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+## Structure
 
-## 🛠️ Installation
+- `init.lua` - bootstraps `lazy.nvim` and loads the config
+- `lua/lazy_setup.lua` - AstroNvim + Lazy setup
+- `lua/community.lua` - AstroCommunity imports
+- `lua/plugins/` - plugin overrides and custom plugins
 
-#### Make a backup of your current nvim and shared folder
+## Enabled features
 
-```shell
-mv ~/.config/nvim ~/.config/nvim.bak
-mv ~/.local/share/nvim ~/.local/share/nvim.bak
-mv ~/.local/state/nvim ~/.local/state/nvim.bak
-mv ~/.cache/nvim ~/.cache/nvim.bak
+### Core platform
+
+- [AstroNvim v4](https://github.com/AstroNvim/AstroNvim)
+- [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management
+- AstroCommunity imports for shared plugin packs
+
+### Language support
+
+Current language/community packs:
+
+- Lua
+- Python
+  - base pack
+  - Ruff integration
+
+### UI and navigation
+
+- `noice.nvim`
+- `mini.animate`
+- `flash.nvim`
+- `harpoon`
+- `trouble.nvim`
+- `telescope-zoxide`
+- `render-markdown.nvim`
+- `nvim-spectre`
+- `neotest`
+- `oil.nvim` on `-`
+
+## Python setup
+
+Python is configured around:
+
+- `ruff` for linting/import organization
+- `ty server` as the Python language server
+- Default `pyright` and `basedpyright` handlers disabled in favor of the custom `ty` setup
+
+Related files:
+
+- `lua/plugins/astrolsp.lua`
+- `lua/plugins/mason.lua`
+
+Installed tools include:
+
+- `lua_ls`
+- `ruff`
+- `ty`
+- `stylua`
+- Python DAP support
+
+## Notable customizations
+
+### Editor options
+
+Configured in `lua/plugins/astrocore.lua`:
+
+- relative line numbers enabled
+- wrapping enabled
+- signcolumn always shown
+- diagnostics virtual text enabled
+- large buffer protections enabled
+
+### Keymaps
+
+Custom normal-mode mappings include:
+
+- `]b` / `[b` - next/previous buffer
+- `<Leader>1` .. `<Leader>9` - jump to buffer by tab position
+- `<Leader>bd` - choose a buffer from the tabline and close it
+- `-` - open `oil.nvim`
+
+## Plugin notes
+
+Custom plugins and overrides currently live in:
+
+- `lua/plugins/user.lua`
+
+This file includes:
+
+- `presence.nvim`
+- `lsp_signature.nvim`
+- `oil.nvim`
+- `nvim-surround`
+- custom `alpha-nvim` header
+- `LuaSnip` filetype extension for JavaScript
+- custom `nvim-autopairs` rules
+
+## Maintenance
+
+### Update plugins
+
+Inside Neovim:
+
+```vim
+:Lazy sync
 ```
 
-#### Create a new user repository from this template
+### Check tool installs
 
-Press the "Use this template" button above to create a new repository to store your user configuration.
+Inside Neovim:
 
-You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
-
-#### Clone the repository
-
-```shell
-git clone https://github.com/mfmezger/astrovim_v4_config ~/.config/nvim
+```vim
+:Mason
 ```
 
-#### Start Neovim
+### Lockfile
 
-```shell
-nvim
-```
+Plugin versions are pinned in:
+
+- `lazy-lock.json`
+
+## Repo context
+
+This config lives at:
+
+- `nvim/.config/nvim/`
+
+and is intended to be managed via GNU Stow with the rest of this dotfiles repository.
