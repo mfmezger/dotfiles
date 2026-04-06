@@ -44,8 +44,8 @@ Current language/community packs:
 Python is configured around:
 
 - `ruff` for linting/import organization
-- `ty` as the Python language server
-- `pyright` and `basedpyright` disabled
+- `ty server` as the Python language server
+- Default `pyright` and `basedpyright` handlers disabled in favor of the custom `ty` setup
 
 Related files:
 
