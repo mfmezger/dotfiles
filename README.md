@@ -201,7 +201,6 @@ stow zsh git nvim
 ```
 
 > **After installing main dotfiles**, set up AI agent configs from the separate repository.
-> The macOS installer does this automatically when you choose personal packages:
 > ```bash
 > git clone https://github.com/mfmezger/ai_agent_dotfiles.git ~/ai_agent_dotfiles
 > cd ~/ai_agent_dotfiles
