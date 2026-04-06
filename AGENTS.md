@@ -16,7 +16,7 @@ This is a personal dotfiles repository for cross-platform (macOS/Linux) developm
 
 # Apply specific configs using stow
 stow zsh git nvim ghostty yazi zed  # macOS
-stow zsh git nvim kitty yazi ghostty zed  # Arch Linux
+stow zsh git nvim yazi ghostty zed  # Arch Linux
 stow -n zsh  # Dry run to preview changes
 stow -R zsh  # Restow to refresh symlinks
 ```
@@ -79,7 +79,6 @@ Place configs in appropriate directories:
 - `zsh/` - Shell configuration (.zshrc, .p10k.zsh)
 - `nvim/.config/nvim/` - Neovim configuration
 - `git/.gitconfig` - Git configuration
-- `kitty/.config/kitty/` - Kitty terminal config
 - `ghostty/.config/ghostty/` - Ghostty terminal config
 - `yazi/.config/yazi/` - Yazi file manager config
 - `zed/.config/zed/` - Zed editor config

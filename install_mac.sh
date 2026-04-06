@@ -160,17 +160,16 @@ if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo "  - GUI applications (terminals, browsers, editors)"
     echo "  - Docker/Kubernetes tools"
     echo "  - System monitoring tools"
-    echo "  - Neovim, Kitty, Yazi, Git, Ghostty, Zed configs (not stowed)"
+    echo "  - Neovim, Yazi, Git, Ghostty, Zed configs (not stowed)"
     echo ""
 else
     # Full install: link all dotfiles
     backup_if_exists ".gitconfig"
     backup_if_exists ".config/nvim"
-    backup_if_exists ".config/kitty"
     backup_if_exists ".config/yazi"
     backup_if_exists ".config/ghostty"
 
-    stow zsh nvim kitty yazi git ghostty zed
+    stow zsh nvim yazi git ghostty zed
 
     # Stow opencode config only if personal packages were installed
     if [[ $PERSONAL_INSTALL == "yes" ]]; then
