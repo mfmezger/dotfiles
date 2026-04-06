@@ -172,11 +172,23 @@ else
 
     stow zsh nvim kitty yazi git ghostty zed
 
-    # Stow opencode config only if personal packages were installed
+    # Install AI agent dotfiles from the dedicated repository for personal setups
     if [[ $PERSONAL_INSTALL == "yes" ]]; then
-        backup_if_exists ".config/opencode"
-        stow opencode
-        echo ">>> Stowing OpenCode configuration (personal install) <<<"
+        AI_AGENT_DOTFILES_DIR="$HOME/ai_agent_dotfiles"
+
+        if [[ ! -d "$AI_AGENT_DOTFILES_DIR" ]]; then
+            echo ">>> Cloning AI agent dotfiles to $AI_AGENT_DOTFILES_DIR <<<"
+            git clone https://github.com/mfmezger/ai_agent_dotfiles.git "$AI_AGENT_DOTFILES_DIR"
+        else
+            echo ">>> AI agent dotfiles already present at $AI_AGENT_DOTFILES_DIR <<<"
+        fi
+
+        if [[ -f "$AI_AGENT_DOTFILES_DIR/install.sh" ]]; then
+            echo ">>> Installing AI agent dotfiles from $AI_AGENT_DOTFILES_DIR <<<"
+            bash "$AI_AGENT_DOTFILES_DIR/install.sh"
+        else
+            echo ">>> Warning: $AI_AGENT_DOTFILES_DIR/install.sh not found. Skipping AI agent dotfiles setup. <<<"
+        fi
     fi
 
     echo ""
