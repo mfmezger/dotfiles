@@ -13,7 +13,7 @@
 #   helm completion zsh > _helm
 
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
-mkdir -p "$COMPLETIONS_DIR"
+[[ -d "$COMPLETIONS_DIR" ]] || mkdir -p "$COMPLETIONS_DIR"
 
 # Atuin (history search)
 if [[ -f "$COMPLETIONS_DIR/atuin-init.zsh" ]]; then

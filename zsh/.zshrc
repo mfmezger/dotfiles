@@ -96,12 +96,13 @@ ZSH_AUTOSUGGEST_STRATEGY=( abbreviations $ZSH_AUTOSUGGEST_STRATEGY )
 export LANG=en_US.UTF-8
 
 export EDITOR="nvim"
+HAS_ABBR=$+commands[abbr]
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # BASIC STUFF (session-only for faster shell startup)
-if command -v abbr >/dev/null 2>&1; then
+if (( HAS_ABBR )); then
     abbr --quiet --session e="exit"
     abbr --quiet --session v="$EDITOR"
     abbr --quiet --session c="clear"
@@ -158,7 +159,7 @@ fi
 # Platform-specific update aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
-    if command -v abbr >/dev/null 2>&1; then
+    if (( HAS_ABBR )); then
         abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
     fi
     function uu() {
@@ -167,7 +168,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     }
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    if command -v abbr >/dev/null 2>&1; then
+    if (( HAS_ABBR )); then
         abbr --quiet --session update="paru -Syyu --noconfirm && tldr --update && omz update"
     fi
     function uu() {
@@ -176,7 +177,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     }
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
-    if command -v abbr >/dev/null 2>&1; then
+    if (( HAS_ABBR )); then
         abbr --quiet --session nvitop="uvx nvitop"
         abbr --quiet --session audio="pavucontrol"
     fi
