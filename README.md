@@ -2,7 +2,9 @@
 
 Cross-platform dotfiles for macOS and Linux with modern CLI tools and development environment.
 
-My recommended extensions for ai engineering can be installed via the vs-code extensions pack: [AI Engineering Extensions Pack](https://marketplace.visualstudio.com/items?itemName=mfmezger.python-ai-engineering).
+> My recommended extensions for ai engineering can be installed via the vs-code extensions pack: [AI Engineering Extensions Pack](https://marketplace.visualstudio.com/items?itemName=mfmezger.python-ai-engineering).
+
+> **AI Agents**: Claude Code and OpenCode configs are managed in the separate [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) repository.
 
 ## Quick Install
 
@@ -181,7 +183,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `waybar`       | `~/.config/waybar`        |
 | `screenlayout` | `~/.screenlayout`         |
 
-> **AI Agents**: Claude Code and OpenCode configs are managed in the separate [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) repository.
+
 
 ### Apply Configs
 
@@ -198,7 +200,8 @@ stow zsh git nvim kitty yazi ghostty zed dunst hypr waybar
 stow zsh git nvim
 ```
 
-> **After installing main dotfiles**, set up AI agent configs from the separate repository:
+> **After installing main dotfiles**, set up AI agent configs from the separate repository.
+> The macOS installer does this automatically when you choose personal packages:
 > ```bash
 > git clone https://github.com/mfmezger/ai_agent_dotfiles.git ~/ai_agent_dotfiles
 > cd ~/ai_agent_dotfiles
