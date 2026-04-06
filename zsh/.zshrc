@@ -2,6 +2,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Resolve the dotfiles repo from this file's location so the checkout path is portable.
+export DOTFILES_DIR="${${(%):-%N}:A:h:h}"
+
+source_if_exists() {
+    [[ -f "$1" ]] && source "$1"
+}
+
 # Configure zoxide to override cd command directly
 export ZOXIDE_CMD_OVERRIDE="cd"
 
@@ -55,7 +62,7 @@ fi
 
 # OPTIMIZATION: Manually handle completion initialization
 # Moved ugly logic to separate file to keep .zshrc clean
-source $HOME/dotfiles/zsh/fast_init.zsh
+source_if_exists "$DOTFILES_DIR/zsh/fast_init.zsh"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -74,8 +81,8 @@ setopt SHARE_HISTORY      # Share history between sessions
 
 # User configuration
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
-    source /opt/homebrew/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+    source_if_exists /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
+    source_if_exists /opt/homebrew/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # zsh-abbr: check Arch path first, then oh-my-zsh custom path
     if [[ -f /usr/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh ]]; then
@@ -83,90 +90,97 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     elif [[ -f ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-abbr/zsh-abbr.zsh ]]; then
         source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-abbr/zsh-abbr.zsh
     fi
-    source $HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+    source_if_exists "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh"
 fi
 ZSH_AUTOSUGGEST_STRATEGY=( abbreviations $ZSH_AUTOSUGGEST_STRATEGY )
 export LANG=en_US.UTF-8
 
 export EDITOR="nvim"
+HAS_ABBR=$+commands[abbr]
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # BASIC STUFF (session-only for faster shell startup)
-abbr --quiet --session e="exit"
-abbr --quiet --session v="$EDITOR"
-abbr --quiet --session c="clear"
-abbr --quiet --session g="git"
-abbr --quiet --session d="docker"
-abbr --quiet --session dc="docker compose"
-abbr --quiet --session k="kubectl"
+if (( HAS_ABBR )); then
+    abbr --quiet --session e="exit"
+    abbr --quiet --session v="$EDITOR"
+    abbr --quiet --session c="clear"
+    abbr --quiet --session g="git"
+    abbr --quiet --session d="docker"
+    abbr --quiet --session dc="docker compose"
+    abbr --quiet --session k="kubectl"
 
-# PYTHON VIRTUAL ENV
-abbr --quiet --session av=". .venv/bin/activate"
-abbr --quiet --session us="uv sync"
+    # PYTHON VIRTUAL ENV
+    abbr --quiet --session av=". .venv/bin/activate"
+    abbr --quiet --session us="uv sync"
 
-# GITHUB & GIT
-abbr --quiet --session init="pre-commit install && cz init"
-abbr --quiet --session ga="git add -A"
-abbr --quiet --session gs="git status"
-abbr --quiet --session gd="git diff"
-abbr --quiet --session gl="git log --oneline -10"
+    # GITHUB & GIT
+    abbr --quiet --session init="pre-commit install && cz init"
+    abbr --quiet --session ga="git add -A"
+    abbr --quiet --session gs="git status"
+    abbr --quiet --session gd="git diff"
+    abbr --quiet --session gl="git log --oneline -10"
+    abbr --quiet --session gg="git add -A && git commit -m"
+    abbr --quiet --session gcm="git commit -m"
+    abbr --quiet --session gp="git push"
+    abbr --quiet --session gpl="git pull"
+    abbr --quiet --session gcb="git checkout -b"
+    abbr --quiet --session gc="git checkout"
+    abbr --quiet --session pcr="pre-commit run --all-files"
+    abbr --quiet --session pcu="pre-commit autoupdate"
+    abbr --quiet --session pt="uv run coverage run -m pytest -o log_cli=true -vvv tests && uv run coverage report && uv run coverage html"
 
+    # FANCY NEW TOOLS
+    abbr --quiet --session ff="fastfetch"
+    abbr --quiet --session ls="eza -1 -a --icons --group-directories-first"
+    abbr --quiet --session l="eza -lah --icons --group-directories-first"
+    abbr --quiet --session ll="eza -lah --icons --group-directories-first"
+    abbr --quiet --session lt="eza --tree --level 2"
+    abbr --quiet --session tree="eza --tree"
+    abbr --quiet --session lg="eza -lah --git --icons --group-directories-first"
+    abbr --quiet --session cat="bat"
 
-abbr --quiet --session gg="git add -A && git commit -m"
-abbr --quiet --session gcm="git commit -m"
-abbr --quiet --session gp="git push"
-abbr --quiet --session gpl="git pull"
-abbr --quiet --session gcb="git checkout -b"
-abbr --quiet --session gc="git checkout"
-abbr --quiet --session pcr="pre-commit run --all-files"
-abbr --quiet --session pcu="pre-commit autoupdate"
-abbr --quiet --session pt="uv run coverage run -m pytest -o log_cli=true -vvv tests && uv run coverage report && uv run coverage html"
+    # AI TOOLS
+    abbr --quiet --session oc="opencode"
 
-# FANCY NEW TOOLS
-abbr --quiet --session ff="fastfetch"
-abbr --quiet --session ls="eza -1 -a --icons --group-directories-first"
-abbr --quiet --session l="eza -lah --icons --group-directories-first"
-abbr --quiet --session ll="eza -lah --icons --group-directories-first"
-abbr --quiet --session lt="eza --tree --level 2"
-abbr --quiet --session tree="eza --tree"
-abbr --quiet --session lg="eza -lah --git --icons --group-directories-first"
-abbr --quiet --session cat="bat"
+    # docker
+    abbr --quiet --session dcb="docker compose build"
+    abbr --quiet --session dcu="docker compose up"
+    abbr --quiet --session dcub="docker compose up --build"
+    abbr --quiet --session dd="docker compose up --build -d"
+    abbr --quiet --session dl="docker compose logs -f -t"
 
-# AI TOOLS
-abbr --quiet --session oc="opencode"
-
-# docker
-abbr --quiet --session dcb="docker compose build"
-abbr --quiet --session dcu="docker compose up"
-abbr --quiet --session dcub="docker compose up --build"
-abbr --quiet --session dd="docker compose up --build -d"
-abbr --quiet --session dl="docker compose logs -f -t"
-
-# kubernetes
-abbr --quiet --session tt="tilt down; tilt up"
-abbr --quiet --session kgp='kubectl get pods'
+    # kubernetes
+    abbr --quiet --session tt="tilt down; tilt up"
+    abbr --quiet --session kgp='kubectl get pods'
+fi
 
 # Platform-specific update aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
-    abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
+    if (( HAS_ABBR )); then
+        abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
+    fi
     function uu() {
         echo "⚠️  'uu' is deprecated, please use 'update' instead"
         brew update && brew upgrade && brew cu -f -a && tldr --update && omz update
     }
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    abbr --quiet --session update="paru -Syyu --noconfirm && tldr --update && omz update"
+    if (( HAS_ABBR )); then
+        abbr --quiet --session update="paru -Syyu --noconfirm && tldr --update && omz update"
+    fi
     function uu() {
         echo "⚠️  'uu' is deprecated, please use 'update' instead"
         paru -Syyu --noconfirm && tldr --update && omz update
     }
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
-    abbr --quiet --session nvitop="uvx nvitop"
-    abbr --quiet --session audio="pavucontrol"
+    if (( HAS_ABBR )); then
+        abbr --quiet --session nvitop="uvx nvitop"
+        abbr --quiet --session audio="pavucontrol"
+    fi
 
     # CUDA
     export PATH=/opt/cuda/bin:$PATH
@@ -180,7 +194,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 # Pre-cached completions (moved to separate file for cleaner .zshrc)
-source $HOME/dotfiles/zsh/completions.zsh
+source_if_exists "$DOTFILES_DIR/zsh/completions.zsh"
 
 # Normalize trailing slashes for zoxide-backed `cd` queries.
 # Without this, `cd project/` falls through to `zoxide query "project/"`,
@@ -268,13 +282,13 @@ export PATH="$PATH:$HOME/go/bin"
 
 # Antigravity
 if [[ -d "$HOME/.antigravity/antigravity/bin" ]]; then
-    export PATH="$HOME/dotfiles/scripts:$HOME/.antigravity/antigravity/bin:$PATH"
+    export PATH="$DOTFILES_DIR/scripts:$HOME/.antigravity/antigravity/bin:$PATH"
 else
-    export PATH="$HOME/dotfiles/scripts:$PATH"
+    export PATH="$DOTFILES_DIR/scripts:$PATH"
 fi
 
 # Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source /usr/share/nvm/init-nvm.sh
+source_if_exists /usr/share/nvm/init-nvm.sh

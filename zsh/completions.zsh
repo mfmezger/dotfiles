@@ -13,12 +13,13 @@
 #   helm completion zsh > _helm
 
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
+[[ -d "$COMPLETIONS_DIR" ]] || mkdir -p "$COMPLETIONS_DIR"
 
 # Atuin (history search)
 if [[ -f "$COMPLETIONS_DIR/atuin-init.zsh" ]]; then
     source "$COMPLETIONS_DIR/atuin-init.zsh"
-else
-    eval "$(atuin init zsh)"
+elif command -v atuin >/dev/null 2>&1; then
+    eval "$(command atuin init zsh)"
 fi
 
 # GitHub CLI
@@ -30,7 +31,7 @@ fi
 # Kubectl (lazy-loaded if no cache)
 if [[ -f "$COMPLETIONS_DIR/_kubectl" ]]; then
     source "$COMPLETIONS_DIR/_kubectl"
-else
+elif command -v kubectl >/dev/null 2>&1; then
     kubectl() {
         unfunction kubectl
         eval "$(command kubectl completion zsh)"
@@ -41,7 +42,7 @@ fi
 # Helm (lazy-loaded if no cache)
 if [[ -f "$COMPLETIONS_DIR/_helm" ]]; then
     source "$COMPLETIONS_DIR/_helm"
-else
+elif command -v helm >/dev/null 2>&1; then
     helm() {
         unfunction helm
         eval "$(command helm completion zsh)"
