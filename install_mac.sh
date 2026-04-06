@@ -189,13 +189,13 @@ fi
 echo ">>> Setting zsh as default shell <<<"
 ZSH_PATH="$(command -v zsh)"
 if [ "$SHELL" != "$ZSH_PATH" ]; then
-    if grep -qx "$ZSH_PATH" /etc/shells; then
+    if grep -qFx "$ZSH_PATH" /etc/shells; then
         chsh -s "$ZSH_PATH"
     else
         echo ">>> Warning: $ZSH_PATH is not listed in /etc/shells, so the default shell was not changed. <<<"
         echo ">>> To set it manually, run: <<<"
-        echo "sudo sh -c 'echo $ZSH_PATH >> /etc/shells'"
-        echo "chsh -s $ZSH_PATH"
+        echo "sudo sh -c 'echo \"$ZSH_PATH\" >> /etc/shells'"
+        echo "chsh -s \"$ZSH_PATH\""
     fi
 else
     echo ">>> zsh is already the default shell <<<"
