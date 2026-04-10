@@ -46,7 +46,7 @@ EOF
 ## Key Tools
 
 - **Shell**: Zsh + Oh My Zsh + Powerlevel10k
-- **Terminal**: Ghostty, Kitty (backup)
+- **Terminal**: Ghostty
 - **Editor**: Neovim, Zed
 - **File Navigation**: eza, yazi, zoxide, fd
 - **Text & Viewers**: bat, glow, chroma, jq
@@ -65,7 +65,6 @@ EOF
 ~/dotfiles/
 ├── zsh/                    # Zsh configuration (.zshrc, .p10k.zsh)
 ├── nvim/                   # Neovim configuration
-├── kitty/                  # Kitty terminal config
 ├── ghostty/                # Ghostty terminal config
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
@@ -165,7 +164,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 
 ## Stow Usage
 
-This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs to your home directory.
+This repo uses GNU Stow to symlink configs to your home directory.
 
 ### Stow Packages
 
@@ -175,7 +174,6 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `git`          | `~/.gitconfig`            |
 | `nvim`         | `~/.config/nvim`          |
 | `ghostty`      | `~/.config/ghostty`       |
-| `kitty`        | `~/.config/kitty`         |
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
 | `hypr`         | `~/.config/hypr`          |
@@ -194,7 +192,7 @@ cd ~/dotfiles
 stow zsh git nvim ghostty yazi zed
 
 # Arch Linux / CachyOS
-stow zsh git nvim kitty yazi ghostty zed dunst hypr waybar
+stow zsh git nvim yazi ghostty zed dunst hypr waybar
 
 # Ubuntu (minimal)
 stow zsh git nvim
