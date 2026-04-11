@@ -99,6 +99,7 @@ fi
 AUR_PACKAGES=(
     visual-studio-code-bin
     brave-bin
+    ekphos-bin
     zsh-abbr
     discord
     witr-bin
