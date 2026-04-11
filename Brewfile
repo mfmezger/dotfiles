@@ -32,6 +32,7 @@ brew "witr"
 # FILE MANAGEMENT & NAVIGATION
 # ==============================================================================
 brew "eza"
+brew "ekphos"
 brew "yazi"
 brew "stow"
 brew "tree"

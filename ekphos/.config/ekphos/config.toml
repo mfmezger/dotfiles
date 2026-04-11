@@ -1,0 +1,20 @@
+notes_dir = "~/Documents/ekphos"
+welcome_shown = true
+theme = "ayu"
+show_empty_dir = true
+syntax_theme = "base16-ocean.dark"
+sidebar_collapsed = false
+outline_collapsed = false
+folders_first = true
+frontmatter_hidden = true
+show_tags = true
+check_updates = true
+transparent_bg = false
+
+[editor]
+line_wrap = true
+tab_width = 4
+left_padding = 0
+right_padding = 1
+line_numbers = "absolute"
+scrolloff = 0

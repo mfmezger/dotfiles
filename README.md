@@ -67,6 +67,7 @@ EOF
 ├── nvim/                   # Neovim configuration
 ├── kitty/                  # Kitty terminal config
 ├── ghostty/                # Ghostty terminal config
+├── ekphos/                 # Ekphos notes app config
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
 ├── zed/                    # Zed editor config
@@ -97,6 +98,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | `g`      | `git`            |
 | `d`      | `docker`         |
 | `k`      | `kubectl`        |
+| `md`     | `ekphos`         |
 | `pbcopy` | Copy to clipboard (Linux) |
 | `pbpaste`| Paste from clipboard (Linux) |
 
@@ -175,6 +177,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `git`          | `~/.gitconfig`            |
 | `nvim`         | `~/.config/nvim`          |
 | `ghostty`      | `~/.config/ghostty`       |
+| `ekphos`       | `~/.config/ekphos`        |
 | `kitty`        | `~/.config/kitty`         |
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
@@ -191,13 +194,13 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 cd ~/dotfiles
 
 # macOS
-stow zsh git nvim ghostty yazi zed
+stow zsh git nvim ghostty ekphos yazi zed
 
 # Arch Linux / CachyOS
-stow zsh git nvim kitty yazi ghostty zed dunst hypr waybar
+stow zsh git nvim kitty yazi ghostty ekphos zed dunst hypr waybar
 
 # Ubuntu (minimal)
-stow zsh git nvim
+stow zsh git nvim ekphos
 ```
 
 > **After installing main dotfiles**, set up AI agent configs from the separate repository.

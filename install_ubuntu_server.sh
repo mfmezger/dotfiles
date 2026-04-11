@@ -97,6 +97,17 @@ fi
 # Ensure uv is in PATH for this session
 export PATH="$HOME/.local/bin:$PATH"
 
+# Install Rust toolchain for ekphos
+echo "🦀 Installing Rust toolchain..."
+if ! command -v cargo &>/dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+fi
+
+if [ -f "$HOME/.cargo/env" ]; then
+    # Make cargo available immediately after rustup installation.
+    . "$HOME/.cargo/env"
+fi
+
 # Install commitizen via uv
 echo "📝 Installing commitizen..."
 uv tool install commitizen
@@ -105,6 +116,12 @@ uv tool install commitizen
 echo "🌤️ Installing witr..."
 if ! command -v witr &>/dev/null; then
     curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
+fi
+
+# Install ekphos (Markdown notes app)
+echo "📝 Installing ekphos..."
+if ! command -v ekphos &>/dev/null; then
+    cargo install ekphos
 fi
 
 # Install Oh My Zsh
@@ -182,6 +199,8 @@ backup_if_exists ".zshrc"
 backup_if_exists ".p10k.zsh"
 backup_if_exists ".gitconfig"
 backup_if_exists ".config/nvim"
+backup_if_exists ".config/ekphos"
+mkdir -p "$HOME/Documents/ekphos"
 
 # Run stow for available configs
 if [ -d "zsh" ]; then
@@ -197,6 +216,11 @@ fi
 if [ -d "nvim" ]; then
     stow nvim
     echo "✅ Neovim configuration linked"
+fi
+
+if [ -d "ekphos" ]; then
+    stow ekphos
+    echo "✅ Ekphos configuration linked"
 fi
 
 echo ""
