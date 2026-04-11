@@ -136,6 +136,7 @@ abbr --quiet --session cat="bat"
 
 # AI TOOLS
 abbr --quiet --session oc="opencode"
+abbr --quiet --session md="ekphos"
 
 # docker
 abbr --quiet --session dcb="docker compose build"

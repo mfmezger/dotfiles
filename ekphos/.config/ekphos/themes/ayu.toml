@@ -1,0 +1,91 @@
+# Ayu Dark Theme for Ekphos
+# Based on the Ayu color scheme by Dobbbri
+# https://github.com/dobbbri/daily/blob/master/themes/ayu.json
+
+[base]
+background = "#0D0E11"
+background_secondary = "#15171C"
+foreground = "#B8BCC2"
+muted = "#636e7b"
+
+[accent]
+primary = "#00B7C9"
+secondary = "#D27CED"
+
+[semantic]
+error = "#FF3333"
+warning = "#FD971F"
+success = "#9ED54E"
+info = "#6796e6"
+
+[ui]
+border = "#2C313A"
+border_focused = "#00B7C9"
+selection = "#1e2330"
+cursor = "#B8BCC2"
+
+[ui.statusbar]
+background = "#0D0E11"
+foreground = "#B8BCC2"
+brand = "#00B7C9"
+mode = "#636e7b"
+separator = "#2C313A"
+
+[ui.dialog]
+background = "#15171C"
+border = "#00B7C9"
+title = "#00B7C9"
+text = "#B8BCC2"
+
+[ui.sidebar]
+background = "#0D0E11"
+item = "#B8BCC2"
+item_selected = "#FD971F"
+folder = "#00B7C9"
+folder_expanded = "#9ED54E"
+
+[ui.content]
+background = "#0D0E11"
+text = "#B8BCC2"
+heading1 = "#9ED54E"
+heading2 = "#9ED54E"
+heading3 = "#FDC114"
+heading4 = "#D27CED"
+link = "#FFC44C"
+link_invalid = "#FF3333"
+code = "#9ED54E"
+code_background = "#15171C"
+blockquote = "#00B7C9"
+list_marker = "#D27CED"
+tag = "#00B7C9"
+tag_background = "#15171C"
+frontmatter = "#636e7b"
+
+[ui.outline]
+background = "#0D0E11"
+heading1 = "#9ED54E"
+heading2 = "#FDC114"
+heading3 = "#D27CED"
+heading4 = "#00B7C9"
+
+[ui.search]
+background = "#15171C"
+border = "#00B7C9"
+input = "#B8BCC2"
+match_highlight = "#FD971F"
+match_current = "#FFC44C"
+match_count = "#636e7b"
+
+[ui.editor]
+heading1 = "#9ED54E"
+heading2 = "#9ED54E"
+heading3 = "#FDC114"
+heading4 = "#D27CED"
+heading5 = "#00B7C9"
+heading6 = "#636e7b"
+code = "#9ED54E"
+link = "#FFC44C"
+bold = "#FC6664"
+italic = "#FC6664"
+blockquote = "#00B7C9"
+list_marker = "#D27CED"

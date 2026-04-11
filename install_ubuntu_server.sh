@@ -182,6 +182,7 @@ backup_if_exists ".zshrc"
 backup_if_exists ".p10k.zsh"
 backup_if_exists ".gitconfig"
 backup_if_exists ".config/nvim"
+backup_if_exists ".config/ekphos"
 
 # Run stow for available configs
 if [ -d "zsh" ]; then
@@ -197,6 +198,11 @@ fi
 if [ -d "nvim" ]; then
     stow nvim
     echo "✅ Neovim configuration linked"
+fi
+
+if [ -d "ekphos" ]; then
+    stow ekphos
+    echo "✅ Ekphos configuration linked"
 fi
 
 echo ""

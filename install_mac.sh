@@ -169,9 +169,10 @@ else
     backup_if_exists ".config/kitty"
     backup_if_exists ".config/yazi"
     backup_if_exists ".config/ghostty"
+    backup_if_exists ".config/ekphos"
     backup_if_exists ".config/zed"
 
-    stow zsh nvim kitty yazi git ghostty zed
+    stow zsh nvim kitty yazi git ghostty ekphos zed
 
     echo ""
     echo ">>> Full installation successfully completed! <<<"
