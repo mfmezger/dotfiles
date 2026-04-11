@@ -200,6 +200,7 @@ backup_if_exists ".p10k.zsh"
 backup_if_exists ".gitconfig"
 backup_if_exists ".config/nvim"
 backup_if_exists ".config/ekphos"
+mkdir -p "$HOME/Documents/ekphos"
 
 # Run stow for available configs
 if [ -d "zsh" ]; then
