@@ -101,6 +101,7 @@ abbr --quiet --session g="git"
 abbr --quiet --session d="docker"
 abbr --quiet --session dc="docker compose"
 abbr --quiet --session k="kubectl"
+abbr --quiet --session md="ekphos"
 
 # PYTHON VIRTUAL ENV
 abbr --quiet --session av=". .venv/bin/activate"
@@ -136,7 +137,6 @@ abbr --quiet --session cat="bat"
 
 # AI TOOLS
 abbr --quiet --session oc="opencode"
-abbr --quiet --session md="ekphos"
 
 # docker
 abbr --quiet --session dcb="docker compose build"
