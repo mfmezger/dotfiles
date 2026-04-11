@@ -170,6 +170,7 @@ else
     backup_if_exists ".config/yazi"
     backup_if_exists ".config/ghostty"
     backup_if_exists ".config/ekphos"
+    mkdir -p "$HOME/Documents/ekphos"
     backup_if_exists ".config/zed"
 
     stow zsh nvim kitty yazi git ghostty ekphos zed
