@@ -162,7 +162,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 
 ## Stow Usage
 
-This repo uses GNU Stow to symlink configs to your home directory.
+This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs to your home directory.
 
 ### Stow Packages
 
