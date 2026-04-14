@@ -98,6 +98,7 @@ fi
 AUR_PACKAGES=(
     visual-studio-code-bin
     brave-bin
+    ekphos-bin
     zsh-abbr
     discord
     witr-bin
@@ -248,7 +249,7 @@ if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
     atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
     echo ">>> Importing shell history into atuin <<<"
-    atuin import auto -y || {
+    atuin import auto || {
         echo ">>> Warning: Failed to import shell history into atuin."
         echo ">>> Please check atuin logs or run 'atuin import auto' manually."
     }
@@ -329,6 +330,8 @@ backup_if_exists ".config/nvim"
 backup_if_exists ".config/yazi"
 backup_if_exists ".config/hypr"
 backup_if_exists ".config/ghostty"
+backup_if_exists ".config/ekphos"
+mkdir -p "$HOME/Documents/ekphos"
 backup_if_exists ".config/zed"
 backup_if_exists ".config/dunst"
 backup_if_exists ".config/waybar"
@@ -338,7 +341,7 @@ backup_if_exists ".config/gtk-4.0"
 backup_if_exists ".gtkrc-2.0"
 
 # Run stow
-stow zsh nvim yazi git ghostty zed dunst hypr waybar rofi gtk
+stow zsh nvim yazi git ghostty ekphos zed dunst hypr waybar rofi gtk
 
 # ==============================================================================
 # 14. Set Default Shell

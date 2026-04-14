@@ -2,7 +2,9 @@
 
 Cross-platform dotfiles for macOS and Linux with modern CLI tools and development environment.
 
-My recommended extensions for ai engineering can be installed via the vs-code extensions pack: [AI Engineering Extensions Pack](https://marketplace.visualstudio.com/items?itemName=mfmezger.python-ai-engineering).
+> My recommended extensions for ai engineering can be installed via the vs-code extensions pack: [AI Engineering Extensions Pack](https://marketplace.visualstudio.com/items?itemName=mfmezger.python-ai-engineering).
+
+> **AI Agents**: Claude Code and OpenCode configs are managed in the separate [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) repository.
 
 ## Quick Install
 
@@ -64,6 +66,7 @@ EOF
 ├── zsh/                    # Zsh configuration (.zshrc, .p10k.zsh)
 ├── nvim/                   # Neovim configuration
 ├── ghostty/                # Ghostty terminal config
+├── ekphos/                 # Ekphos notes app config
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
 ├── zed/                    # Zed editor config
@@ -94,6 +97,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 | `g`      | `git`            |
 | `d`      | `docker`         |
 | `k`      | `kubectl`        |
+| `md`     | `ekphos`         |
 | `pbcopy` | Copy to clipboard (Linux) |
 | `pbpaste`| Paste from clipboard (Linux) |
 
@@ -172,6 +176,7 @@ This repo uses GNU Stow to symlink configs to your home directory.
 | `git`          | `~/.gitconfig`            |
 | `nvim`         | `~/.config/nvim`          |
 | `ghostty`      | `~/.config/ghostty`       |
+| `ekphos`       | `~/.config/ekphos`        |
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
 | `hypr`         | `~/.config/hypr`          |
@@ -179,7 +184,7 @@ This repo uses GNU Stow to symlink configs to your home directory.
 | `waybar`       | `~/.config/waybar`        |
 | `screenlayout` | `~/.screenlayout`         |
 
-> **AI Agents**: Claude Code and OpenCode configs are managed in the separate [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) repository.
+
 
 ### Apply Configs
 
@@ -187,16 +192,16 @@ This repo uses GNU Stow to symlink configs to your home directory.
 cd ~/dotfiles
 
 # macOS
-stow zsh git nvim ghostty yazi zed
+stow zsh git nvim ghostty ekphos yazi zed
 
 # Arch Linux / CachyOS
-stow zsh git nvim yazi ghostty zed dunst hypr waybar
+stow zsh git nvim yazi ghostty ekphos zed dunst hypr waybar
 
 # Ubuntu (minimal)
-stow zsh git nvim
+stow zsh git nvim ekphos
 ```
 
-> **After installing main dotfiles**, set up AI agent configs from the separate repository:
+> **After installing main dotfiles**, set up AI agent configs from the separate repository.
 > ```bash
 > git clone https://github.com/mfmezger/ai_agent_dotfiles.git ~/ai_agent_dotfiles
 > cd ~/ai_agent_dotfiles
