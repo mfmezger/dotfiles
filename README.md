@@ -166,7 +166,7 @@ Shell abbreviations defined in `.zshrc` (type and press space to expand):
 
 ## Stow Usage
 
-This repo uses GNU Stow to symlink configs to your home directory.
+This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs to your home directory.
 
 ### Stow Packages
 
@@ -195,7 +195,7 @@ cd ~/dotfiles
 stow zsh git nvim ghostty ekphos yazi zed
 
 # Arch Linux / CachyOS
-stow zsh git nvim yazi ghostty ekphos zed dunst hypr waybar
+stow zsh nvim yazi git ghostty ekphos zed dunst hypr waybar rofi gtk
 
 # Ubuntu (minimal)
 stow zsh git nvim ekphos
