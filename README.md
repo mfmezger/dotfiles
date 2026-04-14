@@ -46,7 +46,7 @@ EOF
 ## Key Tools
 
 - **Shell**: Zsh + Oh My Zsh + Powerlevel10k
-- **Terminal**: Ghostty, Kitty (backup)
+- **Terminal**: Ghostty
 - **Editor**: Neovim, Zed
 - **File Navigation**: eza, yazi, zoxide, fd
 - **Text & Viewers**: bat, glow, chroma, jq
@@ -65,7 +65,6 @@ EOF
 ~/dotfiles/
 ├── zsh/                    # Zsh configuration (.zshrc, .p10k.zsh)
 ├── nvim/                   # Neovim configuration
-├── kitty/                  # Kitty terminal config
 ├── ghostty/                # Ghostty terminal config
 ├── ekphos/                 # Ekphos notes app config
 ├── git/                    # Git configuration (.gitconfig)
@@ -178,7 +177,6 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `nvim`         | `~/.config/nvim`          |
 | `ghostty`      | `~/.config/ghostty`       |
 | `ekphos`       | `~/.config/ekphos`        |
-| `kitty`        | `~/.config/kitty`         |
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
 | `hypr`         | `~/.config/hypr`          |
@@ -197,7 +195,7 @@ cd ~/dotfiles
 stow zsh git nvim ghostty ekphos yazi zed
 
 # Arch Linux / CachyOS
-stow zsh git nvim kitty yazi ghostty ekphos zed dunst hypr waybar
+stow zsh nvim yazi git ghostty ekphos zed dunst hypr waybar rofi gtk
 
 # Ubuntu (minimal)
 stow zsh git nvim ekphos
