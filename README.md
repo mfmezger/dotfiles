@@ -190,7 +190,7 @@ cd ~/dotfiles
 stow zsh git nvim ghostty yazi zed
 
 # Arch Linux / CachyOS
-stow zsh git nvim yazi ghostty zed dunst hypr waybar
+stow zsh nvim yazi git ghostty zed dunst hypr waybar rofi gtk
 
 # Ubuntu (minimal)
 stow zsh git nvim
