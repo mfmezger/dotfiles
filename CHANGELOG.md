@@ -21,6 +21,7 @@ All notable changes to this dotfiles repository will be documented in this file.
 - **ghostty**: match iTerm color scheme with Cascadia Cove NF font
 - **git**: add commitizen configuration templates
 - **iterm2**: adding iterm configuration file
+- **kitty**: enable copy on select
 
 ### Fix
 
@@ -359,6 +360,7 @@ All notable changes to this dotfiles repository will be documented in this file.
 ### Feat
 
 - Adding yazi configurations
+- Adding kitty and nvim configs
 
 ## 0.1.0 (2024-03-31)
 
