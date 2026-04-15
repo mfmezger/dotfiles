@@ -2,6 +2,26 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## v0.39.0 (2026-04-15)
+
+### Feat
+
+- **config**: add ekphos dotfiles and md launcher
+
+### Fix
+
+- **install**: remove opencode stow from mac setup
+- **changelog**: keep kitty entries unchanged
+- **atuin**: fixing not existing option for atuin import
+- **install**: install ekphos on ubuntu
+- **install**: install ekphos on macos
+- **install**: install ekphos on arch
+- **install**: quote zsh path handling
+- **zsh**: set default shell in mac install
+- **nvim**: fix startup and clarify python setup
+- **install**: preserve backups and use ai agent dotfiles
+- **zsh**: normalize trailing slash in zoxide cd
+
 ## v0.38.0 (2026-04-01)
 
 ### Feat
