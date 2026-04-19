@@ -20,6 +20,7 @@ sudo pacman -Syyu --noconfirm
 echo ">>> Installing core packages <<<"
 sudo pacman -S --needed --noconfirm \
     zsh \
+    zellij \
     stow \
     atuin \
     eza \
@@ -328,6 +329,7 @@ backup_if_exists ".p10k.zsh"
 backup_if_exists ".gitconfig"
 backup_if_exists ".config/nvim"
 backup_if_exists ".config/yazi"
+backup_if_exists ".config/zellij"
 backup_if_exists ".config/hypr"
 backup_if_exists ".config/ghostty"
 backup_if_exists ".config/ekphos"
@@ -341,7 +343,7 @@ backup_if_exists ".config/gtk-4.0"
 backup_if_exists ".gtkrc-2.0"
 
 # Run stow
-stow zsh nvim yazi git ghostty ekphos zed dunst hypr waybar rofi gtk
+stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi gtk
 
 # ==============================================================================
 # 14. Set Default Shell

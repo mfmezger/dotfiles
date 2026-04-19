@@ -108,6 +108,19 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
+# Install zellij terminal multiplexer
+echo "🪟 Installing zellij..."
+if ! command -v zellij &>/dev/null; then
+    if sudo apt install -y zellij 2>/dev/null; then
+        echo "✅ zellij installed via apt"
+    else
+        echo "📥 zellij not available via apt, installing cargo build dependencies..."
+        sudo apt install -y pkg-config libssl-dev
+        echo "🦀 Building zellij via cargo..."
+        cargo install --locked zellij
+    fi
+fi
+
 # Install commitizen via uv
 echo "📝 Installing commitizen..."
 uv tool install commitizen
@@ -199,6 +212,7 @@ backup_if_exists ".zshrc"
 backup_if_exists ".p10k.zsh"
 backup_if_exists ".gitconfig"
 backup_if_exists ".config/nvim"
+backup_if_exists ".config/zellij"
 backup_if_exists ".config/ekphos"
 mkdir -p "$HOME/Documents/ekphos"
 
@@ -216,6 +230,11 @@ fi
 if [ -d "nvim" ]; then
     stow nvim
     echo "✅ Neovim configuration linked"
+fi
+
+if [ -d "zellij" ]; then
+    stow zellij
+    echo "✅ Zellij configuration linked"
 fi
 
 if [ -d "ekphos" ]; then

@@ -22,6 +22,7 @@ brew "duf"
 # SHELL & TERMINAL TOOLS
 # ==============================================================================
 brew "zsh"
+brew "zellij"
 brew "atuin"
 brew "zoxide"
 brew "tealdeer"

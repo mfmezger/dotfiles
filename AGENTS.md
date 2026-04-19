@@ -15,8 +15,8 @@ This is a personal dotfiles repository for cross-platform (macOS/Linux) developm
 ./install_ubuntu_server.sh
 
 # Apply specific configs using stow
-stow zsh git nvim ghostty yazi zed  # macOS
-stow zsh git nvim yazi ghostty zed  # Arch Linux
+stow zsh git nvim ghostty yazi zellij zed  # macOS
+stow zsh git nvim yazi zellij ghostty zed  # Arch Linux
 stow -n zsh  # Dry run to preview changes
 stow -R zsh  # Restow to refresh symlinks
 ```
