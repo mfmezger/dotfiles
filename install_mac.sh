@@ -27,7 +27,6 @@ fi
 read -p ">>> Do you want a minimal install (zsh essentials + zellij)? (y/N) " -n 1 -r
 echo # move to a new line
 MINIMAL_INSTALL=$REPLY
-PERSONAL_INSTALL="no"
 if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo ">>> Installing minimal brew packages (zsh essentials + zellij) <<<"
     brew bundle --file="$DOTFILES_DIR/Brewfile.minimal"
@@ -39,7 +38,6 @@ else
     read -p ">>> Do you want to install personal packages (Obsidian, WhatsApp, VLC, etc.)? (y/N) " -n 1 -r
     echo # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        PERSONAL_INSTALL="yes"
         echo ">>> Installing Personal Brew packages <<<"
         brew bundle --file="$DOTFILES_DIR/Brewfile.personal"
     else
@@ -154,7 +152,7 @@ if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo "  - Zsh with Oh My Zsh + Powerlevel10k theme"
     echo "  - Zellij terminal multiplexer with dotfile config"
     echo "  - Essential plugins: zsh-autosuggestions, zsh-syntax-highlighting, zsh-abbr"
-    echo "  - Core tools: atuin, zoxide, eza, bat, yazi, zellij, stow"
+    echo "  - Core tools: atuin, zoxide, eza, bat, yazi, stow"
     echo "  - Development: go, gh, git-delta, uv, fastfetch"
     echo "  - Nerd Font for Powerlevel10k icons"
     echo ""

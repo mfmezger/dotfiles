@@ -114,11 +114,10 @@ if ! command -v zellij &>/dev/null; then
     if sudo apt install -y zellij 2>/dev/null; then
         echo "✅ zellij installed via apt"
     else
-        echo "📥 zellij not available via apt, installing via cargo..."
+        echo "📥 zellij not available via apt, installing cargo build dependencies..."
+        sudo apt install -y pkg-config libssl-dev
+        echo "🦀 Building zellij via cargo..."
         cargo install --locked zellij
-        if [ -f "$HOME/.cargo/bin/zellij" ]; then
-            sudo ln -sf "$HOME/.cargo/bin/zellij" /usr/local/bin/zellij
-        fi
     fi
 fi
 
