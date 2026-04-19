@@ -90,6 +90,11 @@ export LANG=en_US.UTF-8
 
 export EDITOR="nvim"
 
+# Rust toolchain installed via rustup
+if [[ -f "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
