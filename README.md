@@ -6,6 +6,32 @@ Cross-platform dotfiles for macOS and Linux with modern CLI tools and developmen
 
 > **AI Agents**: Claude Code and OpenCode configs are managed in the separate [ai_agent_dotfiles](https://github.com/mfmezger/ai_agent_dotfiles) repository.
 
+## Table of Contents
+
+- [Quick Install](#quick-install)
+  - [macOS](#macos)
+  - [Arch Linux / CachyOS](#arch-linux--cachyos)
+  - [Ubuntu (Minimal Setup)](#ubuntu-minimal-setup)
+- [Change Git Name and Email](#change-git-name-and-email)
+- [Key Tools](#key-tools)
+- [Structure](#structure)
+- [Shortcuts](#shortcuts)
+  - [Zellij](#zellij)
+  - [Basic](#basic)
+  - [Python / UV](#python--uv)
+  - [Git](#git)
+  - [Kubernetes](#kubernetes)
+  - [Docker](#docker)
+  - [System Update](#system-update)
+  - [File Listing (eza)](#file-listing-eza)
+- [Stow Usage](#stow-usage)
+  - [Stow Packages](#stow-packages)
+  - [Apply Configs](#apply-configs)
+  - [Dry Run (Preview Changes)](#dry-run-preview-changes)
+  - [Remove Symlinks](#remove-symlinks)
+  - [Restow (Refresh Symlinks)](#restow-refresh-symlinks)
+  - [Troubleshooting Conflicts](#troubleshooting-conflicts)
+
 ## Quick Install
 
 ```bash
