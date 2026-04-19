@@ -90,6 +90,8 @@ export LANG=en_US.UTF-8
 
 export EDITOR="nvim"
 
+typeset -U path
+
 # Rust toolchain installed via rustup
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
