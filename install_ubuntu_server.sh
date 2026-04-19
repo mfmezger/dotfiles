@@ -97,10 +97,12 @@ fi
 # Ensure uv is in PATH for this session
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install Rust toolchain for ekphos
-echo "🦀 Installing Rust toolchain..."
-if ! command -v cargo &>/dev/null; then
+# Install Rust toolchain via rustup
+echo "🦀 Installing rustup..."
+if ! command -v rustup &>/dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+else
+    echo "✅ rustup already installed"
 fi
 
 if [ -f "$HOME/.cargo/env" ]; then

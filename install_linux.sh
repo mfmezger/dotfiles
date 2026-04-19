@@ -228,11 +228,25 @@ fi
 # Ensure uv is in PATH for this session
 export PATH="$HOME/.local/bin:$PATH"
 
+# ==============================================================================
+# 8. Install Rust Toolchain (rustup)
+# ==============================================================================
+echo ">>> Installing rustup <<<"
+if ! command -v rustup &>/dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+else
+    echo ">>> rustup already installed <<<"
+fi
+
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
 echo ">>> Installing commitizen via uv <<<"
 uv tool install commitizen
 
 # ==============================================================================
-# 8. Generate Shell Completions (Pre-cached for faster shell startup)
+# 9. Generate Shell Completions (Pre-cached for faster shell startup)
 # ==============================================================================
 echo ">>> Generating shell completions <<<"
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
@@ -281,7 +295,7 @@ if command -v helm &>/dev/null; then
 fi
 
 # ==============================================================================
-# 9. Configure Docker
+# 10. Configure Docker
 # ==============================================================================
 echo ">>> Configuring Docker <<<"
 sudo systemctl enable docker.service
@@ -289,7 +303,7 @@ sudo systemctl start docker.service
 sudo usermod -aG docker "$USER"
 
 # ==============================================================================
-# 10. Security: ClamAV Antivirus
+# 11. Security: ClamAV Antivirus
 # ==============================================================================
 echo ">>> Setting up ClamAV antivirus <<<"
 sudo pacman -S --needed --noconfirm clamav
@@ -297,7 +311,7 @@ sudo systemctl enable clamav-freshclam
 sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next boot <<<"
 
 # ==============================================================================
-# 11. Security: Firewall (UFW)
+# 12. Security: Firewall (UFW)
 # ==============================================================================
 echo ">>> Configuring UFW firewall <<<"
 sudo pacman -S --needed --noconfirm ufw
@@ -311,14 +325,14 @@ sudo ufw allow ssh
 sudo ufw --force enable
 
 # ==============================================================================
-# 12. Security: Application Firewall (OpenSnitch)
+# 13. Security: Application Firewall (OpenSnitch)
 # ==============================================================================
 echo ">>> Setting up OpenSnitch application firewall <<<"
 sudo pacman -S --needed --noconfirm opensnitch
 sudo systemctl enable --now opensnitchd
 
 # ==============================================================================
-# 13. Link Dotfiles
+# 14. Link Dotfiles
 # ==============================================================================
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
@@ -346,7 +360,7 @@ backup_if_exists ".gtkrc-2.0"
 stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi gtk
 
 # ==============================================================================
-# 14. Set Default Shell
+# 15. Set Default Shell
 # ==============================================================================
 echo ">>> Setting zsh as default shell <<<"
 if [ "$SHELL" != "$(which zsh)" ]; then

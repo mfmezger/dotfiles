@@ -53,7 +53,23 @@ else
     echo ">>> uv already installed <<<"
 fi
 
-# 4. Install Oh My Zsh
+# 4. Install Rust toolchain (full install only)
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
+    echo ">>> Installing rustup <<<"
+    if ! command -v rustup &>/dev/null; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    else
+        echo ">>> rustup already installed <<<"
+    fi
+
+    if [ -f "$HOME/.cargo/env" ]; then
+        . "$HOME/.cargo/env"
+    fi
+else
+    echo ">>> Skipping rustup for minimal install <<<"
+fi
+
+# 5. Install Oh My Zsh
 echo ">>> Installing Oh My Zsh <<<"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -61,7 +77,7 @@ else
     echo ">>> Oh My Zsh already installed <<<"
 fi
 
-# 5. Install Zsh Plugins & Themes
+# 6. Install Zsh Plugins & Themes
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
 echo ">>> Installing Powerlevel10k <<<"
@@ -85,7 +101,7 @@ else
     echo ">>> zsh-syntax-highlighting already installed <<<"
 fi
 
-# 6. Generate Static Completions (Pre-cached for faster shell startup)
+# 7. Generate Static Completions (Pre-cached for faster shell startup)
 echo ">>> Generating shell completions <<<"
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"
@@ -132,7 +148,7 @@ if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &>/dev/null; then
     helm completion zsh >"$COMPLETIONS_DIR/_helm"
 fi
 
-# 7. Link Dotfiles
+# 8. Link Dotfiles
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
 
@@ -154,6 +170,7 @@ if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo "  - Essential plugins: zsh-autosuggestions, zsh-syntax-highlighting, zsh-abbr"
     echo "  - Core tools: atuin, zoxide, eza, bat, yazi, stow"
     echo "  - Development: go, gh, git-delta, uv, fastfetch"
+    echo "  - Rust toolchain via rustup was skipped"
     echo "  - Nerd Font for Powerlevel10k icons"
     echo ""
     echo "What was NOT installed:"
@@ -178,16 +195,19 @@ else
     echo ""
     echo ">>> Full installation successfully completed! <<<"
     echo ""
+    echo "What was also installed:"
+    echo "  - Rust toolchain via rustup"
+    echo ""
 fi
 
-# 8. macOS Settings (applies to both minimal and full install)
+# 9. macOS Settings (applies to both minimal and full install)
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo ">>> Configuring iTerm2: Load preferences from dotfiles <<<"
     defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_DIR/iterm2"
     defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 fi
 
-# 9. Set Default Shell
+# 10. Set Default Shell
 echo ">>> Setting zsh as default shell <<<"
 ZSH_PATH="$(command -v zsh)"
 if [ "$SHELL" != "$ZSH_PATH" ]; then
