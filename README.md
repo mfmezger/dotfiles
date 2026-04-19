@@ -89,6 +89,19 @@ EOF
 
 Shell abbreviations defined in `.zshrc` (type and press space to expand):
 
+### Zellij
+
+Most-used Zellij shortcuts:
+
+| Shortcut | Action |
+| -------- | ------ |
+| `Alt+n`  | Open a new pane |
+| `Alt+s`  | Open a stacked split |
+| `Alt+h`  | Move focus left |
+| `Alt+j`  | Move focus down |
+| `Alt+k`  | Move focus up |
+| `Alt+l`  | Move focus right |
+
 ### Basic
 
 | Shortcut | Expands To       |
