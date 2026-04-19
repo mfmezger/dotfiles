@@ -110,6 +110,13 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
+if ! cargo --version &>/dev/null; then
+    echo "🦀 Configuring default Rust toolchain (stable)..."
+    rustup default stable
+else
+    echo "✅ Rust toolchain already configured"
+fi
+
 # Install zellij terminal multiplexer
 echo "🪟 Installing zellij..."
 if ! command -v zellij &>/dev/null; then

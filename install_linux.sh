@@ -242,6 +242,13 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
+if ! cargo --version &>/dev/null; then
+    echo ">>> Configuring default Rust toolchain (stable) <<<"
+    rustup default stable
+else
+    echo ">>> Rust toolchain already configured <<<"
+fi
+
 echo ">>> Installing commitizen via uv <<<"
 uv tool install commitizen
 
