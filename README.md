@@ -47,6 +47,7 @@ EOF
 
 - **Shell**: Zsh + Oh My Zsh + Powerlevel10k
 - **Terminal**: Ghostty
+- **Terminal Multiplexer**: Zellij
 - **Editor**: Neovim, Zed
 - **File Navigation**: eza, yazi, zoxide, fd
 - **Text & Viewers**: bat, glow, chroma, jq
@@ -66,6 +67,7 @@ EOF
 ├── zsh/                    # Zsh configuration (.zshrc, .p10k.zsh)
 ├── nvim/                   # Neovim configuration
 ├── ghostty/                # Ghostty terminal config
+├── zellij/                 # Zellij terminal multiplexer config
 ├── ekphos/                 # Ekphos notes app config
 ├── git/                    # Git configuration (.gitconfig)
 ├── yazi/                   # Yazi file manager
@@ -176,6 +178,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 | `git`          | `~/.gitconfig`            |
 | `nvim`         | `~/.config/nvim`          |
 | `ghostty`      | `~/.config/ghostty`       |
+| `zellij`       | `~/.config/zellij`        |
 | `ekphos`       | `~/.config/ekphos`        |
 | `yazi`         | `~/.config/yazi`          |
 | `zed`          | `~/.config/zed`           |
@@ -192,13 +195,13 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs
 cd ~/dotfiles
 
 # macOS
-stow zsh git nvim ghostty ekphos yazi zed
+stow zsh git nvim ghostty zellij ekphos yazi zed
 
 # Arch Linux / CachyOS
-stow zsh nvim yazi git ghostty ekphos zed dunst hypr waybar rofi gtk
+stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi gtk
 
 # Ubuntu (minimal)
-stow zsh git nvim ekphos
+stow zsh git nvim zellij ekphos
 ```
 
 > **After installing main dotfiles**, set up AI agent configs from the separate repository.

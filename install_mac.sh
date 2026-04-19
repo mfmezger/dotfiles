@@ -24,12 +24,12 @@ else
 fi
 
 # 2. Install Packages
-read -p ">>> Do you want a minimal install (only zsh essentials)? (y/N) " -n 1 -r
+read -p ">>> Do you want a minimal install (zsh essentials + zellij)? (y/N) " -n 1 -r
 echo # move to a new line
 MINIMAL_INSTALL=$REPLY
 PERSONAL_INSTALL="no"
 if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
-    echo ">>> Installing minimal brew packages (zsh essentials only) <<<"
+    echo ">>> Installing minimal brew packages (zsh essentials + zellij) <<<"
     brew bundle --file="$DOTFILES_DIR/Brewfile.minimal"
 else
     echo ">>> Installing full brew packages <<<"
@@ -144,15 +144,17 @@ backup_if_exists ".p10k.zsh"
 
 # Run stow based on installation type
 if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
-    # Minimal install: only link zsh
-    stow zsh
+    # Minimal install: link zsh essentials and zellij
+    backup_if_exists ".config/zellij"
+    stow zsh zellij
     echo ""
     echo ">>> Minimal installation successfully completed! <<<"
     echo ""
     echo "What was installed:"
     echo "  - Zsh with Oh My Zsh + Powerlevel10k theme"
+    echo "  - Zellij terminal multiplexer with dotfile config"
     echo "  - Essential plugins: zsh-autosuggestions, zsh-syntax-highlighting, zsh-abbr"
-    echo "  - Core tools: atuin, zoxide, eza, bat, yazi, stow"
+    echo "  - Core tools: atuin, zoxide, eza, bat, yazi, zellij, stow"
     echo "  - Development: go, gh, git-delta, uv, fastfetch"
     echo "  - Nerd Font for Powerlevel10k icons"
     echo ""
@@ -167,12 +169,13 @@ else
     backup_if_exists ".gitconfig"
     backup_if_exists ".config/nvim"
     backup_if_exists ".config/yazi"
+    backup_if_exists ".config/zellij"
     backup_if_exists ".config/ghostty"
     backup_if_exists ".config/ekphos"
     mkdir -p "$HOME/Documents/ekphos"
     backup_if_exists ".config/zed"
 
-    stow zsh nvim yazi git ghostty ekphos zed
+    stow zsh nvim yazi zellij git ghostty ekphos zed
 
 
     echo ""

@@ -16,6 +16,7 @@ tap "buo/cask-upgrade"
 # SHELL & TERMINAL TOOLS (Core zsh functionality)
 # ==============================================================================
 brew "zsh"                                                     # Shell itself
+brew "zellij"                                                  # Terminal multiplexer
 brew "atuin"                                                   # History search (completions.zsh)
 brew "zoxide"                                                  # cd replacement (used in .zshrc)
 brew "tealdeer"                                                # tldr (used in update alias)
