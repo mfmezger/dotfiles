@@ -177,7 +177,6 @@ else
 
     stow zsh nvim yazi zellij git ghostty ekphos zed
 
-
     echo ""
     echo ">>> Full installation successfully completed! <<<"
     echo ""
