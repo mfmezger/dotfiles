@@ -1,14 +1,17 @@
 autoload -Uz add-zsh-hook
 
 function _zellij_repo_context() {
-    local repo_root
-    repo_root=$(command git rev-parse --show-toplevel 2>/dev/null) || return 1
+    local git_output
+    git_output=$(command git rev-parse --show-toplevel --abbrev-ref HEAD 2>/dev/null) || return 1
 
-    local repo_name="${repo_root:t}"
-    local git_ref
-    git_ref=$(command git branch --show-current 2>/dev/null)
+    local -a git_info
+    git_info=("${(@f)git_output}")
+    [[ ${#git_info[@]} -ge 2 ]] || return 1
 
-    if [[ -z "$git_ref" ]]; then
+    local repo_name="${git_info[1]:t}"
+    local git_ref="${git_info[2]}"
+
+    if [[ "$git_ref" == "HEAD" ]]; then
         git_ref=$(command git rev-parse --short HEAD 2>/dev/null) || return 1
         git_ref="detached@$git_ref"
     fi
@@ -31,7 +34,6 @@ function _update_zellij_pane_title() {
     printf '\033]0;%s\007' "$pane_title"
 }
 
-add-zsh-hook chpwd _update_zellij_pane_title
 add-zsh-hook precmd _update_zellij_pane_title
 
 # Set the initial pane title when the shell starts inside Zellij.
