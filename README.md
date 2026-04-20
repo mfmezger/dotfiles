@@ -15,9 +15,19 @@ cd ~/dotfiles
 
 ### macOS
 
+The installer is interactive — it prompts for minimal vs. full install and personal packages:
+
 ```bash
 ./install_mac.sh
 ```
+
+**Brewfile profiles:**
+
+| Profile | File | When to use |
+| --- | --- | --- |
+| Full | `Brewfile` | Work machine with DevOps/cloud tools |
+| Minimal | `Brewfile.minimal` | Shell essentials only (zsh, git, eza, yazi, zellij) |
+| Personal | `Brewfile.personal` | AI coding agents, messaging, media (add on top) |
 
 ### Arch Linux / CachyOS
 
