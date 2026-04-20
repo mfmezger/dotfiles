@@ -1,0 +1,52 @@
+name: Shell Lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.sh"
+      - ".github/workflows/shell-lint.yml"
+  pull_request:
+    paths:
+      - "**.sh"
+      - ".github/workflows/shell-lint.yml"
+
+jobs:
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run shellcheck
+        uses: ludeeus/action-shellcheck@2.0.0
+        with:
+          shellcheckflags: --severity=error --exclude=SC1091,SC2086
+
+  shfmt:
+    name: shfmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shfmt
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shfmt
+
+      - name: Check formatting
+        run: |
+          set -e
+          unformatted=$(shfmt -l -sr -i 4 \
+            install_mac.sh \
+            install_linux.sh \
+            install_ubuntu_server.sh \
+            scripts/*.sh \
+            scripts/**/*.sh 2>/dev/null || true)
+          if [ -n "$unformatted" ]; then
+            echo "Unformatted files:"
+            echo "$unformatted"
+            echo ""
+            echo "Run 'shfmt -w -sr -i 4 <file>' to fix."
+            exit 1
+          fi
