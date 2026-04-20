@@ -225,11 +225,12 @@ function gwt() {
 
     local name="$1"
     if [[ -z "$name" ]]; then
-        echo "Usage: gwt <name>"
+        echo "Usage: gwt <name> [target]"
+        echo "Default target: \\$GWT_BASE or main"
         return 1
     fi
 
-    local target="HEAD"
+    local target="${2:-${GWT_BASE:-main}}"
     local worktree_dir="/tmp/worktrees/$name"
 
     # Ensure parent directory exists
