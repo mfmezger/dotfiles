@@ -41,32 +41,19 @@ cd ~/dotfiles
 
 ### macOS
 
-macOS installation uses Homebrew and has three profiles depending on your use case:
-
-| Profile        | File               | What it includes                                      |
-| -------------- | ------------------ | ----------------------------------------------------- |
-| **All**        | `Brewfile`         | Full work setup (DevOps, cloud tools, productivity)  |
-| **Minimal**    | `Brewfile.minimal` | Essentials only (zsh, git, eza, yazi, shell tools)   |
-| **Personal**   | `Brewfile.personal`| Personal apps (AI coding tools, messaging, media)     |
+The installer is interactive — it prompts for minimal vs. full install and personal packages:
 
 ```bash
-# Run the base installer (sets up Homebrew, zsh, and stow)
 ./install_mac.sh
-
-# Then apply dotfiles with stow
-stow zsh git nvim ghostty zellij ekphos yazi zed
-
-# Install all work packages (DevOps, cloud, productivity)
-brew bundle --file=Brewfile
-
-# OR install only the minimal shell essentials
-brew bundle --file=Brewfile.minimal
-
-# Personal packages (AI coding agents, messaging, media)
-brew bundle --file=Brewfile.personal
 ```
 
-You can combine profiles — for example, start with `Brewfile.minimal` and add `Brewfile.personal` on top for personal machines.
+**Brewfile profiles:**
+
+| Profile | File | When to use |
+| --- | --- | --- |
+| Full | `Brewfile` | Work machine with DevOps/cloud tools |
+| Minimal | `Brewfile.minimal` | Shell essentials only (zsh, git, eza, yazi, zellij) |
+| Personal | `Brewfile.personal` | AI coding agents, messaging, media (add on top) |
 
 ### Arch Linux / CachyOS
 
