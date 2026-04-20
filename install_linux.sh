@@ -324,6 +324,7 @@ echo ">>> Configuring UFW firewall <<<"
 # WARNING: Do NOT run this script remotely over SSH unless you have
 # confirmed port 22 (or your SSH port) is explicitly allowed below.
 sudo pacman -S --needed --noconfirm ufw
+sudo systemctl enable --now ufw.service
 
 sudo ufw allow ssh
 sudo ufw default deny incoming
