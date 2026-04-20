@@ -57,6 +57,17 @@ For the source of truth, see:
 | `pcr` | `pre-commit run --all-files` |
 | `pcu` | `pre-commit autoupdate` |
 
+### Git Worktrees
+
+Worktrees are created under `/tmp/worktrees/<name>` and auto-copied from the main repo's `.env` and `gcloud.json` if present.
+
+| Command | Behavior |
+| ------- | -------- |
+| `gwt <name>` | Create a detached worktree at `/tmp/worktrees/<name>`, copy `.env` and `gcloud.json` if they exist, and cd into it |
+| `gwtc` | Remove the current worktree and cd back to the main repo |
+
+> Note: `gwt` is a full function (not an abbreviation) because it needs to cd into the new worktree after creation. Conflicts with any existing `gwt` alias or git-worktree shorthand.
+
 ## File Listing and Viewing
 
 | Shortcut | Expands To |
