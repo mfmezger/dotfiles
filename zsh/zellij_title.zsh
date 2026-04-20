@@ -23,6 +23,7 @@ function _update_zellij_pane_title() {
     [[ -n "$ZELLIJ" ]] || return
 
     local pane_title="${PWD:t}"
+    [[ -n "$pane_title" ]] || pane_title="/"
     local repo_context
     repo_context=$(_zellij_repo_context)
 
