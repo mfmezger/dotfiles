@@ -59,14 +59,14 @@ For the source of truth, see:
 
 ### Git Worktrees
 
-Worktrees are created under `/tmp/worktrees/<name>` and auto-copied from the main repo's `.env` and `gcloud.json` if present.
+Worktrees are created under `/tmp/worktrees/<name>`. If present, `.env` and `gcloud.json` are copied from the main repo into the new worktree.
 
 | Command | Behavior |
 | ------- | -------- |
-| `gwt <name>` | Create a detached worktree at `/tmp/worktrees/<name>`, copy `.env` and `gcloud.json` if they exist, and cd into it |
-| `gwtc` | Remove the current worktree and cd back to the main repo |
+| `gwt <name> [target]` | Create a detached worktree at `/tmp/worktrees/<name>` from `target`, or from `main` by default (`GWT_BASE` can override), then `cd` into it |
+| `gwtc` | From inside a worktree, remove the current worktree and `cd` back to the main repo |
 
-> Note: `gwt` is a full function (not an abbreviation) because it needs to cd into the new worktree after creation. Conflicts with any existing `gwt` alias or git-worktree shorthand.
+> Note: `gwt` is a shell function rather than an abbreviation because it needs to change the current shell directory after creating the worktree.
 
 ## File Listing and Viewing
 
