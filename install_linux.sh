@@ -110,7 +110,7 @@ if [ "$POWERLEVEL10K_INSTALLED_FROM_REPO" -eq 0 ]; then
     AUR_PACKAGES+=(zsh-theme-powerlevel10k-git)
 fi
 
-"$AUR_HELPER" -S --needed --noconfirm "${AUR_PACKAGES[@]}"
+"$AUR_HELPER" -S --needed --noconfirm "${AUR_PACKAGES[@]}" || echo ">>> Some AUR packages failed, continuing... <<<"
 
 # ==============================================================================
 # 4. Install Personal Applications (Optional)
@@ -132,7 +132,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo pacman -S --needed --noconfirm qbittorrent
     "$AUR_HELPER" -S --needed --noconfirm \
         obsidian \
-        steam
+        steam || echo ">>> Some personal AUR packages failed, continuing... <<<"
 else
     echo ">>> Skipping personal packages <<<"
 fi
@@ -262,14 +262,23 @@ mkdir -p "$COMPLETIONS_DIR"
 # Generate uv completions
 if command -v uv &>/dev/null; then
     echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
+    if ! uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"; then
+        rm -f "$COMPLETIONS_DIR/_uv"
+        echo ">>> Warning: Failed to generate uv completions <<<"
+    fi
+    if ! uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"; then
+        rm -f "$COMPLETIONS_DIR/_uvx"
+        echo ">>> Warning: Failed to generate uvx completions <<<"
+    fi
 fi
 
 # Generate atuin init script
 if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
-    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
+    if ! atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"; then
+        rm -f "$COMPLETIONS_DIR/atuin-init.zsh"
+        echo ">>> Warning: Failed to generate atuin completions <<<"
+    fi
     echo ">>> Importing shell history into atuin <<<"
     atuin import auto || {
         echo ">>> Warning: Failed to import shell history into atuin."
@@ -280,25 +289,37 @@ fi
 # Generate GitHub CLI completions
 if command -v gh &>/dev/null; then
     echo ">>> Generating gh completions <<<"
-    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
+    if ! gh completion -s zsh >"$COMPLETIONS_DIR/_gh"; then
+        rm -f "$COMPLETIONS_DIR/_gh"
+        echo ">>> Warning: Failed to generate gh completions <<<"
+    fi
 fi
 
 # Generate Docker completions
 if command -v docker &>/dev/null; then
     echo ">>> Generating docker completions <<<"
-    docker completion zsh >"$COMPLETIONS_DIR/_docker"
+    if ! docker completion zsh >"$COMPLETIONS_DIR/_docker"; then
+        rm -f "$COMPLETIONS_DIR/_docker"
+        echo ">>> Warning: Failed to generate docker completions <<<"
+    fi
 fi
 
 # Generate kubectl completions (if installed)
 if command -v kubectl &>/dev/null; then
     echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
+    if ! kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"; then
+        rm -f "$COMPLETIONS_DIR/_kubectl"
+        echo ">>> Warning: Failed to generate kubectl completions <<<"
+    fi
 fi
 
 # Generate helm completions (if installed)
 if command -v helm &>/dev/null; then
     echo ">>> Generating helm completions <<<"
-    helm completion zsh >"$COMPLETIONS_DIR/_helm"
+    if ! helm completion zsh >"$COMPLETIONS_DIR/_helm"; then
+        rm -f "$COMPLETIONS_DIR/_helm"
+        echo ">>> Warning: Failed to generate helm completions <<<"
+    fi
 fi
 
 # ==============================================================================
@@ -321,14 +342,14 @@ sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next
 # 12. Security: Firewall (UFW)
 # ==============================================================================
 echo ">>> Configuring UFW firewall <<<"
+# WARNING: Do NOT run this script remotely over SSH unless you have
+# confirmed port 22 (or your SSH port) is explicitly allowed below.
 sudo pacman -S --needed --noconfirm ufw
+sudo systemctl enable --now ufw.service
 
-sudo systemctl enable ufw.service
-sudo systemctl start ufw.service
-
+sudo ufw allow ssh
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow ssh
 sudo ufw --force enable
 
 # ==============================================================================
