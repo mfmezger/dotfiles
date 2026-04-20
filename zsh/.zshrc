@@ -23,7 +23,6 @@ fi
 plugins=(
     # Git
     git
-    git-hubflow
     gh
     # Docker
     docker
