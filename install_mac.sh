@@ -94,21 +94,7 @@ else
     echo ">>> Powerlevel10k already installed <<<"
 fi
 
-echo ">>> Installing zsh-autosuggestions <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-else
-    echo ">>> zsh-autosuggestions already installed <<<"
-fi
-
-echo ">>> Installing zsh-syntax-highlighting <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-else
-    echo ">>> zsh-syntax-highlighting already installed <<<"
-fi
-
-# 7. Generate Static Completions (Pre-cached for faster shell startup)
+# 7. Generate Static Completions
 echo ">>> Generating shell completions <<<"
 COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"

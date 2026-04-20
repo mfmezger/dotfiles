@@ -193,20 +193,6 @@ fi
 
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
-echo ">>> Installing zsh-autosuggestions <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-else
-    echo ">>> zsh-autosuggestions already installed <<<"
-fi
-
-echo ">>> Installing zsh-syntax-highlighting <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-else
-    echo ">>> zsh-syntax-highlighting already installed <<<"
-fi
-
 echo ">>> Installing zsh-autosuggestions-abbreviations-strategy <<<"
 if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
     git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git \
