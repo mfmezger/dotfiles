@@ -99,6 +99,8 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+source "$HOME/dotfiles/zsh/zellij_title.zsh"
+
 # BASIC STUFF (session-only for faster shell startup)
 abbr --quiet --session e="exit"
 abbr --quiet --session v="$EDITOR"
