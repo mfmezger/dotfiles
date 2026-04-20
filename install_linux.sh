@@ -110,7 +110,7 @@ if [ "$POWERLEVEL10K_INSTALLED_FROM_REPO" -eq 0 ]; then
     AUR_PACKAGES+=(zsh-theme-powerlevel10k-git)
 fi
 
-"$AUR_HELPER" -S --needed --noconfirm "${AUR_PACKAGES[@]}"
+"$AUR_HELPER" -S --needed --noconfirm "${AUR_PACKAGES[@]}" || echo ">>> Some AUR packages failed, continuing... <<<"
 
 # ==============================================================================
 # 4. Install Personal Applications (Optional)
@@ -132,7 +132,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo pacman -S --needed --noconfirm qbittorrent
     "$AUR_HELPER" -S --needed --noconfirm \
         obsidian \
-        steam
+        steam || echo ">>> Some personal AUR packages failed, continuing... <<<"
 else
     echo ">>> Skipping personal packages <<<"
 fi
@@ -262,14 +262,14 @@ mkdir -p "$COMPLETIONS_DIR"
 # Generate uv completions
 if command -v uv &>/dev/null; then
     echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv" 2>/dev/null || rm -f "$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx" 2>/dev/null || rm -f "$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
 if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
-    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
+    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh" 2>/dev/null || rm -f "$COMPLETIONS_DIR/atuin-init.zsh"
     echo ">>> Importing shell history into atuin <<<"
     atuin import auto || {
         echo ">>> Warning: Failed to import shell history into atuin."
@@ -280,25 +280,25 @@ fi
 # Generate GitHub CLI completions
 if command -v gh &>/dev/null; then
     echo ">>> Generating gh completions <<<"
-    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
+    gh completion -s zsh >"$COMPLETIONS_DIR/_gh" 2>/dev/null || rm -f "$COMPLETIONS_DIR/_gh"
 fi
 
 # Generate Docker completions
 if command -v docker &>/dev/null; then
     echo ">>> Generating docker completions <<<"
-    docker completion zsh >"$COMPLETIONS_DIR/_docker"
+    docker completion zsh >"$COMPLETIONS_DIR/_docker" 2>/dev/null || rm -f "$COMPLETIONS_DIR/_docker"
 fi
 
 # Generate kubectl completions (if installed)
 if command -v kubectl &>/dev/null; then
     echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
+    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl" 2>/dev/null || rm -f "$COMPLETIONS_DIR/_kubectl"
 fi
 
 # Generate helm completions (if installed)
 if command -v helm &>/dev/null; then
     echo ">>> Generating helm completions <<<"
-    helm completion zsh >"$COMPLETIONS_DIR/_helm"
+    helm completion zsh >"$COMPLETIONS_DIR/_helm" 2>/dev/null || rm -f "$COMPLETIONS_DIR/_helm"
 fi
 
 # ==============================================================================
@@ -321,14 +321,13 @@ sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next
 # 12. Security: Firewall (UFW)
 # ==============================================================================
 echo ">>> Configuring UFW firewall <<<"
+# WARNING: Do NOT run this script remotely over SSH unless you have
+# confirmed port 22 (or your SSH port) is explicitly allowed below.
 sudo pacman -S --needed --noconfirm ufw
 
-sudo systemctl enable ufw.service
-sudo systemctl start ufw.service
-
+sudo ufw allow ssh
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow ssh
 sudo ufw --force enable
 
 # ==============================================================================

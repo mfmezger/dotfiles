@@ -29,17 +29,17 @@ echo # move to a new line
 MINIMAL_INSTALL=$REPLY
 if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo ">>> Installing minimal brew packages (zsh essentials + zellij) <<<"
-    brew bundle --file="$DOTFILES_DIR/Brewfile.minimal"
+    brew bundle --file="$DOTFILES_DIR/Brewfile.minimal" || echo ">>> Some packages failed, continuing... <<<"
 else
     echo ">>> Installing full brew packages <<<"
-    brew bundle --file="$DOTFILES_DIR/Brewfile"
+    brew bundle --file="$DOTFILES_DIR/Brewfile" || echo ">>> Some packages failed, continuing... <<<"
 
     # 2.1 Install Personal Packages (Optional - only for full install)
     read -p ">>> Do you want to install personal packages (Obsidian, WhatsApp, VLC, etc.)? (y/N) " -n 1 -r
     echo # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo ">>> Installing Personal Brew packages <<<"
-        brew bundle --file="$DOTFILES_DIR/Brewfile.personal"
+        brew bundle --file="$DOTFILES_DIR/Brewfile.personal" || echo ">>> Some packages failed, continuing... <<<"
     else
         echo ">>> Skipping personal packages <<<"
     fi
@@ -116,14 +116,14 @@ mkdir -p "$COMPLETIONS_DIR"
 # Generate uv completions
 if command -v uv &>/dev/null; then
     echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv" 2>/dev/null || true
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx" 2>/dev/null || true
 fi
 
 # Generate atuin init script
 if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
-    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
+    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh" 2>/dev/null || true
     echo ">>> Importing shell history into atuin <<<"
     atuin import auto || {
         echo ">>> Warning: Failed to import shell history into atuin."
@@ -134,25 +134,25 @@ fi
 # Generate GitHub CLI completions
 if command -v gh &>/dev/null; then
     echo ">>> Generating gh completions <<<"
-    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
+    gh completion -s zsh >"$COMPLETIONS_DIR/_gh" 2>/dev/null || true
 fi
 
 # Generate Docker completions (full install only)
 if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v docker &>/dev/null; then
     echo ">>> Generating docker completions <<<"
-    docker completion zsh >"$COMPLETIONS_DIR/_docker"
+    docker completion zsh >"$COMPLETIONS_DIR/_docker" 2>/dev/null || true
 fi
 
 # Generate kubectl completions (full install only)
 if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v kubectl &>/dev/null; then
     echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
+    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl" 2>/dev/null || true
 fi
 
 # Generate helm completions (full install only)
 if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &>/dev/null; then
     echo ">>> Generating helm completions <<<"
-    helm completion zsh >"$COMPLETIONS_DIR/_helm"
+    helm completion zsh >"$COMPLETIONS_DIR/_helm" 2>/dev/null || true
 fi
 
 # 8. Link Dotfiles
