@@ -286,5 +286,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 if ! command -v nvm >/dev/null 2>&1 && [ -s "/usr/share/nvm/init-nvm.sh" ]; then
-    . "/usr/share/nvm/init-nvm.sh"
+    \. "/usr/share/nvm/init-nvm.sh"
 fi
