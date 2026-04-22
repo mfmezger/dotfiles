@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if ! command -v pactl >/dev/null 2>&1; then
+if ! command -v pactl > /dev/null 2>&1; then
     notify-send "Audio output" "pactl is not installed"
     exit 1
 fi

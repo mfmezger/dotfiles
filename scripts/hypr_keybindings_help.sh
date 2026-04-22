@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cat <<'EOF' | rofi -dmenu -i -p "Hyprland keys" -theme-str 'listview { lines: 24; }'
+cat << 'EOF' | rofi -dmenu -i -p "Hyprland keys" -theme-str 'listview { lines: 24; }'
 Hyprland Keybindings Cheat Sheet
 ================================
 

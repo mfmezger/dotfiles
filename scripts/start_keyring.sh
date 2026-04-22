@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-if ! command -v gnome-keyring-daemon >/dev/null 2>&1; then
+if ! command -v gnome-keyring-daemon > /dev/null 2>&1; then
     exit 0
 fi
 
-if pgrep -x gnome-keyring-daemon >/dev/null 2>&1; then
+if pgrep -x gnome-keyring-daemon > /dev/null 2>&1; then
     exit 0
 fi
 

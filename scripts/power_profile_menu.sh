@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-if ! command -v rofi >/dev/null 2>&1; then
+if ! command -v rofi > /dev/null 2>&1; then
     notify-send "Power profile" "rofi is not installed"
     exit 1
 fi
 
-if ! command -v powerprofilesctl >/dev/null 2>&1; then
+if ! command -v powerprofilesctl > /dev/null 2>&1; then
     notify-send "Power profile" "powerprofilesctl is not installed"
     exit 1
 fi
