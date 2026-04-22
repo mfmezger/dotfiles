@@ -8,7 +8,7 @@ mkdir -p "$SCREENSHOT_DIR"
 
 take_wayland_screenshot() {
     grim -g "$(slurp)" "$FILENAME"
-    wl-copy <"$FILENAME"
+    wl-copy < "$FILENAME"
 }
 
 take_x11_screenshot() {
