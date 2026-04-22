@@ -1,0 +1,53 @@
+name: Shell Lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*.sh"
+      - "**/*.sh"
+      - ".github/workflows/shell-lint.yml"
+  pull_request:
+    paths:
+      - "*.sh"
+      - "**/*.sh"
+      - ".github/workflows/shell-lint.yml"
+
+permissions: {}
+
+jobs:
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+
+      - name: Run shellcheck
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -path ./.git -prune -o -type f -name "*.sh" -print0 \
+            | xargs -0 -r shellcheck -S error -e SC1091,SC2086
+
+  shfmt:
+    name: shfmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shfmt
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shfmt
+
+      - name: Check formatting
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -path ./.git -prune -o -type f -name "*.sh" -print0 \
+            | xargs -0 -r shfmt -d -sr -i 4
