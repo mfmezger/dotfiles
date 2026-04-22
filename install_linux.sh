@@ -71,7 +71,7 @@ POWERLEVEL10K_INSTALLED_FROM_REPO=0
 if pacman -Q zsh-theme-powerlevel10k &> /dev/null; then
     echo ">>> zsh-theme-powerlevel10k already installed <<<"
     POWERLEVEL10K_INSTALLED_FROM_REPO=1
-elif sudo pacman -Si zsh-theme-powerlevel10k &> /dev/null; then
+elif pacman -Si zsh-theme-powerlevel10k &> /dev/null; then
     echo ">>> Installing zsh-theme-powerlevel10k from pacman <<<"
     sudo pacman -S --needed --noconfirm zsh-theme-powerlevel10k
     POWERLEVEL10K_INSTALLED_FROM_REPO=1

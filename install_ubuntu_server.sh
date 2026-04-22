@@ -85,7 +85,7 @@ fi
 # Install atuin (better history)
 if ! command -v atuin &> /dev/null; then
     bash <(curl https://raw.githubusercontent.com/atuinsh/atuin/main/install.sh)
-    sudo mv ~/.cargo/bin/atuin /usr/local/bin/ 2> /dev/null || true
+    sudo mv ~/.atuin/bin/atuin /usr/local/bin/ 2> /dev/null || true
 fi
 
 # Install uv (Python package manager)
