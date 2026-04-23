@@ -41,6 +41,68 @@ The installer is interactive — it prompts for minimal vs. full install and per
 ./install_ubuntu_server.sh
 ```
 
+## macOS Installation
+
+The macOS installer is interactive — it prompts for minimal vs. full install and whether to include personal packages.
+
+```bash
+./install_mac.sh
+```
+
+### Package Profiles
+
+Three Brewfile profiles are available. The installer decides which to use based on your choices:
+
+| Profile | File | What it installs |
+|---|---|---|
+| **Minimal** | `Brewfile.minimal` | Shell essentials only |
+| **Personal** | `Brewfile.personal` | AI agents + media + messaging |
+| **All** | `Brewfile` | Full DevOps workstation |
+
+#### Minimal — Shell Essentials
+
+Recommended as a baseline. Installs the core of the dotfiles setup without any GUI apps or cloud/DevOps tooling:
+
+- **Shell**: zsh, zellij, atuin, zoxide, zsh-abbr, zsh-autosuggestions-abbreviations-strategy
+- **Core tools**: gh, git-delta, eza, yazi, stow, bat, fastfetch
+- **Completions**: kubectl shell completions
+- **Fonts**: Nerd Font (Caskaydia Cove)
+- **macOS apps**: Maccy (clipboard manager)
+
+No VS Code, no cloud CLIs, no browser — just a fully functional shell environment.
+
+#### Personal — AI Agents + Media + Messaging
+
+Add this on top of minimal to get AI coding agents and everyday macOS apps:
+
+- **AI agents**: OpenCode (OpenCode CLI), Claude Code
+- **AI apps**: Obsidian (notes)
+- **Media**: VLC, OBS, Shotcut
+- **Messaging**: WhatsApp
+- **Utilities**: Cyberduck, AppCleaner, Handry
+
+#### All — Full DevOps Workstation
+
+Everything in minimal + personal, plus:
+
+- **Terminal emulators**: Ghostty, iTerm2, Raycast
+- **DevOps**: kubectl, helm, k9s
+- **System tools**: btop, zenith, dust, duf, fastfetch
+- **Browsers**: Brave, Arc
+- **Dev editors**: Neovim, Zed, Visual Studio Code, Bruno (API client)
+- **Cloud/storage**: Google Drive
+- **Utilities**: Rectangle, Alt Tab, Ice, The Unarchiver, Draw.io
+- **Languages**: Go, tokei, onefetch, commitizen, wget, xz, poppler, graphviz, ffmpeg
+- **Font alternatives**: Caskaydia Mono Nerd Font, Eurkey
+
+The full profile is designed for a work machine. It installs a significant number of casks and compiles several tools from source — expect several minutes for a first run.
+
+#### Which profile should I use?
+
+- **New macOS machine / quick setup** → minimal
+- **Work machine with cloud/DevOps** → all
+- **Dotfiles sync only (configs, no packages)** → just run `stow` after cloning — no brew install needed
+
 ## Change Git Name and Email
 
 Create a `~/.gitconfig.local` file to set your user details without modifying the tracked config:
