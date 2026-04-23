@@ -189,7 +189,9 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 # Pre-cached completions (moved to separate file for cleaner .zshrc)
-source $HOME/dotfiles/zsh/completions.zsh
+if [[ -f "$HOME/dotfiles/zsh/completions.zsh" ]]; then
+    source "$HOME/dotfiles/zsh/completions.zsh"
+fi
 
 # Normalize trailing slashes for zoxide-backed `cd` queries.
 # Without this, `cd project/` falls through to `zoxide query "project/"`,
