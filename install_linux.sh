@@ -8,17 +8,23 @@ echo ">>> Starting Arch Linux / CachyOS Installation from $DOTFILES_DIR <<<"
 
 source "$DOTFILES_DIR/scripts/common.sh"
 
+if ! command -v paru &> /dev/null; then
+    echo ">>> paru is required but not installed <<<"
+    echo ">>> Install paru first, then re-run this script <<<"
+    exit 1
+fi
+
 # ==============================================================================
 # 1. System Update
 # ==============================================================================
 echo ">>> Updating system packages <<<"
-sudo pacman -Syyu --noconfirm
+paru -Syu --noconfirm
 
 # ==============================================================================
-# 2. Install Core Packages via Pacman
+# 2. Install Core Packages via Paru
 # ==============================================================================
 echo ">>> Installing core packages <<<"
-sudo pacman -S --needed --noconfirm \
+paru -S --needed --noconfirm \
     zsh \
     zellij \
     stow \
@@ -68,33 +74,19 @@ sudo pacman -S --needed --noconfirm \
 
 # Install the packaged Powerlevel10k when available to avoid AUR conflicts
 POWERLEVEL10K_INSTALLED_FROM_REPO=0
-if pacman -Q zsh-theme-powerlevel10k &> /dev/null; then
+if paru -Q zsh-theme-powerlevel10k &> /dev/null; then
     echo ">>> zsh-theme-powerlevel10k already installed <<<"
     POWERLEVEL10K_INSTALLED_FROM_REPO=1
-elif pacman -Si zsh-theme-powerlevel10k &> /dev/null; then
-    echo ">>> Installing zsh-theme-powerlevel10k from pacman <<<"
-    sudo pacman -S --needed --noconfirm zsh-theme-powerlevel10k
+elif paru --repo -Si zsh-theme-powerlevel10k &> /dev/null; then
+    echo ">>> Installing zsh-theme-powerlevel10k from repos via paru <<<"
+    paru --repo -S --needed --noconfirm zsh-theme-powerlevel10k
     POWERLEVEL10K_INSTALLED_FROM_REPO=1
 fi
 
 # ==============================================================================
-# 3. Install AUR Packages via AUR Helper
+# 3. Install Extra Packages via Paru
 # ==============================================================================
-echo ">>> Installing AUR packages <<<"
-
-# Prefer paru on CachyOS, fall back to yay on other Arch-based systems
-if command -v paru &> /dev/null; then
-    AUR_HELPER="paru"
-elif command -v yay &> /dev/null; then
-    AUR_HELPER="yay"
-else
-    echo ">>> Installing paru AUR helper <<<"
-    sudo pacman -S --needed --noconfirm base-devel git
-    git clone https://aur.archlinux.org/paru.git /tmp/paru
-    cd /tmp/paru && makepkg -si --noconfirm
-    cd "$DOTFILES_DIR"
-    AUR_HELPER="paru"
-fi
+echo ">>> Installing extra packages via paru <<<"
 
 AUR_PACKAGES=(
     visual-studio-code-bin
@@ -110,7 +102,7 @@ if [ "$POWERLEVEL10K_INSTALLED_FROM_REPO" -eq 0 ]; then
     AUR_PACKAGES+=(zsh-theme-powerlevel10k-git)
 fi
 
-"$AUR_HELPER" -S --needed --noconfirm "${AUR_PACKAGES[@]}"
+paru -S --needed --noconfirm "${AUR_PACKAGES[@]}"
 
 # ==============================================================================
 # 4. Install Personal Applications (Optional)
@@ -123,14 +115,14 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
         echo ">>> Enabling multilib repository for Steam <<<"
         sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
-        sudo pacman -Sy --noconfirm
+        paru -Syu --noconfirm
     else
         echo ">>> multilib repository already enabled <<<"
     fi
 
-    echo ">>> Installing personal AUR packages <<<"
-    sudo pacman -S --needed --noconfirm qbittorrent
-    "$AUR_HELPER" -S --needed --noconfirm \
+    echo ">>> Installing personal packages via paru <<<"
+    paru -S --needed --noconfirm \
+        qbittorrent \
         obsidian \
         steam
 else
@@ -144,7 +136,7 @@ echo ""
 read -p ">>> Do you want to install NVIDIA drivers and CUDA toolkit? (y/N) " -n 1 -r
 echo # move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    if pacman -Qq | grep -Eq '^(linux-cachyos.*nvidia|linux-cachyos.*nvidia-open|nvidia-dkms|nvidia-open-dkms|nvidia-open|nvidia)$'; then
+    if paru -Qq | grep -Eq '^(linux-cachyos.*nvidia|linux-cachyos.*nvidia-open|nvidia-dkms|nvidia-open-dkms|nvidia-open|nvidia)$'; then
         echo ">>> Existing NVIDIA driver stack detected, skipping driver installation <<<"
     else
         echo ">>> Installing NVIDIA drivers via distro tooling when available <<<"
@@ -153,18 +145,18 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
             nvidia-inst
         else
             echo ">>> nvidia-inst not found, installing generic nvidia packages <<<"
-            sudo pacman -S --needed --noconfirm nvidia nvidia-utils nvidia-settings
+            paru -S --needed --noconfirm nvidia nvidia-utils nvidia-settings
         fi
     fi
 
     echo ">>> Installing CUDA toolkit <<<"
-    sudo pacman -S --needed --noconfirm cuda
+    paru -S --needed --noconfirm cuda
 
     echo ">>> Installing cuSPARSELt library <<<"
-    "$AUR_HELPER" -S --needed --noconfirm cusparselt
+    paru -S --needed --noconfirm cusparselt
 
     echo ">>> Installing NVIDIA Container Toolkit for Docker <<<"
-    sudo pacman -S --needed --noconfirm nvidia-container-toolkit
+    paru -S --needed --noconfirm nvidia-container-toolkit
 
     # Configure Docker to use NVIDIA runtime
     echo ">>> Configuring Docker for NVIDIA GPU support <<<"
@@ -313,7 +305,7 @@ sudo usermod -aG docker "$USER"
 # 11. Security: ClamAV Antivirus
 # ==============================================================================
 echo ">>> Setting up ClamAV antivirus <<<"
-sudo pacman -S --needed --noconfirm clamav
+paru -S --needed --noconfirm clamav
 sudo systemctl enable clamav-freshclam
 sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next boot <<<"
 
@@ -321,7 +313,7 @@ sudo freshclam || echo ">>> Warning: freshclam update failed, will retry on next
 # 12. Security: Firewall (UFW)
 # ==============================================================================
 echo ">>> Configuring UFW firewall <<<"
-sudo pacman -S --needed --noconfirm ufw
+paru -S --needed --noconfirm ufw
 
 sudo systemctl enable ufw.service
 sudo systemctl start ufw.service
@@ -335,7 +327,7 @@ sudo ufw --force enable
 # 13. Security: Application Firewall (OpenSnitch)
 # ==============================================================================
 echo ">>> Setting up OpenSnitch application firewall <<<"
-sudo pacman -S --needed --noconfirm opensnitch
+paru -S --needed --noconfirm opensnitch
 sudo systemctl enable --now opensnitchd
 
 # ==============================================================================
