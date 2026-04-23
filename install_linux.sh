@@ -8,7 +8,7 @@ echo ">>> Starting Arch Linux / CachyOS Installation from $DOTFILES_DIR <<<"
 
 source "$DOTFILES_DIR/scripts/common.sh"
 
-if ! command -v paru &>/dev/null; then
+if ! command -v paru &> /dev/null; then
     echo ">>> paru is required but not installed <<<"
     echo ">>> Install paru first, then re-run this script <<<"
     exit 1
@@ -18,11 +18,11 @@ fi
 # 1. System Update
 # ==============================================================================
 echo ">>> Updating system packages <<<"
-paru -Syyu --noconfirm
+paru -Syu --noconfirm
 
-# ============================================================================== 
+# ==============================================================================
 # 2. Install Core Packages via Paru
-# ============================================================================== 
+# ==============================================================================
 echo ">>> Installing core packages <<<"
 paru -S --needed --noconfirm \
     zsh \
@@ -74,18 +74,18 @@ paru -S --needed --noconfirm \
 
 # Install the packaged Powerlevel10k when available to avoid AUR conflicts
 POWERLEVEL10K_INSTALLED_FROM_REPO=0
-if paru -Q zsh-theme-powerlevel10k &>/dev/null; then
+if paru -Q zsh-theme-powerlevel10k &> /dev/null; then
     echo ">>> zsh-theme-powerlevel10k already installed <<<"
     POWERLEVEL10K_INSTALLED_FROM_REPO=1
-elif paru -Si zsh-theme-powerlevel10k &>/dev/null; then
+elif paru --repo -Si zsh-theme-powerlevel10k &> /dev/null; then
     echo ">>> Installing zsh-theme-powerlevel10k from repos via paru <<<"
-    paru -S --needed --noconfirm zsh-theme-powerlevel10k
+    paru --repo -S --needed --noconfirm zsh-theme-powerlevel10k
     POWERLEVEL10K_INSTALLED_FROM_REPO=1
 fi
 
-# ============================================================================== 
+# ==============================================================================
 # 3. Install Extra Packages via Paru
-# ============================================================================== 
+# ==============================================================================
 echo ">>> Installing extra packages via paru <<<"
 
 AUR_PACKAGES=(
@@ -115,7 +115,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
         echo ">>> Enabling multilib repository for Steam <<<"
         sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
-        paru -Sy --noconfirm
+        paru -Syu --noconfirm
     else
         echo ">>> multilib repository already enabled <<<"
     fi
@@ -141,7 +141,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     else
         echo ">>> Installing NVIDIA drivers via distro tooling when available <<<"
         # nvidia-inst exists on some Arch-based distros and picks a suitable stack.
-        if command -v nvidia-inst &>/dev/null; then
+        if command -v nvidia-inst &> /dev/null; then
             nvidia-inst
         else
             echo ">>> nvidia-inst not found, installing generic nvidia packages <<<"
@@ -211,7 +211,7 @@ fi
 # 7. Install Python Tools (uv & commitizen)
 # ==============================================================================
 echo ">>> Installing uv <<<"
-if ! command -v uv &>/dev/null; then
+if ! command -v uv &> /dev/null; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 else
     echo ">>> uv already installed <<<"
@@ -224,7 +224,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # 8. Install Rust Toolchain (rustup)
 # ==============================================================================
 echo ">>> Installing rustup <<<"
-if ! command -v rustup &>/dev/null; then
+if ! command -v rustup &> /dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
 else
     echo ">>> rustup already installed <<<"
@@ -234,7 +234,7 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-if ! cargo --version &>/dev/null; then
+if ! cargo --version &> /dev/null; then
     echo ">>> Configuring default Rust toolchain (stable) <<<"
     rustup default stable
 else
@@ -252,16 +252,16 @@ COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"
 
 # Generate uv completions
-if command -v uv &>/dev/null; then
+if command -v uv &> /dev/null; then
     echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
+    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
-if command -v atuin &>/dev/null; then
+if command -v atuin &> /dev/null; then
     echo ">>> Generating atuin completions <<<"
-    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
+    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
     echo ">>> Importing shell history into atuin <<<"
     atuin import auto || {
         echo ">>> Warning: Failed to import shell history into atuin."
@@ -270,27 +270,27 @@ if command -v atuin &>/dev/null; then
 fi
 
 # Generate GitHub CLI completions
-if command -v gh &>/dev/null; then
+if command -v gh &> /dev/null; then
     echo ">>> Generating gh completions <<<"
-    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
+    gh completion -s zsh > "$COMPLETIONS_DIR/_gh"
 fi
 
 # Generate Docker completions
-if command -v docker &>/dev/null; then
+if command -v docker &> /dev/null; then
     echo ">>> Generating docker completions <<<"
-    docker completion zsh >"$COMPLETIONS_DIR/_docker"
+    docker completion zsh > "$COMPLETIONS_DIR/_docker"
 fi
 
 # Generate kubectl completions (if installed)
-if command -v kubectl &>/dev/null; then
+if command -v kubectl &> /dev/null; then
     echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
+    kubectl completion zsh > "$COMPLETIONS_DIR/_kubectl"
 fi
 
 # Generate helm completions (if installed)
-if command -v helm &>/dev/null; then
+if command -v helm &> /dev/null; then
     echo ">>> Generating helm completions <<<"
-    helm completion zsh >"$COMPLETIONS_DIR/_helm"
+    helm completion zsh > "$COMPLETIONS_DIR/_helm"
 fi
 
 # ==============================================================================
