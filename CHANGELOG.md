@@ -2,6 +2,39 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## v0.40.0 (2026-04-24)
+
+### Feat
+
+- **zsh**: show git branch in zellij titles
+- **iterm2**: allow clipboard access
+- **zellij**: add Alt tab shortcuts
+- **install**: add rustup to setup scripts
+- **zellij**: add install support and default config
+
+### Fix
+
+- **iterm**: enable focus follows mouse to avoid blocking scrolling in iTerm
+- **shell**: correct installer command usage
+- **shell**: format scripts for shfmt
+- **install**: use paru instead of pacman and yay
+- **zsh**: fallback zellij title to root
+- **zsh**: optimize zellij title git lookup
+- **zsh**: show resolved gwt default target
+- **zsh**: default gwt base to main
+- **zsh**: remove git-hubflow plugin
+- **install**: validate rust toolchain setup
+- **zsh**: dedupe path entries
+- **install**: avoid rustup shell path changes
+- **zsh**: source cargo env after rustup install
+- **install**: address zellij review feedback
+- **terminal**: improve zellij pane shortcuts on macos
+- **ghostty**: improve split divider visibility
+
+### Refactor
+
+- **zsh**: extract zellij title hooks
+
 ## v0.39.0 (2026-04-15)
 
 ### Feat
@@ -48,8 +81,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 - **atuin**: adding y flag in case for interactive.
 - **install**: add error handling for atuin history import
 - **iterm2**: apply iTerm2 config for both minimal and full install
-- **iterm2**: apply iTerm2 config for both minimal and full install
-- **iterm2**: apply iTerm2 config for both minimal and full install
 - **zoxide**: echo the directory to allow for better visualization of the jump
 - **tree**: adding tree for linux
 
@@ -95,9 +126,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 ### Feat
 
 - **git**: auto-push tags with commits
-
-### Fix
-
 
 ## 0.33.0 (2026-01-18)
 
@@ -210,9 +238,6 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ## 0.25.0 (2025-12-12)
 
-### Feat
-
-
 ## 0.24.0 (2025-12-12)
 
 ### Feat
@@ -221,17 +246,11 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ## 0.23.1 (2025-12-12)
 
-### Fix
-
-
 ## 0.23.0 (2025-12-11)
 
 ### Feat
 
 - **Linux**: Adding personal applications for linux
-
-### Fix
-
 
 ## 0.22.2 (2025-12-11)
 
@@ -254,18 +273,9 @@ All notable changes to this dotfiles repository will be documented in this file.
 
 ## 0.21.8 (2025-12-10)
 
-### Fix
-
-
 ## 0.21.7 (2025-12-10)
 
-### Fix
-
-
 ## 0.21.6 (2025-12-10)
-
-### Fix
-
 
 ## 0.21.5 (2025-12-10)
 
