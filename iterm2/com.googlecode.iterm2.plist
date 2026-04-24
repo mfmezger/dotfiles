@@ -30,6 +30,8 @@
 	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>109C9426-095A-448D-9B96-A930161E0481</string>
+	<key>FocusFollowsMouse</key>
+	<true/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
