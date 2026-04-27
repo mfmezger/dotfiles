@@ -7,7 +7,19 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
+    "pi-acp": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
   "agent": {
+    "sidebar_side": "left",
     "default_model": {
       "provider": "ollama",
       "model": "devstral-small-2:latest"
