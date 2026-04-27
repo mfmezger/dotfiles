@@ -73,8 +73,8 @@ return {
           event = "notify",
           warning = true,
           any = {
-            { find = "require%('lspconfig'%)" },
-            { find = "vim%.lsp%.with%(%) is deprecated" },
+            { find = "require.*lspconfig" },
+            { find = "vim%.lsp%.with.*deprecated" },
           },
         },
         opts = { skip = true },
