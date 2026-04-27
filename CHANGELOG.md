@@ -2,6 +2,12 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## v0.41.0 (2026-04-27)
+
+### Feat
+
+- **zed**: adding coding agents to zed
+
 ## v0.40.0 (2026-04-24)
 
 ### Feat
