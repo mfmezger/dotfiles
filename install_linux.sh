@@ -91,7 +91,6 @@ echo ">>> Installing extra packages via paru <<<"
 AUR_PACKAGES=(
     visual-studio-code-bin
     brave-bin
-    ekphos-bin
     zsh-abbr
     discord
     witr-bin
@@ -239,6 +238,13 @@ if ! cargo --version &> /dev/null; then
     rustup default stable
 else
     echo ">>> Rust toolchain already configured <<<"
+fi
+
+echo ">>> Installing ekphos via cargo <<<"
+if ! command -v ekphos &> /dev/null; then
+    cargo install ekphos --locked
+else
+    echo ">>> ekphos already installed <<<"
 fi
 
 echo ">>> Installing commitizen via uv <<<"
