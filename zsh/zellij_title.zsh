@@ -31,8 +31,14 @@ function _update_zellij_pane_title() {
         pane_title="$repo_context"
     fi
 
-    # Zellij derives automatic pane names from the terminal title.
-    printf '\033]0;%s\007' "$pane_title"
+    # Use an explicit Zellij pane name instead of only setting the terminal title.
+    # Full-screen TUIs (including pi) can change the terminal title while they run,
+    # which makes Zellij's automatic pane name lose the repo/branch context.
+    if command -v zellij >/dev/null 2>&1; then
+        zellij action rename-pane "$pane_title" >/dev/null 2>&1
+    else
+        printf '\033]0;%s\007' "$pane_title"
+    fi
 }
 
 add-zsh-hook precmd _update_zellij_pane_title
