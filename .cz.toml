@@ -5,3 +5,5 @@ version_scheme = "semver"
 version = "0.42.0"
 update_changelog_on_bump = true
 major_version_zero = true
+annotated_tag = true
+annotated_tag_message = "Release $version"
