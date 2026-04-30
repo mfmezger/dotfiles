@@ -2,6 +2,17 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## v0.42.0 (2026-04-30)
+
+### Feat
+
+- **zed**: update panel and agent settings
+
+### Fix
+
+- **zellij**: preserve pane branch title in pi
+- **install**: install ekphos via cargo
+
 ## v0.41.0 (2026-04-27)
 
 ### Feat
