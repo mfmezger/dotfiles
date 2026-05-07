@@ -39,5 +39,8 @@ return {
   -- Markdown & Documentation
   { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
 
+  -- Formatting (replaces none-ls)
+  { import = "astrocommunity.editing-support.conform-nvim" },
+
   -- import/override with your plugins folder
 }
