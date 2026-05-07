@@ -1,5 +1,7 @@
 #!/bin/bash
 # install docker and docker compose on stackit
+set -euo pipefail
+IFS=$'\n\t'
 
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl software-properties-common -y

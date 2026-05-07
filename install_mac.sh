@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e # Exit immediately if a command exits with a non-zero status
+set -euo pipefail
+IFS=$'\n\t'
 
 # Get the directory of this script
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

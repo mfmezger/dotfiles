@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+IFS=$'\n\t'
 
 if ! command -v pactl > /dev/null 2>&1; then
     notify-send "Audio output" "pactl is not installed"

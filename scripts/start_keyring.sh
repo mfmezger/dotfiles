@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+IFS=$'\n\t'
 
 if ! command -v gnome-keyring-daemon > /dev/null 2>&1; then
     exit 0

@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+IFS=$'\n\t'
 
 if ! command -v rofi > /dev/null 2>&1; then
     notify-send "Power profile" "rofi is not installed"
