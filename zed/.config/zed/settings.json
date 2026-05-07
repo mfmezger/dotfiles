@@ -150,6 +150,7 @@
     "show_other_hints": true
   },
   "terminal": {
+    "dock": "right",
     "detect_venv": {
       "on": {
         "directories": [".venv", "venv", ".env", "env"],
