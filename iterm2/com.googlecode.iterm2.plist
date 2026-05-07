@@ -30,8 +30,6 @@
 	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>109C9426-095A-448D-9B96-A930161E0481</string>
-	<key>FocusFollowsMouse</key>
-	<true/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
@@ -1090,11 +1088,11 @@
 			<key>Normal Font</key>
 			<string>CaskaydiaCoveNFM-Regular 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
-			<integer>2</integer>
+			<integer>0</integer>
 			<key>Rows</key>
 			<integer>25</integer>
 			<key>Screen</key>
@@ -1193,6 +1191,8 @@
 			<string>xterm-256color</string>
 			<key>Transparency</key>
 			<real>0.0</real>
+			<key>Treat Option as Alt</key>
+			<false/>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
