@@ -73,7 +73,7 @@
       "milliseconds": 1000
     }
   },
-  "buffer_font_fallbacks": ["CascadiaCove Mono", "monospace"],
+  "buffer_font_fallbacks": ["monospace"],
   "buffer_font_family": "CaskaydiaCove Nerd Font Mono",
   "file_types": {},
   "auto_indent_on_paste": true,
