@@ -53,6 +53,29 @@ cat <<EOF > ~/.gitconfig.local
 EOF
 ```
 
+## Per-Host Zsh Overrides
+
+`zsh/.zshrc` sources `~/.zshrc.local` at the end if it exists, so you can keep
+machine-specific settings and secrets out of the tracked dotfiles:
+
+```bash
+cat <<'EOF' > ~/.zshrc.local
+# Secrets / API keys
+export OPENAI_API_KEY="sk-..."
+
+# Host-specific PATH additions
+export PATH="$HOME/.local/bin:$PATH"
+
+# Work-only aliases or proxy settings
+alias vpn="sudo openconnect vpn.example.com"
+export HTTPS_PROXY="http://proxy.corp:3128"
+EOF
+```
+
+Typical uses: API keys, proxy/VPN settings, work-vs-personal aliases, and any
+`PATH` tweaks that only apply to one machine. The file overrides anything set
+earlier in `.zshrc` because it is sourced last.
+
 ## What's Included
 
 - **Shell**: Zsh + Oh My Zsh + Powerlevel10k
