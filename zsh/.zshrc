@@ -292,3 +292,6 @@ source /usr/share/nvm/init-nvm.sh
 
 
 export PATH="/Applications/PyCharm.app/Contents/MacOS:$PATH"
+
+# Per-host secrets and overrides (not tracked in dotfiles)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
