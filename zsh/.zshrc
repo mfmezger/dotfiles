@@ -188,6 +188,10 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias pbpaste="xclip -selection clipboard -o"
 fi
 
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 # Pre-cached completions (moved to separate file for cleaner .zshrc)
 source $HOME/dotfiles/zsh/completions.zsh
 
@@ -289,13 +293,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 source /usr/share/nvm/init-nvm.sh
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 export PATH="/Applications/PyCharm.app/Contents/MacOS:$PATH"
 
