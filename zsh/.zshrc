@@ -190,7 +190,7 @@ fi
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+[[ -d "$BUN_INSTALL/bin" ]] && export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Pre-cached completions (moved to separate file for cleaner .zshrc)
 source $HOME/dotfiles/zsh/completions.zsh
