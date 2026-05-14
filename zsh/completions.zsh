@@ -24,6 +24,9 @@ fi
 # GitHub CLI
 [[ -f "$COMPLETIONS_DIR/_gh" ]] && source "$COMPLETIONS_DIR/_gh"
 
+# Bun
+[[ -f "${BUN_INSTALL:-$HOME/.bun}/_bun" ]] && source "${BUN_INSTALL:-$HOME/.bun}/_bun"
+
 # Docker
 [[ -f "$COMPLETIONS_DIR/_docker" ]] && source "$COMPLETIONS_DIR/_docker"
 
