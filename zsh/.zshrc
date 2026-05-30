@@ -6,7 +6,11 @@ fi
 export DOTFILES_DIR="${${(%):-%N}:A:h:h}"
 
 source_if_exists() {
-    [[ -f "$1" ]] && source "$1"
+    if [[ -f "$1" && -r "$1" ]]; then
+        source "$1"
+        return 0
+    fi
+    return 1
 }
 
 # Configure zoxide to override cd command directly
