@@ -369,8 +369,16 @@ stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi gtk
 # ==============================================================================
 echo ">>> Applying GTK dark theme preference <<<"
 if command -v gsettings &> /dev/null; then
-    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' || true
-    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' || true
+    run_gsettings() {
+        if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ] && command -v dbus-run-session &> /dev/null; then
+            dbus-run-session -- gsettings "$@"
+        else
+            gsettings "$@"
+        fi
+    }
+
+    run_gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' || true
+    run_gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' || true
 else
     echo ">>> gsettings not found, skipping system color-scheme preference <<<"
 fi
