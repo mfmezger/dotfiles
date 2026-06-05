@@ -18,6 +18,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to manage symlinks
 | `hypr` | `~/.config/hypr` |
 | `waybar` | `~/.config/waybar` |
 | `rofi` | `~/.config/rofi` |
+| `walker` | `~/.config/walker` |
 | `gtk` | `~/.config/gtk-3.0`, `~/.gtkrc-2.0` |
 | `screenlayout` | `~/.screenlayout` |
 
@@ -38,7 +39,7 @@ stow zsh git nvim ghostty zellij ekphos yazi zed
 ### Arch Linux / CachyOS
 
 ```bash
-stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi gtk
+stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi walker gtk
 ```
 
 ### Ubuntu (minimal)

@@ -1,0 +1,59 @@
+force_keyboard_focus = true
+close_when_open = true
+click_to_close = true
+selection_wrap = true
+theme = "default"
+
+[placeholders]
+"default" = { input = "Search", list = "No Results" }
+"desktopapplications" = { input = "Launch app", list = "No apps" }
+"calc" = { input = "Calculate", list = "Enter expression" }
+"runner" = { input = "Run command", list = "No commands" }
+"websearch" = { input = "Search web", list = "" }
+"clipboard" = { input = "Clipboard", list = "Clipboard empty" }
+
+[keybinds]
+close = ["Escape"]
+next = ["Down", "ctrl j"]
+previous = ["Up", "ctrl k"]
+toggle_exact = ["ctrl e"]
+resume_last_query = ["ctrl r"]
+quick_activate = ["F1", "F2", "F3", "F4"]
+
+[providers]
+default = [
+  "desktopapplications",
+  "calc",
+  "runner",
+  "websearch",
+  "clipboard",
+]
+empty = ["desktopapplications", "clipboard"]
+max_results = 50
+
+[providers.clipboard]
+time_format = "relative"
+
+[[providers.prefixes]]
+prefix = ";"
+provider = "providerlist"
+
+[[providers.prefixes]]
+prefix = ">"
+provider = "runner"
+
+[[providers.prefixes]]
+prefix = "="
+provider = "calc"
+
+[[providers.prefixes]]
+prefix = "@"
+provider = "websearch"
+
+[[providers.prefixes]]
+prefix = ":"
+provider = "clipboard"
+
+[[providers.prefixes]]
+prefix = "$"
+provider = "windows"
