@@ -92,6 +92,7 @@ echo ">>> Installing extra packages via paru <<<"
 AUR_PACKAGES=(
     visual-studio-code-bin
     brave-bin
+    zen-browser-bin
     zsh-abbr
     discord
     witr-bin
