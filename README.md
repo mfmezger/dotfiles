@@ -105,7 +105,8 @@ earlier in `.zshrc` because it is sourced last.
 ├── zed/                     # Zed editor config
 ├── hypr/                    # Hyprland configuration (Linux)
 ├── waybar/                  # Waybar configuration (Linux)
-├── rofi/                    # Rofi launcher config (Linux)
+├── rofi/                    # Rofi launcher config/fallback (Linux)
+├── walker/                  # Walker launcher config (Linux)
 ├── gtk/                     # GTK theming/config (Linux)
 ├── screenlayout/            # Screen layout scripts (Linux)
 ├── scripts/                 # Utility scripts
@@ -133,7 +134,7 @@ cd ~/dotfiles
 stow zsh git nvim ghostty zellij ekphos yazi zed
 
 # Arch Linux / CachyOS
-stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi gtk
+stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi walker gtk
 
 # Ubuntu (minimal)
 stow zsh git nvim zellij ekphos

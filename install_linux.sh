@@ -60,6 +60,7 @@ paru -S --needed --noconfirm \
     qt6-wayland \
     rofi-wayland \
     rofi-calc \
+    walker \
     wlogout \
     grim \
     slurp \
@@ -95,6 +96,14 @@ AUR_PACKAGES=(
     discord
     witr-bin
     cliphist
+    elephant-bin
+    elephant-desktopapplications-bin
+    elephant-calc-bin
+    elephant-runner-bin
+    elephant-websearch-bin
+    elephant-clipboard-bin
+    elephant-providerlist-bin
+    elephant-windows-bin
 )
 
 if [ "$POWERLEVEL10K_INSTALLED_FROM_REPO" -eq 0 ]; then
@@ -357,12 +366,13 @@ backup_if_exists ".config/zed"
 backup_if_exists ".config/dunst"
 backup_if_exists ".config/waybar"
 backup_if_exists ".config/rofi"
+backup_if_exists ".config/walker"
 backup_if_exists ".config/gtk-3.0"
 backup_if_exists ".config/gtk-4.0"
 backup_if_exists ".gtkrc-2.0"
 
 # Run stow
-stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi gtk
+stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi walker gtk
 
 # ==============================================================================
 # 15. Apply GTK Dark Theme Preference
