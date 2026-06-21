@@ -55,7 +55,9 @@ fi
 
 # OPTIMIZATION: Manually handle completion initialization
 # Moved ugly logic to separate file to keep .zshrc clean
-source $HOME/dotfiles/zsh/fast_init.zsh
+if [[ -f "$HOME/dotfiles/zsh/fast_init.zsh" ]]; then
+    source "$HOME/dotfiles/zsh/fast_init.zsh"
+fi
 
 source $ZSH/oh-my-zsh.sh
 
