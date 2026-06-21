@@ -54,7 +54,9 @@ fi
 
 # OPTIMIZATION: Manually handle completion initialization
 # Moved ugly logic to separate file to keep .zshrc clean
-source $HOME/dotfiles/zsh/fast_init.zsh
+if [[ -r "$HOME/dotfiles/zsh/fast_init.zsh" ]]; then
+    source "$HOME/dotfiles/zsh/fast_init.zsh"
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -193,7 +195,9 @@ export BUN_INSTALL="$HOME/.bun"
 [[ -d "$BUN_INSTALL/bin" ]] && export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Pre-cached completions (moved to separate file for cleaner .zshrc)
-source $HOME/dotfiles/zsh/completions.zsh
+if [[ -r "$HOME/dotfiles/zsh/completions.zsh" ]]; then
+    source "$HOME/dotfiles/zsh/completions.zsh"
+fi
 
 # Normalize trailing slashes for zoxide-backed `cd` queries.
 # Without this, `cd project/` falls through to `zoxide query "project/"`,
