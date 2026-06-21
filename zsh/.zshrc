@@ -55,7 +55,7 @@ fi
 
 # OPTIMIZATION: Manually handle completion initialization
 # Moved ugly logic to separate file to keep .zshrc clean
-if [[ -f "$HOME/dotfiles/zsh/fast_init.zsh" ]]; then
+if [[ -r "$HOME/dotfiles/zsh/fast_init.zsh" ]]; then
     source "$HOME/dotfiles/zsh/fast_init.zsh"
 fi
 
@@ -190,7 +190,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 # Pre-cached completions (moved to separate file for cleaner .zshrc)
-if [[ -f "$HOME/dotfiles/zsh/completions.zsh" ]]; then
+if [[ -r "$HOME/dotfiles/zsh/completions.zsh" ]]; then
     source "$HOME/dotfiles/zsh/completions.zsh"
 fi
 
