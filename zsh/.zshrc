@@ -2,8 +2,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Configure zoxide to override cd command directly
-export ZOXIDE_CMD_OVERRIDE="cd"
+# Note: we intentionally do NOT set ZOXIDE_CMD_OVERRIDE here.
+# The zoxide oh-my-zsh plugin would override `cd` itself, but we define our
+# own `cd()` wrapper below (trailing-slash normalization). Letting the plugin
+# also claim `cd` triggers zoxide's "redefined after init" warning. By leaving
+# the override unset, our wrapper is the sole `cd`, and the warning disappears.
 
 # Echo the matched directory before navigating
 export _ZO_ECHO=1
