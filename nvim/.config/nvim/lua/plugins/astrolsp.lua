@@ -53,11 +53,7 @@ return {
       ty = {
         cmd = { "ty", "server" },
         filetypes = { "python" },
-        root_dir = function(fname)
-          return require("lspconfig.util").root_pattern("pyproject.toml", "ty.toml", "setup.py", "setup.cfg", ".git")(
-            fname
-          )
-        end,
+        root_markers = { "pyproject.toml", "ty.toml", "setup.py", "setup.cfg", ".git" },
         single_file_support = true,
       },
     },
@@ -71,8 +67,6 @@ return {
       -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
       basedpyright = false,
       pyright = false,
-      ruff = function(_, opts) require("lspconfig").ruff.setup(opts) end,
-      ty = function(_, opts) require("lspconfig").ty.setup(opts) end,
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {

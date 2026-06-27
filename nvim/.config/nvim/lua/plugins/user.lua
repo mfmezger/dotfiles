@@ -6,7 +6,7 @@ return {
 
   -- == Examples of Adding Plugins ==
 
-  "andweeb/presence.nvim",
+  { "andweeb/presence.nvim", enabled = false },
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
@@ -64,6 +64,26 @@ return {
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
 
+  {
+    "folke/noice.nvim",
+    opts = function(_, opts)
+      opts = opts or {}
+      opts.routes = opts.routes or {}
+      table.insert(opts.routes, 1, {
+        filter = {
+          event = "notify",
+          warning = true,
+          any = {
+            { find = "require.*lspconfig" },
+            { find = "vim%.lsp%.with.*deprecated" },
+          },
+        },
+        opts = { skip = true },
+      })
+      return opts
+    end,
+  },
+
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
     "L3MON4D3/LuaSnip",
@@ -98,9 +118,9 @@ return {
             :with_del(cond.not_after_regex "xx")
             -- disable adding a newline when you press <cr>
             :with_cr(cond.none()),
-        },
-        -- disable for .vim files, but it work for another filetypes
-        Rule("a", "a", "-vim")
+          -- disable for .vim files, but it works for other filetypes
+          Rule("a", "a", "-vim")
+        }
       )
     end,
   },
