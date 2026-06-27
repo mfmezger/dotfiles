@@ -67,6 +67,7 @@ return {
   {
     "folke/noice.nvim",
     opts = function(_, opts)
+      opts = opts or {}
       opts.routes = opts.routes or {}
       table.insert(opts.routes, 1, {
         filter = {
