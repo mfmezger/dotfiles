@@ -166,17 +166,9 @@ abbr --quiet --session kgp='kubectl get pods'
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
     abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
-    function uu() {
-        echo "⚠️  'uu' is deprecated, please use 'update' instead"
-        brew update && brew upgrade && brew cu -f -a && tldr --update && omz update
-    }
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
     abbr --quiet --session update="paru -Syyu --noconfirm && tldr --update && omz update"
-    function uu() {
-        echo "⚠️  'uu' is deprecated, please use 'update' instead"
-        paru -Syyu --noconfirm && tldr --update && omz update
-    }
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
     abbr --quiet --session nvitop="uvx nvitop"
