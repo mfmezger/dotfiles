@@ -20,7 +20,6 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to manage symlinks
 | `rofi` | `~/.config/rofi` |
 | `walker` | `~/.config/walker` |
 | `gtk` | `~/.config/gtk-3.0`, `~/.gtkrc-2.0` |
-| `screenlayout` | `~/.screenlayout` |
 
 ## Apply Configs
 

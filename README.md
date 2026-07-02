@@ -97,7 +97,6 @@ earlier in `.zshrc` because it is sourced last.
 ├── zsh/                     # Zsh configuration (.zshrc, .p10k.zsh)
 ├── nvim/                    # Neovim configuration
 ├── ghostty/                 # Ghostty terminal config
-├── kitty/                   # Kitty terminal config
 ├── zellij/                  # Zellij configuration
 ├── ekphos/                  # Ekphos notes app config
 ├── git/                     # Git configuration (.gitconfig)
@@ -108,7 +107,6 @@ earlier in `.zshrc` because it is sourced last.
 ├── rofi/                    # Rofi launcher config/fallback (Linux)
 ├── walker/                  # Walker launcher config (Linux)
 ├── gtk/                     # GTK theming/config (Linux)
-├── screenlayout/            # Screen layout scripts (Linux)
 ├── scripts/                 # Utility scripts
 ├── Brewfile                 # macOS packages
 ├── Brewfile.personal        # macOS personal packages
