@@ -6,7 +6,7 @@ repos:
       - id: shellcheck
         args: [--severity=warning]
         exclude: >-
-          ^(zsh/|nvim/|kitty/|ghostty/|yazi/|zed/|i3/|albert/|screenlayout/)
+          ^(zsh/|nvim/|ghostty/|yazi/|zed/|i3/|albert/)
   # Shell script formatting
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.10.0-1
