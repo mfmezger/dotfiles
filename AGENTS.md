@@ -82,7 +82,6 @@ Place configs in appropriate directories:
 - `ghostty/.config/ghostty/` - Ghostty terminal config
 - `yazi/.config/yazi/` - Yazi file manager config
 - `zed/.config/zed/` - Zed editor config
-- `opencode/.config/opencode/` - OpenCode AI coding agent config (personal install only)
 - `scripts/` - Utility scripts
 
 ### Platform-Specific Handling
