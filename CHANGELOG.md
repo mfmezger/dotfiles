@@ -2,6 +2,37 @@
 
 All notable changes to this dotfiles repository will be documented in this file.
 
+## v0.43.0 (2026-07-05)
+
+### Feat
+
+- **minimalBrew**: adding herdr as tmux for agents for the minimal installation for macos
+- **hypr**: autostart zen browser in workspace 2 (#46)
+- **hypr**: add walker launcher support (#47)
+- **nvim**: add mayu theme
+- **zsh**: source ~/.zshrc.local for per-host overrides
+- **zed**: open CLI files in existing window
+- **zed**: dock terminal panel to the right
+- **zsh**: add PyCharm to PATH
+
+### Fix
+
+- **zsh**: drop ZOXIDE_CMD_OVERRIDE to silence cd warning (#49)
+- **zsh**: guard completions.zsh source with -f check (#30)
+- **zsh**: guard distro nvm fallback
+- **gtk**: use dbus session for theme settings
+- **gtk**: handle gsettings failures
+- **gtk**: apply dark theme in linux install
+- **ghostty**: move macos option as alt to left
+- **zsh**: guard Bun PATH setup
+- **dotfiles**: address PR review feedback
+- **hypr**: update dwindle config for Hyprland 0.55
+- **nvim**: replace none-ls with conform, unpin aerial for nvim 0.12+
+
+### Refactor
+
+- **zsh**: remove deprecated uu function
+
 ## v0.42.0 (2026-04-30)
 
 ### Feat
