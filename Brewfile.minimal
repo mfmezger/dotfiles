@@ -43,6 +43,7 @@ brew "gh"                                                      # GitHub CLI (com
 brew "git-delta"                                               # Git pager
 brew "fastfetch"                                               # System info (ff alias)
 brew "kubectl"                                                 # Kubernetes completions
+brew "herdr"                                                   # tmux for agents
 
 
 # ==============================================================================
