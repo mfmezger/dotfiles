@@ -39,6 +39,7 @@ brew "bat"                                                     # cat replacement
 # DEVELOPMENT TOOLS (Referenced in zsh config)
 # ==============================================================================
 brew "go"                                                      # Go language (PATH in .zshrc)
+brew "go-task"                                                 # Task runner
 brew "gh"                                                      # GitHub CLI (completions)
 brew "git-delta"                                               # Git pager
 brew "fastfetch"                                               # System info (ff alias)

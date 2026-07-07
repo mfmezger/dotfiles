@@ -49,6 +49,7 @@ paru -S --needed --noconfirm \
     xclip \
     zed \
     go \
+    go-task \
     scrot \
     dunst \
     hyprland \
