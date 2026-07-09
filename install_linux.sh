@@ -95,6 +95,7 @@ AUR_PACKAGES=(
     brave-bin
     zen-browser-bin
     zsh-abbr
+    hunk-bin
     discord
     witr-bin
     cliphist

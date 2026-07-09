@@ -56,6 +56,7 @@ cask "zed"
 brew "go"
 brew "gh"
 brew "git-delta"
+brew "hunk"
 brew "tokei"
 brew "onefetch"
 # uv is installed via curl in install_mac.sh for latest version
