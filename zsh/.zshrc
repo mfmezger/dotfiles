@@ -166,10 +166,12 @@ abbr --quiet --session kgp='kubectl get pods'
 # Platform-specific update aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
-    abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && tldr --update && omz update"
+    # tldr + omz run in parallel (independent of brew); cleanup at the end.
+    abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && { tldr --update & omz update & wait; } && brew cleanup"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
-    abbr --quiet --session update="paru -Syyu --noconfirm && tldr --update && omz update"
+    # tldr + omz run in parallel (independent of paru); cleanup at the end.
+    abbr --quiet --session update="paru -Syyu --noconfirm && { tldr --update & omz update & wait; } && paru -Sc --noconfirm"
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
     abbr --quiet --session nvitop="uvx nvitop"
