@@ -167,11 +167,15 @@ abbr --quiet --session kgp='kubectl get pods'
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS update command
     # tldr + omz run in parallel (independent of brew); cleanup at the end.
-    abbr --quiet --session update="brew update && brew upgrade && brew cu -f -a && { tldr --update & omz update & wait; } && brew cleanup"
+    # wait on each PID so a failed update propagates and halts before cleanup;
+    # single quotes keep $! / $pid unexpanded until the abbr runs.
+    abbr --quiet --session update='brew update && brew upgrade && brew cu -f -a && { tldr --update & pid1=$!; omz update & pid2=$!; wait $pid1 && wait $pid2; } && brew cleanup'
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Arch Linux update command
     # tldr + omz run in parallel (independent of paru); cleanup at the end.
-    abbr --quiet --session update="paru -Syyu --noconfirm && { tldr --update & omz update & wait; } && paru -Sc --noconfirm"
+    # wait on each PID so a failed update propagates and halts before cleanup;
+    # single quotes keep $! / $pid unexpanded until the abbr runs.
+    abbr --quiet --session update='paru -Syyu --noconfirm && { tldr --update & pid1=$!; omz update & pid2=$!; wait $pid1 && wait $pid2; } && paru -Sc --noconfirm'
     # Zed editor is called 'zeditor' on Linux
     alias zed="zeditor"
     abbr --quiet --session nvitop="uvx nvitop"
