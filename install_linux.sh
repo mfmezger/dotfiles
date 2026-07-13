@@ -236,51 +236,14 @@ uv tool install commitizen
 # ==============================================================================
 # 9. Generate Shell Completions (Pre-cached for faster shell startup)
 # ==============================================================================
-echo ">>> Generating shell completions <<<"
-COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
-mkdir -p "$COMPLETIONS_DIR"
-
-# Generate uv completions
-if command -v uv &>/dev/null; then
-    echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
-fi
-
-# Generate atuin init script
-if command -v atuin &>/dev/null; then
-    echo ">>> Generating atuin completions <<<"
-    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
-    echo ">>> Importing shell history into atuin <<<"
-    atuin import auto || {
-        echo ">>> Warning: Failed to import shell history into atuin."
-        echo ">>> Please check atuin logs or run 'atuin import auto' manually."
-    }
-fi
-
-# Generate GitHub CLI completions
-if command -v gh &>/dev/null; then
-    echo ">>> Generating gh completions <<<"
-    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
-fi
-
-# Generate Docker completions
-if command -v docker &>/dev/null; then
-    echo ">>> Generating docker completions <<<"
-    docker completion zsh >"$COMPLETIONS_DIR/_docker"
-fi
-
-# Generate kubectl completions (if installed)
-if command -v kubectl &>/dev/null; then
-    echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
-fi
-
-# Generate helm completions (if installed)
-if command -v helm &>/dev/null; then
-    echo ">>> Generating helm completions <<<"
-    helm completion zsh >"$COMPLETIONS_DIR/_helm"
-fi
+gen_completions \
+    'uv:uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"; uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"' \
+    'atuin:atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"' \
+    'gh:gh completion -s zsh > "$COMPLETIONS_DIR/_gh"' \
+    'docker:docker completion zsh > "$COMPLETIONS_DIR/_docker"' \
+    'kubectl:kubectl completion zsh > "$COMPLETIONS_DIR/_kubectl"' \
+    'helm:helm completion zsh > "$COMPLETIONS_DIR/_helm"'
+import_atuin_history
 
 # ==============================================================================
 # 10. Configure Docker

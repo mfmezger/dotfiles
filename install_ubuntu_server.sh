@@ -154,25 +154,10 @@ ensure_repo "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" \
     https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git
 
 # Generate Shell Completions
-echo "📝 Generating shell completions..."
-COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
-mkdir -p "$COMPLETIONS_DIR"
-
-# Generate uv completions
-if command -v uv &>/dev/null; then
-    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
-fi
-
-# Generate atuin init script
-if command -v atuin &>/dev/null; then
-    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
-    echo ">>> Importing shell history into atuin <<<"
-    atuin import auto || {
-        echo ">>> Warning: Failed to import shell history into atuin."
-        echo ">>> Please check atuin logs or run 'atuin import auto' manually."
-    }
-fi
+gen_completions \
+    'uv:uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"; uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"' \
+    'atuin:atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"'
+import_atuin_history
 
 # Set zsh as default shell
 echo "🐚 Setting zsh as default shell..."
