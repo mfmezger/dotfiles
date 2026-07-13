@@ -56,7 +56,7 @@ fi
 
 # Try to install eza via apt (available in Ubuntu 24.04+)
 echo "📦 Installing eza..."
-if sudo apt install -y rust-eza 2> /dev/null; then
+if sudo apt install -y rust-eza 2>/dev/null; then
     echo "✅ eza installed via apt"
     # Create symlink if eza binary has different name
     if [ -f /usr/bin/eza ] && [ ! -f /usr/local/bin/eza ]; then
@@ -64,7 +64,7 @@ if sudo apt install -y rust-eza 2> /dev/null; then
     fi
 else
     echo "📥 eza not available via apt, installing from binary..."
-    if ! command -v eza &> /dev/null; then
+    if ! command -v eza &>/dev/null; then
         wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
         echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
         sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
@@ -77,40 +77,33 @@ fi
 echo "🔧 Installing additional tools..."
 
 # Install zoxide (smart cd)
-if ! command -v zoxide &> /dev/null; then
+if ! command -v zoxide &>/dev/null; then
     curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
     sudo mv ~/.local/bin/zoxide /usr/local/bin/
 fi
 
 # Install atuin (better history)
-if ! command -v atuin &> /dev/null; then
+if ! command -v atuin &>/dev/null; then
     bash <(curl https://raw.githubusercontent.com/atuinsh/atuin/main/install.sh)
-    sudo mv ~/.atuin/bin/atuin /usr/local/bin/ 2> /dev/null || true
+    sudo mv ~/.atuin/bin/atuin /usr/local/bin/ 2>/dev/null || true
 fi
 
 # Install uv (Python package manager)
-echo "🐍 Installing uv..."
-if ! command -v uv &> /dev/null; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-fi
+ensure_tool uv "uv" 'curl -LsSf https://astral.sh/uv/install.sh | sh'
 
 # Ensure uv is in PATH for this session
 export PATH="$HOME/.local/bin:$PATH"
 
 # Install Rust toolchain via rustup
-echo "🦀 Installing rustup..."
-if ! command -v rustup &> /dev/null; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
-else
-    echo "✅ rustup already installed"
-fi
+ensure_tool rustup "rustup" \
+    "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path"
 
 if [ -f "$HOME/.cargo/env" ]; then
     # Make cargo available immediately after rustup installation.
     . "$HOME/.cargo/env"
 fi
 
-if ! cargo --version &> /dev/null; then
+if ! cargo --version &>/dev/null; then
     echo "🦀 Configuring default Rust toolchain (stable)..."
     rustup default stable
 else
@@ -119,8 +112,8 @@ fi
 
 # Install zellij terminal multiplexer
 echo "🪟 Installing zellij..."
-if ! command -v zellij &> /dev/null; then
-    if sudo apt install -y zellij 2> /dev/null; then
+if ! command -v zellij &>/dev/null; then
+    if sudo apt install -y zellij 2>/dev/null; then
         echo "✅ zellij installed via apt"
     else
         echo "📥 zellij not available via apt, installing cargo build dependencies..."
@@ -135,16 +128,11 @@ echo "📝 Installing commitizen..."
 uv tool install commitizen
 
 # Install witr (weather tool)
-echo "🌤️ Installing witr..."
-if ! command -v witr &> /dev/null; then
-    curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
-fi
+ensure_tool witr "witr" \
+    "curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash"
 
 # Install ekphos (Markdown notes app)
-echo "📝 Installing ekphos..."
-if ! command -v ekphos &> /dev/null; then
-    cargo install ekphos
-fi
+ensure_tool ekphos "ekphos" "cargo install ekphos"
 
 # Install Oh My Zsh
 echo "🎨 Installing Oh My Zsh..."
@@ -152,38 +140,18 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
-# Install Powerlevel10k theme
-echo "⚡ Installing Powerlevel10k theme..."
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-fi
-
-# Install zsh plugins
-echo "🔌 Installing zsh plugins..."
+# Install Powerlevel10k theme and zsh plugins
 ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
-
-# zsh-autosuggestions
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-fi
-
-# zsh-syntax-highlighting
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-fi
-
-# zsh-abbr (for abbreviations)
-echo "🔌 Installing zsh-abbr..."
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-abbr" ]; then
-    git clone https://github.com/olets/zsh-abbr.git $ZSH_CUSTOM/plugins/zsh-abbr
-fi
-
-# zsh-autosuggestions-abbreviations-strategy
-echo "🔌 Installing zsh-autosuggestions-abbreviations-strategy..."
-if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
-    git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git \
-        "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy"
-fi
+ensure_repo "$ZSH_CUSTOM/themes/powerlevel10k" \
+    https://github.com/romkatv/powerlevel10k.git --depth=1
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-autosuggestions" \
+    https://github.com/zsh-users/zsh-autosuggestions
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" \
+    https://github.com/zsh-users/zsh-syntax-highlighting.git
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-abbr" \
+    https://github.com/olets/zsh-abbr.git
+ensure_repo "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" \
+    https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git
 
 # Generate Shell Completions
 echo "📝 Generating shell completions..."
@@ -191,14 +159,14 @@ COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"
 
 # Generate uv completions
-if command -v uv &> /dev/null; then
-    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
+if command -v uv &>/dev/null; then
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
-if command -v atuin &> /dev/null; then
-    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+if command -v atuin &>/dev/null; then
+    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
     echo ">>> Importing shell history into atuin <<<"
     atuin import auto || {
         echo ">>> Warning: Failed to import shell history into atuin."

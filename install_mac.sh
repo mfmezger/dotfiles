@@ -9,7 +9,7 @@ echo ">>> Starting Installation from $DOTFILES_DIR <<<"
 source "$DOTFILES_DIR/scripts/common.sh"
 
 # 1. Install Homebrew
-if ! command -v brew &> /dev/null; then
+if ! command -v brew &>/dev/null; then
     echo ">>> Installing Homebrew <<<"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -46,27 +46,18 @@ else
 fi
 
 # 3. Install Python tools (uv)
-echo ">>> Installing uv <<<"
-if ! command -v uv &> /dev/null; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-else
-    echo ">>> uv already installed <<<"
-fi
+ensure_tool uv "uv" 'curl -LsSf https://astral.sh/uv/install.sh | sh'
 
 # 4. Install Rust toolchain (full install only)
 if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
-    echo ">>> Installing rustup <<<"
-    if ! command -v rustup &> /dev/null; then
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
-    else
-        echo ">>> rustup already installed <<<"
-    fi
+    ensure_tool rustup "rustup" \
+        "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path"
 
     if [ -f "$HOME/.cargo/env" ]; then
         . "$HOME/.cargo/env"
     fi
 
-    if ! cargo --version &> /dev/null; then
+    if ! cargo --version &>/dev/null; then
         echo ">>> Configuring default Rust toolchain (stable) <<<"
         rustup default stable
     else
@@ -87,26 +78,12 @@ fi
 # 6. Install Zsh Plugins & Themes
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
-echo ">>> Installing Powerlevel10k <<<"
-if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
-else
-    echo ">>> Powerlevel10k already installed <<<"
-fi
-
-echo ">>> Installing zsh-autosuggestions <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-else
-    echo ">>> zsh-autosuggestions already installed <<<"
-fi
-
-echo ">>> Installing zsh-syntax-highlighting <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-else
-    echo ">>> zsh-syntax-highlighting already installed <<<"
-fi
+ensure_repo "$ZSH_CUSTOM/themes/powerlevel10k" \
+    https://github.com/romkatv/powerlevel10k.git --depth=1
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-autosuggestions" \
+    https://github.com/zsh-users/zsh-autosuggestions
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" \
+    https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 # 7. Generate Static Completions (Pre-cached for faster shell startup)
 echo ">>> Generating shell completions <<<"
@@ -114,16 +91,16 @@ COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"
 
 # Generate uv completions
-if command -v uv &> /dev/null; then
+if command -v uv &>/dev/null; then
     echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
-if command -v atuin &> /dev/null; then
+if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
-    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
     echo ">>> Importing shell history into atuin <<<"
     atuin import auto || {
         echo ">>> Warning: Failed to import shell history into atuin."
@@ -132,27 +109,27 @@ if command -v atuin &> /dev/null; then
 fi
 
 # Generate GitHub CLI completions
-if command -v gh &> /dev/null; then
+if command -v gh &>/dev/null; then
     echo ">>> Generating gh completions <<<"
-    gh completion -s zsh > "$COMPLETIONS_DIR/_gh"
+    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
 fi
 
 # Generate Docker completions (full install only)
-if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v docker &> /dev/null; then
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v docker &>/dev/null; then
     echo ">>> Generating docker completions <<<"
-    docker completion zsh > "$COMPLETIONS_DIR/_docker"
+    docker completion zsh >"$COMPLETIONS_DIR/_docker"
 fi
 
 # Generate kubectl completions (full install only)
-if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v kubectl &> /dev/null; then
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v kubectl &>/dev/null; then
     echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh > "$COMPLETIONS_DIR/_kubectl"
+    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
 fi
 
 # Generate helm completions (full install only)
-if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &> /dev/null; then
+if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &>/dev/null; then
     echo ">>> Generating helm completions <<<"
-    helm completion zsh > "$COMPLETIONS_DIR/_helm"
+    helm completion zsh >"$COMPLETIONS_DIR/_helm"
 fi
 
 # 8. Link Dotfiles
