@@ -81,3 +81,46 @@ ensure_repo() {
     echo ">>> Installing $name <<<"
     git clone "$@" "$url" "$dir"
 }
+
+# ------------------------------------------------------------------------------
+# gen_completions <tool:generator> ...
+#
+# Ensure the zsh completions directory exists, then for each "tool:generator"
+# pair run <generator> when <tool> is on PATH. <generator> is evaluated by the
+# shell so it may contain redirects and pipelines. The variable COMPLETIONS_DIR
+# is exported so generator strings can reference it.
+#
+#   gen_completions \
+#       'uv:uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"' \
+#       'gh:gh completion -s zsh > "$COMPLETIONS_DIR/_gh"'
+# ------------------------------------------------------------------------------
+gen_completions() {
+    echo ">>> Generating shell completions <<<"
+    export COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
+    mkdir -p "$COMPLETIONS_DIR"
+
+    local entry tool generator
+    for entry in "$@"; do
+        tool="${entry%%:*}"
+        generator="${entry#*:}"
+        if command -v "$tool" &>/dev/null; then
+            echo ">>> Generating $tool completions <<<"
+            eval "$generator"
+        fi
+    done
+}
+
+# ------------------------------------------------------------------------------
+# import_atuin_history
+#
+# Import existing shell history into atuin when atuin is installed. Non-fatal on
+# failure so a broken import never aborts the installer.
+# ------------------------------------------------------------------------------
+import_atuin_history() {
+    command -v atuin &>/dev/null || return 0
+    echo ">>> Importing shell history into atuin <<<"
+    atuin import auto || {
+        echo ">>> Warning: Failed to import shell history into atuin."
+        echo ">>> Please check atuin logs or run 'atuin import auto' manually."
+    }
+}
