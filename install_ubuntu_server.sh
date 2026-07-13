@@ -135,10 +135,7 @@ ensure_tool witr "witr" \
 ensure_tool ekphos "ekphos" "cargo install ekphos"
 
 # Install Oh My Zsh
-echo "🎨 Installing Oh My Zsh..."
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
+install_omz
 
 # Install Powerlevel10k theme and zsh plugins
 ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
@@ -166,43 +163,10 @@ if [ "$SHELL" != "/usr/bin/zsh" ]; then
 fi
 
 # Link dotfiles using stow
-echo "🔗 Linking dotfiles..."
 cd "$DOTFILES_DIR"
 
-# Backup common conflict files
-backup_if_exists ".zshrc"
-backup_if_exists ".p10k.zsh"
-backup_if_exists ".gitconfig"
-backup_if_exists ".config/nvim"
-backup_if_exists ".config/zellij"
-backup_if_exists ".config/ekphos"
 mkdir -p "$HOME/Documents/ekphos"
-
-# Run stow for available configs
-if [ -d "zsh" ]; then
-    stow zsh
-    echo "✅ Zsh configuration linked"
-fi
-
-if [ -d "git" ]; then
-    stow git
-    echo "✅ Git configuration linked"
-fi
-
-if [ -d "nvim" ]; then
-    stow nvim
-    echo "✅ Neovim configuration linked"
-fi
-
-if [ -d "zellij" ]; then
-    stow zellij
-    echo "✅ Zellij configuration linked"
-fi
-
-if [ -d "ekphos" ]; then
-    stow ekphos
-    echo "✅ Ekphos configuration linked"
-fi
+link_configs zsh git nvim zellij ekphos
 
 echo ""
 echo "🎉 Installation completed successfully!"

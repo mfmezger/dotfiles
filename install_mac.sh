@@ -68,12 +68,7 @@ else
 fi
 
 # 5. Install Oh My Zsh
-echo ">>> Installing Oh My Zsh <<<"
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-else
-    echo ">>> Oh My Zsh already installed <<<"
-fi
+install_omz
 
 # 6. Install Zsh Plugins & Themes
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
@@ -103,18 +98,12 @@ gen_completions "${COMPLETION_ENTRIES[@]}"
 import_atuin_history
 
 # 8. Link Dotfiles
-echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
-
-# Backup common conflict files
-backup_if_exists ".zshrc"
-backup_if_exists ".p10k.zsh"
 
 # Run stow based on installation type
 if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     # Minimal install: link zsh essentials and zellij
-    backup_if_exists ".config/zellij"
-    stow zsh zellij
+    link_configs zsh zellij
     echo ""
     echo ">>> Minimal installation successfully completed! <<<"
     echo ""
@@ -135,16 +124,8 @@ if [[ $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo ""
 else
     # Full install: link all dotfiles
-    backup_if_exists ".gitconfig"
-    backup_if_exists ".config/nvim"
-    backup_if_exists ".config/yazi"
-    backup_if_exists ".config/zellij"
-    backup_if_exists ".config/ghostty"
-    backup_if_exists ".config/ekphos"
     mkdir -p "$HOME/Documents/ekphos"
-    backup_if_exists ".config/zed"
-
-    stow zsh nvim yazi zellij git ghostty ekphos zed
+    link_configs zsh nvim yazi zellij git ghostty ekphos zed
 
     echo ""
     echo ">>> Full installation successfully completed! <<<"

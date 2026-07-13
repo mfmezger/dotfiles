@@ -183,16 +183,7 @@ fi
 # ==============================================================================
 # 6. Install Oh My Zsh & Plugins
 # ==============================================================================
-echo ">>> Installing Oh My Zsh <<<"
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    export RUNZSH=no
-    export CHSH=no
-    export KEEP_ZSHRC=yes
-    export ZSH="$HOME/.oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-else
-    echo ">>> Oh My Zsh already installed <<<"
-fi
+install_omz
 
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
@@ -285,31 +276,10 @@ sudo systemctl enable --now opensnitchd
 # ==============================================================================
 # 14. Link Dotfiles
 # ==============================================================================
-echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
 
-# Backup common conflict files
-backup_if_exists ".zshrc"
-backup_if_exists ".p10k.zsh"
-backup_if_exists ".gitconfig"
-backup_if_exists ".config/nvim"
-backup_if_exists ".config/yazi"
-backup_if_exists ".config/zellij"
-backup_if_exists ".config/hypr"
-backup_if_exists ".config/ghostty"
-backup_if_exists ".config/ekphos"
 mkdir -p "$HOME/Documents/ekphos"
-backup_if_exists ".config/zed"
-backup_if_exists ".config/dunst"
-backup_if_exists ".config/waybar"
-backup_if_exists ".config/rofi"
-backup_if_exists ".config/walker"
-backup_if_exists ".config/gtk-3.0"
-backup_if_exists ".config/gtk-4.0"
-backup_if_exists ".gtkrc-2.0"
-
-# Run stow
-stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi walker gtk
+link_configs zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi walker gtk
 
 # ==============================================================================
 # 15. Apply GTK Dark Theme Preference

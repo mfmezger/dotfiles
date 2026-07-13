@@ -124,3 +124,67 @@ import_atuin_history() {
         echo ">>> Please check atuin logs or run 'atuin import auto' manually."
     }
 }
+
+# ------------------------------------------------------------------------------
+# install_omz
+#
+# Install Oh My Zsh unattended, keeping any existing ~/.zshrc in place. Safe to
+# call on every platform; a no-op when ~/.oh-my-zsh already exists.
+# ------------------------------------------------------------------------------
+install_omz() {
+    echo ">>> Installing Oh My Zsh <<<"
+    if [ -d "$HOME/.oh-my-zsh" ]; then
+        echo ">>> Oh My Zsh already installed <<<"
+        return 0
+    fi
+
+    # KEEP_ZSHRC=yes stops the installer from replacing an existing ~/.zshrc;
+    # --unattended already implies RUNZSH=no and CHSH=no.
+    KEEP_ZSHRC=yes RUNZSH=no CHSH=no \
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+}
+
+# ------------------------------------------------------------------------------
+# link_configs <package> ...
+#
+# Back up each package's known conflict targets, then stow every package in one
+# call. Backup and stow are driven by the same package list so the two can never
+# drift apart.
+# ------------------------------------------------------------------------------
+link_configs() {
+    local pkg target
+    for pkg in "$@"; do
+        for target in $(_stow_targets "$pkg"); do
+            backup_if_exists "$target"
+        done
+    done
+
+    echo ">>> Linking dotfiles with stow: $* <<<"
+    stow "$@"
+}
+
+# ------------------------------------------------------------------------------
+# _stow_targets <package>
+#
+# Print the $HOME-relative paths a package will occupy, one per line. Keeping
+# this mapping in one place means every installer backs up the same targets.
+# ------------------------------------------------------------------------------
+_stow_targets() {
+    case "$1" in
+    zsh) printf '%s\n' ".zshrc" ".p10k.zsh" ;;
+    git) printf '%s\n' ".gitconfig" ;;
+    nvim) printf '%s\n' ".config/nvim" ;;
+    yazi) printf '%s\n' ".config/yazi" ;;
+    zellij) printf '%s\n' ".config/zellij" ;;
+    ghostty) printf '%s\n' ".config/ghostty" ;;
+    ekphos) printf '%s\n' ".config/ekphos" ;;
+    zed) printf '%s\n' ".config/zed" ;;
+    dunst) printf '%s\n' ".config/dunst" ;;
+    hypr) printf '%s\n' ".config/hypr" ;;
+    waybar) printf '%s\n' ".config/waybar" ;;
+    rofi) printf '%s\n' ".config/rofi" ;;
+    walker) printf '%s\n' ".config/walker" ;;
+    gtk) printf '%s\n' ".config/gtk-3.0" ".config/gtk-4.0" ".gtkrc-2.0" ;;
+    *) : ;;
+    esac
+}
