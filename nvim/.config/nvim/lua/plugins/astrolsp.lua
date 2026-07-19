@@ -56,7 +56,12 @@ return {
         filetypes = { "python" },
         root_dir = function(bufnr, on_dir)
           local root = vim.fs.root(bufnr, { "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", ".git" })
-          on_dir(root or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)))
+          if root then
+            on_dir(root)
+          else
+            local buffer_name = vim.api.nvim_buf_get_name(bufnr)
+            on_dir(buffer_name ~= "" and vim.fs.dirname(buffer_name) or vim.uv.cwd())
+          end
         end,
       },
     },
