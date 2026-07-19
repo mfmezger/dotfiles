@@ -38,9 +38,10 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
+      "ruff",
       "ty",
     },
-    -- customize language server configuration options passed to `lspconfig`
+    -- customize language server configuration options passed to `vim.lsp.config`
     ---@diagnostic disable: missing-fields
     config = {
       ruff = {
@@ -53,26 +54,17 @@ return {
       ty = {
         cmd = { "ty", "server" },
         filetypes = { "python" },
-        root_dir = function(fname)
-          return require("lspconfig.util").root_pattern("pyproject.toml", "ty.toml", "setup.py", "setup.cfg", ".git")(
-            fname
-          )
+        root_dir = function(bufnr, on_dir)
+          local root = vim.fs.root(bufnr, { "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", ".git" })
+          on_dir(root or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)))
         end,
-        single_file_support = true,
       },
     },
-    -- customize how language servers are attached
+    -- customize which language servers AstroLSP enables
     handlers = {
-      -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
-      -- function(server, opts) require("lspconfig")[server].setup(opts) end
-
-      -- the key is the server that is being setup with `lspconfig`
-      -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
-      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
+      -- setting a handler to false disables that language server
       basedpyright = false,
       pyright = false,
-      ruff = function(_, opts) require("lspconfig").ruff.setup(opts) end,
-      ty = function(_, opts) require("lspconfig").ty.setup(opts) end,
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
@@ -108,8 +100,8 @@ return {
         ["<Leader>uY"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client)
-            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
+          cond = function(client, bufnr)
+            return client:supports_method("textDocument/semanticTokens/full", bufnr) and vim.lsp.semantic_tokens
           end,
         },
       },

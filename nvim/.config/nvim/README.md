@@ -93,7 +93,7 @@ This file includes:
 - `lsp_signature.nvim`
 - `oil.nvim`
 - `nvim-surround`
-- custom `alpha-nvim` header
+- custom `snacks.nvim` dashboard header
 - `LuaSnip` filetype extension for JavaScript
 - custom `nvim-autopairs` rules
 

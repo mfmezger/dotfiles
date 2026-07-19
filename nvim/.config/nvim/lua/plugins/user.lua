@@ -25,12 +25,11 @@ return {
     opts = {},
   },
 
-  -- customize alpha options
+  -- customize the Snacks dashboard header
   {
-    "goolord/alpha-nvim",
+    "folke/snacks.nvim",
     opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
+      opts.dashboard.preset.header = table.concat({
         " █████  ███████ ████████ ██████   ██████",
         "██   ██ ██         ██    ██   ██ ██    ██",
         "███████ ███████    ██    ██████  ██    ██",
@@ -42,7 +41,7 @@ return {
         "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
         "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
         "    ██   ████   ████   ██ ██      ██",
-      }
+      }, "\n")
       return opts
     end,
   },
