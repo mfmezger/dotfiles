@@ -17,6 +17,7 @@ brew "zenith"
 brew "fastfetch"
 brew "dust"
 brew "duf"
+brew "codeburn"
 
 # ==============================================================================
 # SHELL & TERMINAL TOOLS
