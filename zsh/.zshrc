@@ -125,7 +125,7 @@ abbr --quiet --session init="pre-commit install && cz init"
 abbr --quiet --session ga="git add -A"
 abbr --quiet --session gs="git status"
 abbr --quiet --session gd="git diff"
-abbr --quiet --session gl="git log --oneline -10"
+abbr --quiet --session gl="git log -10 --pretty=format:"%C(yellow)%h%Creset %C(cyan)%an%Creset %C(dim)%s%Creset""
 
 
 abbr --quiet --session gg="git add -A && git commit -m"
@@ -300,3 +300,9 @@ export PATH="/Applications/PyCharm.app/Contents/MacOS:$PATH"
 
 # Per-host secrets and overrides (not tracked in dotfiles)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# Added by the Wonderful CLI installer
+export PATH="$HOME/.wonderful/bin:$PATH"
+
+# wful shell completion (added by wful completions install)
+command -v wful >/dev/null 2>&1 && eval "$(wful completions zsh)"
