@@ -8,7 +8,7 @@ echo ">>> Starting Arch Linux / CachyOS Installation from $DOTFILES_DIR <<<"
 
 source "$DOTFILES_DIR/scripts/common.sh"
 
-if ! command -v paru &> /dev/null; then
+if ! command -v paru &>/dev/null; then
     echo ">>> paru is required but not installed <<<"
     echo ">>> Install paru first, then re-run this script <<<"
     exit 1
@@ -76,10 +76,10 @@ paru -S --needed --noconfirm \
 
 # Install the packaged Powerlevel10k when available to avoid AUR conflicts
 POWERLEVEL10K_INSTALLED_FROM_REPO=0
-if paru -Q zsh-theme-powerlevel10k &> /dev/null; then
+if paru -Q zsh-theme-powerlevel10k &>/dev/null; then
     echo ">>> zsh-theme-powerlevel10k already installed <<<"
     POWERLEVEL10K_INSTALLED_FROM_REPO=1
-elif paru --repo -Si zsh-theme-powerlevel10k &> /dev/null; then
+elif paru --repo -Si zsh-theme-powerlevel10k &>/dev/null; then
     echo ">>> Installing zsh-theme-powerlevel10k from repos via paru <<<"
     paru --repo -S --needed --noconfirm zsh-theme-powerlevel10k
     POWERLEVEL10K_INSTALLED_FROM_REPO=1
@@ -152,7 +152,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     else
         echo ">>> Installing NVIDIA drivers via distro tooling when available <<<"
         # nvidia-inst exists on some Arch-based distros and picks a suitable stack.
-        if command -v nvidia-inst &> /dev/null; then
+        if command -v nvidia-inst &>/dev/null; then
             nvidia-inst
         else
             echo ">>> nvidia-inst not found, installing generic nvidia packages <<<"
@@ -196,37 +196,17 @@ fi
 
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
-echo ">>> Installing zsh-autosuggestions <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-else
-    echo ">>> zsh-autosuggestions already installed <<<"
-fi
-
-echo ">>> Installing zsh-syntax-highlighting <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-else
-    echo ">>> zsh-syntax-highlighting already installed <<<"
-fi
-
-echo ">>> Installing zsh-autosuggestions-abbreviations-strategy <<<"
-if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
-    git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git \
-        "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy"
-else
-    echo ">>> zsh-autosuggestions-abbreviations-strategy already installed <<<"
-fi
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-autosuggestions" \
+    https://github.com/zsh-users/zsh-autosuggestions
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" \
+    https://github.com/zsh-users/zsh-syntax-highlighting.git
+ensure_repo "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" \
+    https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git
 
 # ==============================================================================
 # 7. Install Python Tools (uv & commitizen)
 # ==============================================================================
-echo ">>> Installing uv <<<"
-if ! command -v uv &> /dev/null; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-else
-    echo ">>> uv already installed <<<"
-fi
+ensure_tool uv "uv" 'curl -LsSf https://astral.sh/uv/install.sh | sh'
 
 # Ensure uv is in PATH for this session
 export PATH="$HOME/.local/bin:$PATH"
@@ -234,30 +214,21 @@ export PATH="$HOME/.local/bin:$PATH"
 # ==============================================================================
 # 8. Install Rust Toolchain (rustup)
 # ==============================================================================
-echo ">>> Installing rustup <<<"
-if ! command -v rustup &> /dev/null; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
-else
-    echo ">>> rustup already installed <<<"
-fi
+ensure_tool rustup "rustup" \
+    "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path"
 
 if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-if ! cargo --version &> /dev/null; then
+if ! cargo --version &>/dev/null; then
     echo ">>> Configuring default Rust toolchain (stable) <<<"
     rustup default stable
 else
     echo ">>> Rust toolchain already configured <<<"
 fi
 
-echo ">>> Installing ekphos via cargo <<<"
-if ! command -v ekphos &> /dev/null; then
-    cargo install ekphos --locked
-else
-    echo ">>> ekphos already installed <<<"
-fi
+ensure_tool ekphos "ekphos" "cargo install ekphos --locked"
 
 echo ">>> Installing commitizen via uv <<<"
 uv tool install commitizen
@@ -270,16 +241,16 @@ COMPLETIONS_DIR="$HOME/.local/share/zsh/completions"
 mkdir -p "$COMPLETIONS_DIR"
 
 # Generate uv completions
-if command -v uv &> /dev/null; then
+if command -v uv &>/dev/null; then
     echo ">>> Generating uv/uvx completions <<<"
-    uv generate-shell-completion zsh > "$COMPLETIONS_DIR/_uv"
-    uvx --generate-shell-completion zsh > "$COMPLETIONS_DIR/_uvx"
+    uv generate-shell-completion zsh >"$COMPLETIONS_DIR/_uv"
+    uvx --generate-shell-completion zsh >"$COMPLETIONS_DIR/_uvx"
 fi
 
 # Generate atuin init script
-if command -v atuin &> /dev/null; then
+if command -v atuin &>/dev/null; then
     echo ">>> Generating atuin completions <<<"
-    atuin init zsh > "$COMPLETIONS_DIR/atuin-init.zsh"
+    atuin init zsh >"$COMPLETIONS_DIR/atuin-init.zsh"
     echo ">>> Importing shell history into atuin <<<"
     atuin import auto || {
         echo ">>> Warning: Failed to import shell history into atuin."
@@ -288,27 +259,27 @@ if command -v atuin &> /dev/null; then
 fi
 
 # Generate GitHub CLI completions
-if command -v gh &> /dev/null; then
+if command -v gh &>/dev/null; then
     echo ">>> Generating gh completions <<<"
-    gh completion -s zsh > "$COMPLETIONS_DIR/_gh"
+    gh completion -s zsh >"$COMPLETIONS_DIR/_gh"
 fi
 
 # Generate Docker completions
-if command -v docker &> /dev/null; then
+if command -v docker &>/dev/null; then
     echo ">>> Generating docker completions <<<"
-    docker completion zsh > "$COMPLETIONS_DIR/_docker"
+    docker completion zsh >"$COMPLETIONS_DIR/_docker"
 fi
 
 # Generate kubectl completions (if installed)
-if command -v kubectl &> /dev/null; then
+if command -v kubectl &>/dev/null; then
     echo ">>> Generating kubectl completions <<<"
-    kubectl completion zsh > "$COMPLETIONS_DIR/_kubectl"
+    kubectl completion zsh >"$COMPLETIONS_DIR/_kubectl"
 fi
 
 # Generate helm completions (if installed)
-if command -v helm &> /dev/null; then
+if command -v helm &>/dev/null; then
     echo ">>> Generating helm completions <<<"
-    helm completion zsh > "$COMPLETIONS_DIR/_helm"
+    helm completion zsh >"$COMPLETIONS_DIR/_helm"
 fi
 
 # ==============================================================================
@@ -381,9 +352,9 @@ stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi walker g
 # 15. Apply GTK Dark Theme Preference
 # ==============================================================================
 echo ">>> Applying GTK dark theme preference <<<"
-if command -v gsettings &> /dev/null; then
+if command -v gsettings &>/dev/null; then
     run_gsettings() {
-        if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ] && command -v dbus-run-session &> /dev/null; then
+        if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ] && command -v dbus-run-session &>/dev/null; then
             dbus-run-session -- gsettings "$@"
         else
             gsettings "$@"
