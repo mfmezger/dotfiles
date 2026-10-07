@@ -59,7 +59,7 @@ paru -S --needed --noconfirm \
     xdg-desktop-portal-hyprland \
     qt5-wayland \
     qt6-wayland \
-    rofi-wayland \
+    rofi \
     rofi-calc \
     walker \
     wlogout \
@@ -72,7 +72,15 @@ paru -S --needed --noconfirm \
     pavucontrol \
     power-profiles-daemon \
     polkit-gnome \
-    gnome-keyring
+    gnome-keyring \
+    hyprpaper \
+    wireplumber \
+    yazi \
+    ripgrep \
+    fd \
+    jq \
+    glow \
+    tree-sitter-cli
 
 # Install the packaged Powerlevel10k when available to avoid AUR conflicts
 POWERLEVEL10K_INSTALLED_FROM_REPO=0
@@ -174,7 +182,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo nvidia-ctk runtime configure --runtime=docker
     sudo systemctl restart docker
 
-    echo ">>> CUDA installed! The following paths have been added to your .zshrc: <<<"
+    echo ">>> CUDA installed! <<<"
     echo ">>> A reboot is recommended after NVIDIA driver installation. <<<"
 else
     echo ">>> Skipping NVIDIA/CUDA installation <<<"
