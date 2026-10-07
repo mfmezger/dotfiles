@@ -53,6 +53,9 @@ else
     echo ">>> uv already installed <<<"
 fi
 
+# Ensure uv is in PATH for this session
+export PATH="$HOME/.local/bin:$PATH"
+
 # 4. Install Rust toolchain (full install only)
 if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo ">>> Installing rustup <<<"
