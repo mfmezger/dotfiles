@@ -6,7 +6,6 @@
 # TAPS
 # ==============================================================================
 tap "buo/cask-upgrade"
-tap "nikitabobko/tap"
 tap "olets/tap"
 
 # ==============================================================================
@@ -45,6 +44,7 @@ brew "bat"
 brew "glow"
 brew "chroma"
 brew "jq"
+brew "ripgrep"
 
 # ==============================================================================
 # TEXT EDITORS
@@ -92,7 +92,7 @@ cask "iterm2"
 # BROWSERS
 # ==============================================================================
 cask "brave-browser"
-cask "zen-browser"
+cask "zen"
 
 # ==============================================================================
 # DEVELOPMENT APPLICATIONS
@@ -134,7 +134,7 @@ cask "font-caskaydia-mono-nerd-font"
 # ==============================================================================
 # SYSTEM CUSTOMIZATION
 # ==============================================================================
-cask "eurkey"
+# eurkey: cask discontinued — install manually from https://eurkey.steffen.bruentjen.eu if needed
 
 # ==============================================================================
 # COMMUNICATION
