@@ -183,8 +183,8 @@ fi
 echo "📝 Installing commitizen..."
 uv tool install commitizen
 
-# Install witr (weather tool)
-echo "🌤️ Installing witr..."
+# Install witr (Why is this running? process inspection tool)
+echo "🔍 Installing witr..."
 if ! command -v witr &> /dev/null; then
     curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
 fi
@@ -204,27 +204,27 @@ fi
 # Install Powerlevel10k theme
 echo "⚡ Installing Powerlevel10k theme..."
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 fi
 
 # Install zsh plugins
 echo "🔌 Installing zsh plugins..."
-ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
 # zsh-autosuggestions
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 fi
 
 # zsh-syntax-highlighting
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 fi
 
 # zsh-abbr (for abbreviations)
 echo "🔌 Installing zsh-abbr..."
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-abbr" ]; then
-    git clone https://github.com/olets/zsh-abbr.git $ZSH_CUSTOM/plugins/zsh-abbr
+    git clone --recurse-submodules https://github.com/olets/zsh-abbr.git "$ZSH_CUSTOM/plugins/zsh-abbr"
 fi
 
 # zsh-autosuggestions-abbreviations-strategy
