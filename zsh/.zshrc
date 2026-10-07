@@ -302,7 +302,14 @@ export PATH="/Applications/PyCharm.app/Contents/MacOS:$PATH"
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # Added by the Wonderful CLI installer
-export PATH="$HOME/.wonderful/bin:$PATH"
+[[ -d "$HOME/.wonderful/bin" ]] && export PATH="$HOME/.wonderful/bin:$PATH"
 
 # wful shell completion (added by wful completions install)
-command -v wful >/dev/null 2>&1 && eval "$(wful completions zsh)"
+if (( $+commands[wful] )); then
+    _wful_comp="$HOME/.local/share/zsh/completions/_wful"
+    if [[ ! -s "$_wful_comp" || "$commands[wful]" -nt "$_wful_comp" ]]; then
+        mkdir -p "${_wful_comp:h}" && wful completions zsh >| "$_wful_comp"
+    fi
+    source "$_wful_comp"
+    unset _wful_comp
+fi
