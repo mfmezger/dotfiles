@@ -156,6 +156,9 @@ if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &> /dev/null; then
 fi
 
 # 8. Link Dotfiles
+echo ">>> Updating git submodules <<<"
+git -C "$DOTFILES_DIR" submodule update --init --recursive
+
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
 
