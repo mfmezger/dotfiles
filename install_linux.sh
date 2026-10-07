@@ -359,6 +359,9 @@ sudo systemctl enable --now opensnitchd
 # ==============================================================================
 # 14. Link Dotfiles
 # ==============================================================================
+echo ">>> Updating git submodules <<<"
+git -C "$DOTFILES_DIR" submodule update --init --recursive
+
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
 

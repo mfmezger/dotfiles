@@ -262,6 +262,9 @@ if [ "$SHELL" != "/usr/bin/zsh" ]; then
 fi
 
 # Link dotfiles using stow
+echo "📦 Initializing git submodules..."
+git -C "$DOTFILES_DIR" submodule update --init --recursive
+
 echo "🔗 Linking dotfiles..."
 cd "$DOTFILES_DIR"
 
