@@ -1,6 +1,6 @@
 # Neovim config
 
-Personal AstroNvim v4 configuration managed in this dotfiles repo.
+Personal AstroNvim v6 configuration managed in this dotfiles repo.
 
 ## Structure
 
@@ -13,7 +13,7 @@ Personal AstroNvim v4 configuration managed in this dotfiles repo.
 
 ### Core platform
 
-- [AstroNvim v4](https://github.com/AstroNvim/AstroNvim)
+- [AstroNvim v6](https://github.com/AstroNvim/AstroNvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management
 - AstroCommunity imports for shared plugin packs
 
