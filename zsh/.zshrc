@@ -78,8 +78,8 @@ setopt SHARE_HISTORY      # Share history between sessions
 
 # User configuration
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
-    source /opt/homebrew/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+    [[ -r "${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-abbr/zsh-abbr.zsh" ]] && source "${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-abbr/zsh-abbr.zsh"
+    [[ -r "${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh" ]] && source "${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # zsh-abbr: check Arch path first, then oh-my-zsh custom path
     if [[ -f /usr/share/zsh/plugins/zsh-abbr/zsh-abbr.zsh ]]; then
@@ -87,7 +87,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     elif [[ -f ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-abbr/zsh-abbr.zsh ]]; then
         source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-abbr/zsh-abbr.zsh
     fi
-    source $HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+    [[ -r "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh" ]] && source "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh"
 fi
 ZSH_AUTOSUGGEST_STRATEGY=( abbreviations $ZSH_AUTOSUGGEST_STRATEGY )
 export LANG=en_US.UTF-8
@@ -176,10 +176,12 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     abbr --quiet --session audio="pavucontrol"
 
     # CUDA
-    export PATH=/opt/cuda/bin:$PATH
-    export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
+    if [[ -d /opt/cuda ]]; then
+        export PATH="/opt/cuda/bin:$PATH"
+        export LD_LIBRARY_PATH="/opt/cuda/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    fi
     # cuSPARSELt
-    export LD_LIBRARY_PATH=/opt/cusparselt/lib:$LD_LIBRARY_PATH
+    [[ -d /opt/cusparselt/lib ]] && export LD_LIBRARY_PATH="/opt/cusparselt/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
     # Clipboard (macOS style)
     alias pbcopy="xclip -selection clipboard"
@@ -199,6 +201,8 @@ fi
 # Without this, `cd project/` falls through to `zoxide query "project/"`,
 # which does not match entries stored without the trailing slash.
 function cd() {
+    (( $+functions[__zoxide_z] )) || { builtin cd "$@"; return }
+
     if [[ "$#" -eq 1 ]] && [[ "$1" != "/" ]] && [[ ! -d "$1" ]] && [[ "$1" == */ ]]; then
         __zoxide_z "${1%/}"
         return $?
@@ -296,7 +300,7 @@ if ! command -v nvm >/dev/null 2>&1 && [ -s "/usr/share/nvm/init-nvm.sh" ]; then
     \. "/usr/share/nvm/init-nvm.sh"
 fi
 
-export PATH="/Applications/PyCharm.app/Contents/MacOS:$PATH"
+[[ -d /Applications/PyCharm.app/Contents/MacOS ]] && export PATH="/Applications/PyCharm.app/Contents/MacOS:$PATH"
 
 # Per-host secrets and overrides (not tracked in dotfiles)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
