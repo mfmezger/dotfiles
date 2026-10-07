@@ -51,7 +51,7 @@ def get_installed_packages() -> Tuple[Set[str], Set[str]]:
 
 
 def main():
-    repo_root = Path.home() / "dotfiles"
+    repo_root = Path(__file__).resolve().parent.parent
     brewfile = repo_root / "Brewfile"
     brewfile_personal = repo_root / "Brewfile.personal"
 

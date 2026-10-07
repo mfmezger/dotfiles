@@ -9,4 +9,4 @@ REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 
 cd "$REPO_ROOT" || exit 1
 
-uvx --from python "$SCRIPT_DIR/brew_compare.py"
+exec python3 "$SCRIPT_DIR/brew_compare.py"
