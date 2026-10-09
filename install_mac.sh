@@ -226,6 +226,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # NoSync* keys never sync to PrefsCustomFolder, so it must be set here.
     echo ">>> Configuring iTerm2: Keep bracketed paste enabled <<<"
     defaults write com.googlecode.iterm2 NoSyncTurnOffBracketedPasteOnHostChange -bool false
+
+    # Finder, Dock, screenshots, appearance
+    "$DOTFILES_DIR/scripts/macos_defaults.sh"
 fi
 
 # 10. Set Default Shell
