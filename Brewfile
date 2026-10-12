@@ -134,7 +134,9 @@ cask "font-caskaydia-mono-nerd-font"
 # ==============================================================================
 # SYSTEM CUSTOMIZATION
 # ==============================================================================
-# eurkey: cask discontinued — install manually from https://eurkey.steffen.bruentjen.eu if needed
+# Successor of the discontinued eurkey cask. Select "EurKEY v1.2" in Input Sources
+# for the classic layout (v1.3 / Next variants change ⌥-, ⌥\, ⌥⇧S and ⌥M).
+cask "eurkey-next"
 
 # ==============================================================================
 # COMMUNICATION
