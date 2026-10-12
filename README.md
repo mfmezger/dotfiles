@@ -122,6 +122,7 @@ earlier in `.zshrc` because it is sourced last.
 
 - [docs/shortcuts.md](docs/shortcuts.md) — shell abbreviations, aliases, and Zellij shortcuts
 - [docs/stow.md](docs/stow.md) — GNU Stow usage, package mapping, and conflict handling
+- [docs/decision_gpu_server.md](docs/decision_gpu_server.md) — Decision model (System One API) on a GPU VM
 
 ## Stow Quick Start
 
