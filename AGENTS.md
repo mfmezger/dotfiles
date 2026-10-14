@@ -76,7 +76,7 @@ pcu           # Update pre-commit hooks
 ### File Organization
 
 Place configs in appropriate directories:
-- `zsh/` - Shell configuration (.zshrc, .p10k.zsh)
+- `zsh/` - Shell configuration (.zshrc, .zprofile, .p10k.zsh)
 - `nvim/.config/nvim/` - Neovim configuration
 - `git/.gitconfig` - Git configuration
 - `ghostty/.config/ghostty/` - Ghostty terminal config

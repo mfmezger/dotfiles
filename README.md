@@ -95,7 +95,7 @@ earlier in `.zshrc` because it is sourced last.
 ```bash
 ~/dotfiles/
 ├── .github/                 # GitHub Actions workflows
-├── zsh/                     # Zsh configuration (.zshrc, .p10k.zsh)
+├── zsh/                     # Zsh configuration (.zshrc, .zprofile, .p10k.zsh)
 ├── nvim/                    # Neovim configuration
 ├── ghostty/                 # Ghostty terminal config
 ├── zellij/                  # Zellij configuration
