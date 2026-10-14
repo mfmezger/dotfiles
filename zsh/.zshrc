@@ -303,10 +303,6 @@ fi
 [[ -d /Applications/PyCharm.app/Contents/MacOS ]] && export PATH="/Applications/PyCharm.app/Contents/MacOS:$PATH"
 
 # Per-host secrets and overrides (not tracked in dotfiles)
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
-# Added by the Wonderful CLI installer
-export PATH="$HOME/.wonderful/bin:$PATH"
-
-# wful shell completion (added by wful completions install)
-command -v wful >/dev/null 2>&1 && eval "$(wful completions zsh)"
+if [[ -f ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi
