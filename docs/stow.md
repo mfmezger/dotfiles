@@ -6,7 +6,7 @@ This repo uses [GNU Stow](https://www.gnu.org/software/stow/) to manage symlinks
 
 | Package | Creates Symlinks |
 | ------- | ---------------- |
-| `zsh` | `~/.zshrc`, `~/.p10k.zsh` |
+| `zsh` | `~/.zshrc`, `~/.zprofile`, `~/.p10k.zsh` |
 | `git` | `~/.gitconfig` |
 | `nvim` | `~/.config/nvim` |
 | `ghostty` | `~/.config/ghostty` |

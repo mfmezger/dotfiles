@@ -367,6 +367,7 @@ cd "$DOTFILES_DIR"
 
 # Backup common conflict files
 backup_if_exists ".zshrc"
+backup_if_exists ".zprofile"
 backup_if_exists ".p10k.zsh"
 backup_if_exists ".gitconfig"
 backup_if_exists ".config/nvim"
