@@ -10,8 +10,9 @@
 # ==============================================================================
 # TAPS
 # ==============================================================================
-tap "olets/tap"
-tap "buo/cask-upgrade"
+# Trust only the command/formulae used here, not the entire third-party taps.
+tap "olets/tap", trusted: { formulae: ["zsh-abbr", "zsh-autosuggestions-abbreviations-strategy"] }
+tap "buo/cask-upgrade", trusted: { command: "cu" }
 # ==============================================================================
 # SHELL & TERMINAL TOOLS (Core zsh functionality)
 # ==============================================================================

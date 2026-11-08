@@ -5,8 +5,9 @@
 # ==============================================================================
 # TAPS
 # ==============================================================================
-tap "buo/cask-upgrade"
-tap "olets/tap"
+# Trust only the command/formulae used here, not the entire third-party taps.
+tap "buo/cask-upgrade", trusted: { command: "cu" }
+tap "olets/tap", trusted: { formulae: ["zsh-abbr", "zsh-autosuggestions-abbreviations-strategy"] }
 
 # ==============================================================================
 # SYSTEM UTILITIES & MONITORING
