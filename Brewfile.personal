@@ -14,5 +14,5 @@ cask "appcleaner"
 cask "arc"
 
 # AI coding tools
-brew "opencode", tap: "anomalyco/tap"
+brew "anomalyco/tap/opencode", trusted: true
 cask "claude-code"
