@@ -13,6 +13,8 @@ cask "shotcut"
 cask "appcleaner"
 cask "arc"
 
-# AI coding tools
-brew "anomalyco/tap/opencode", trusted: true
-cask "claude-code"
+# AI coding tools (global npm packages managed by brew bundle)
+# DeepSeek Harness requires Node.js >=24.9.0; Pi requires >=22.19.0.
+brew "node"
+npm "@deepseek-ai/dsh"
+npm "@earendil-works/pi-coding-agent"
