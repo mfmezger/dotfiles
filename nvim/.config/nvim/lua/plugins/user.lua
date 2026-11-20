@@ -25,22 +25,23 @@ return {
     opts = {},
   },
 
-  -- customize the Snacks dashboard header
+  -- customize the Snacks dashboard header (fox)
+  -- NOTE: lines are padded to equal width because snacks centers each line individually
   {
     "folke/snacks.nvim",
     opts = function(_, opts)
       opts.dashboard.preset.header = table.concat({
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
+        "   /\\   /\\          ",
+        "  //\\\\_//\\\\     ____",
+        "  \\_     _/    /   /",
+        "   / o o \\    /^^^] ",
+        "   \\_\\O/_/    [   ] ",
+        "    /   \\_    [   / ",
+        "    \\     \\_  /  /  ",
+        "     [ [ /  \\/ _/   ",
+        "    _[ [ \\  /_/     ",
+        "                    ",
+        "     n e o v i m    ",
       }, "\n")
       return opts
     end,
