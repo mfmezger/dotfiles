@@ -32,6 +32,8 @@ setting() {
 # Finder
 setting com.apple.finder ShowPathbar bool true
 setting com.apple.finder ShowStatusBar bool true
+# Full POSIX path in the window title (copy it with ⌥⌘C on the selected item)
+setting com.apple.finder _FXShowPosixPathInTitle bool true
 # List view, grouped/arranged by name
 setting com.apple.finder FXPreferredViewStyle string Nlsv
 setting com.apple.finder FXPreferredGroupBy string Name
@@ -57,6 +59,17 @@ setting com.apple.screencapture show-thumbnail bool false
 setting NSGlobalDomain AppleInterfaceStyle string Dark
 setting NSGlobalDomain AppleAccentColor int 2
 setting NSGlobalDomain AppleHighlightColor string "1.000000 0.937255 0.690196 Yellow"
+
+# Per-folder sort overrides: Downloads by Date Added, everything else by Name.
+# Finder's global Name sort only applies to folders without a saved sort of their own.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if command -v uv &> /dev/null; then
+    if [[ "$MODE" == "--check" ]]; then
+        uv run --quiet --script "$SCRIPT_DIR/finder_sort.py" --check || DRIFT=$((DRIFT + 1))
+    else
+        uv run --quiet --script "$SCRIPT_DIR/finder_sort.py" --fix || true
+    fi
+fi
 
 if [[ "$MODE" == "--check" ]]; then
     echo "macOS defaults drift: $DRIFT"
