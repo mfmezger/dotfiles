@@ -15,4 +15,12 @@ if not pcall(require, "lazy") then
   vim.cmd.quit()
 end
 
+-- macOS: pin the SDK used for native builds (treesitter parsers, mason packages).
+-- A leftover beta SDK (e.g. MacOSX27.0.sdk) can be picked by `xcrun` even though the
+-- installed Command Line Tools linker can't read it ("ld: tapi error: malformed file").
+local default_sdk = "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+if vim.fn.has "mac" == 1 and not vim.env.SDKROOT and (vim.uv or vim.loop).fs_stat(default_sdk) then
+  vim.env.SDKROOT = default_sdk
+end
+
 require "lazy_setup"
