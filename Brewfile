@@ -30,6 +30,8 @@ brew "tealdeer"
 brew "olets/tap/zsh-abbr"
 brew "olets/tap/zsh-autosuggestions-abbreviations-strategy"
 brew "witr"
+brew "fzf"
+brew "tmux"
 # ==============================================================================
 # FILE MANAGEMENT & NAVIGATION
 # ==============================================================================
@@ -46,6 +48,9 @@ brew "glow"
 brew "chroma"
 brew "jq"
 brew "ripgrep"
+brew "pandoc"
+brew "typst"
+brew "d2"
 
 # ==============================================================================
 # TEXT EDITORS
@@ -63,6 +68,7 @@ brew "tokei"
 brew "onefetch"
 # uv is installed via curl in install_mac.sh for latest version
 brew "commitizen"
+brew "prek"
 
 # ==============================================================================
 # DEVOPS & CLOUD TOOLS
@@ -70,6 +76,8 @@ brew "commitizen"
 brew "helm"
 brew "kubectl"
 brew "k9s"
+# Docker Desktop ships docker, docker compose and kubectl.docker
+cask "docker-desktop"
 
 # ==============================================================================
 # NETWORK & DOWNLOAD TOOLS

@@ -14,5 +14,5 @@ cask "appcleaner"
 cask "discord"
 
 # AI coding tools
-brew "anomalyco/tap/opencode", trusted: true
+brew "anomalyco/tap/opencode-v2", trusted: true
 cask "claude-code"
