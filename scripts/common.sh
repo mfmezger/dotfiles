@@ -1,6 +1,27 @@
 #!/bin/bash
 set -e
 
+# ensure_repo TARGET URL [clone options...]. Never update or replace an existing checkout.
+ensure_repo() {
+    local target="$1" url="$2" origin
+    shift 2
+
+    if [[ ! -e "$target" && ! -L "$target" ]]; then
+        git clone "$@" -- "$url" "$target"
+        return
+    fi
+
+    # Require this checkout's own .git (not an enclosing repo), origin and HEAD.
+    if [[ -e "$target/.git" ]] && origin=$(git -C "$target" config --local --get remote.origin.url) &&
+        [[ "${origin%.git}" == "${url%.git}" ]] && git -C "$target" rev-parse --verify --quiet 'HEAD^{commit}' > /dev/null; then
+        echo ">>> Keeping existing checkout: $target <<<"
+        return 0
+    fi
+
+    printf 'Cannot install %s: %s already exists and is not the expected checkout. Left untouched.\n' "$url" "$target" >&2
+    return 1
+}
+
 backup_if_exists() {
     local target="$HOME/$1"
     local timestamp
