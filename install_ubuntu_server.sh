@@ -201,38 +201,14 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
-# Install Powerlevel10k theme
-echo "⚡ Installing Powerlevel10k theme..."
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-fi
-
-# Install zsh plugins
-echo "🔌 Installing zsh plugins..."
+# Install Powerlevel10k theme and zsh plugins
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
-
-# zsh-autosuggestions
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-fi
-
-# zsh-syntax-highlighting
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-fi
-
-# zsh-abbr (for abbreviations)
-echo "🔌 Installing zsh-abbr..."
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-abbr" ]; then
-    git clone --recurse-submodules https://github.com/olets/zsh-abbr.git "$ZSH_CUSTOM/plugins/zsh-abbr"
-fi
-
-# zsh-autosuggestions-abbreviations-strategy
-echo "🔌 Installing zsh-autosuggestions-abbreviations-strategy..."
-if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
-    git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git \
-        "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy"
-fi
+ensure_repo "$ZSH_CUSTOM/themes/powerlevel10k" https://github.com/romkatv/powerlevel10k.git --depth=1
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-autosuggestions" https://github.com/zsh-users/zsh-autosuggestions
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" https://github.com/zsh-users/zsh-syntax-highlighting.git
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-abbr" https://github.com/olets/zsh-abbr.git --recurse-submodules
+ensure_repo "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" \
+    https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git
 
 # Generate Shell Completions
 echo "📝 Generating shell completions..."

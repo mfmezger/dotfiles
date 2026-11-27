@@ -204,27 +204,10 @@ fi
 
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
-echo ">>> Installing zsh-autosuggestions <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-else
-    echo ">>> zsh-autosuggestions already installed <<<"
-fi
-
-echo ">>> Installing zsh-syntax-highlighting <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-else
-    echo ">>> zsh-syntax-highlighting already installed <<<"
-fi
-
-echo ">>> Installing zsh-autosuggestions-abbreviations-strategy <<<"
-if [ ! -d "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" ]; then
-    git clone https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git \
-        "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy"
-else
-    echo ">>> zsh-autosuggestions-abbreviations-strategy already installed <<<"
-fi
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-autosuggestions" https://github.com/zsh-users/zsh-autosuggestions
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" https://github.com/zsh-users/zsh-syntax-highlighting.git
+ensure_repo "$HOME/.local/share/zsh-autosuggestions-abbreviations-strategy" \
+    https://github.com/olets/zsh-autosuggestions-abbreviations-strategy.git
 
 # ==============================================================================
 # 7. Install Python Tools (uv & commitizen)

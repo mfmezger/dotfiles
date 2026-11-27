@@ -90,26 +90,9 @@ fi
 # 6. Install Zsh Plugins & Themes
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
-echo ">>> Installing Powerlevel10k <<<"
-if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
-else
-    echo ">>> Powerlevel10k already installed <<<"
-fi
-
-echo ">>> Installing zsh-autosuggestions <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-else
-    echo ">>> zsh-autosuggestions already installed <<<"
-fi
-
-echo ">>> Installing zsh-syntax-highlighting <<<"
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-else
-    echo ">>> zsh-syntax-highlighting already installed <<<"
-fi
+ensure_repo "$ZSH_CUSTOM/themes/powerlevel10k" https://github.com/romkatv/powerlevel10k.git --depth=1
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-autosuggestions" https://github.com/zsh-users/zsh-autosuggestions
+ensure_repo "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 # 7. Generate Static Completions (Pre-cached for faster shell startup)
 echo ">>> Generating shell completions <<<"
