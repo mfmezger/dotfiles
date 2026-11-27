@@ -15,8 +15,8 @@ This is a personal dotfiles repository for cross-platform (macOS/Linux) developm
 ./install_ubuntu_server.sh
 
 # Apply specific configs using stow
-stow zsh git nvim ghostty yazi zellij zed  # macOS
-stow zsh git nvim yazi zellij ghostty zed  # Arch Linux
+stow zsh nvim yazi zellij git ghostty ekphos zed  # macOS
+stow zsh nvim yazi zellij git ghostty ekphos zed dunst hypr waybar rofi walker gtk  # Arch Linux
 stow -n zsh  # Dry run to preview changes
 stow -R zsh  # Restow to refresh symlinks
 ```
@@ -76,13 +76,12 @@ pcu           # Update pre-commit hooks
 ### File Organization
 
 Place configs in appropriate directories:
-- `zsh/` - Shell configuration (.zshrc, .p10k.zsh)
+- `zsh/` - Shell configuration (.zshrc, .zprofile, .p10k.zsh)
 - `nvim/.config/nvim/` - Neovim configuration
 - `git/.gitconfig` - Git configuration
 - `ghostty/.config/ghostty/` - Ghostty terminal config
 - `yazi/.config/yazi/` - Yazi file manager config
 - `zed/.config/zed/` - Zed editor config
-- `opencode/.config/opencode/` - OpenCode AI coding agent config (personal install only)
 - `scripts/` - Utility scripts
 
 ### Platform-Specific Handling
@@ -118,10 +117,11 @@ Always run `pre-commit run --all-files` before committing changes.
 
 ## Neovim Configuration
 
-Based on AstroNvim v4 with community plugins. Use `lazy.nvim` for plugin management.
+Based on AstroNvim v6 with community plugins. Use `lazy.nvim` for plugin management.
 - Main config: `nvim/.config/nvim/init.lua`
 - Plugin specs: `nvim/.config/nvim/lua/community.lua`, `plugins/`
-- Custom settings: `nvim/.config/nvim/lua/polish.lua`
+- Bootstrap and lazy setup: `nvim/.config/nvim/lua/lazy_setup.lua`
+- Custom plugins and settings: `nvim/.config/nvim/lua/plugins/` (e.g. `user.lua`, `astrocore.lua`, `astrolsp.lua`)
 
 Lua linting uses selene with neovim standard. Format with stylua.
 

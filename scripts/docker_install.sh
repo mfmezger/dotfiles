@@ -1,25 +1,31 @@
 #!/bin/bash
-# install docker and docker compose on Ubuntu
+# Install Docker Engine and Docker Compose on Ubuntu.
 set -eo pipefail
 
 sudo apt update
 sudo apt install -y ca-certificates curl
 
-# Add Docker's official GPG key
+# APT reads ASCII-armored keys directly; no gpg binary is needed.
 sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 # Add the repository to Apt sources
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+. /etc/os-release
+ARCH="$(dpkg --print-architecture)"
+echo "deb [arch=$ARCH signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu ${UBUNTU_CODENAME:-$VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-sudo usermod -aG docker "${USER}"
-
-sudo apt install -y unzip
-
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin unzip
 docker compose version
 
-echo "Done. Log out and back in for the docker group to take effect."
+TARGET_USER="$(id -un)"
+if [[ $EUID -eq 0 && -n ${SUDO_USER:-} ]]; then
+    TARGET_USER="$SUDO_USER"
+fi
+if [[ $TARGET_USER != root ]]; then
+    sudo usermod -aG docker "$TARGET_USER"
+    echo "Done. Log out and back in for the docker group to take effect."
+else
+    echo "Done. No non-root user specified; docker group unchanged."
+fi

@@ -9,7 +9,7 @@ Cross-platform dotfiles for macOS and Linux with modern CLI tools and a developm
 ## Quick Install
 
 ```bash
-git clone https://github.com/mfmezger/dotfiles.git ~/dotfiles
+git clone --recurse-submodules https://github.com/mfmezger/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
@@ -88,27 +88,27 @@ earlier in `.zshrc` because it is sourced last.
 - **Git**: git-delta, gh, onefetch, commitizen
 - **History & Docs**: atuin, tealdeer
 - **DevOps**: k9s, kubectl, helm
-- **Launcher**: Rofi (Linux), Raycast (macOS)
+- **Launcher**: Walker (Linux), Raycast (macOS)
 
 ## Repository Structure
 
 ```bash
 ~/dotfiles/
-├── zsh/                     # Zsh configuration (.zshrc, .p10k.zsh)
+├── .github/                 # GitHub Actions workflows
+├── zsh/                     # Zsh configuration (.zshrc, .zprofile, .p10k.zsh)
 ├── nvim/                    # Neovim configuration
 ├── ghostty/                 # Ghostty terminal config
-├── kitty/                   # Kitty terminal config
 ├── zellij/                  # Zellij configuration
 ├── ekphos/                  # Ekphos notes app config
 ├── git/                     # Git configuration (.gitconfig)
 ├── yazi/                    # Yazi file manager
 ├── zed/                     # Zed editor config
+├── iterm2/                  # iTerm2 configuration (macOS)
 ├── hypr/                    # Hyprland configuration (Linux)
 ├── waybar/                  # Waybar configuration (Linux)
 ├── rofi/                    # Rofi launcher config/fallback (Linux)
 ├── walker/                  # Walker launcher config (Linux)
 ├── gtk/                     # GTK theming/config (Linux)
-├── screenlayout/            # Screen layout scripts (Linux)
 ├── scripts/                 # Utility scripts
 ├── Brewfile                 # macOS packages
 ├── Brewfile.personal        # macOS personal packages
@@ -122,6 +122,7 @@ earlier in `.zshrc` because it is sourced last.
 
 - [docs/shortcuts.md](docs/shortcuts.md) — shell abbreviations, aliases, and Zellij shortcuts
 - [docs/stow.md](docs/stow.md) — GNU Stow usage, package mapping, and conflict handling
+- [docs/decision_gpu_server.md](docs/decision_gpu_server.md) — Decision model (System One API) on a GPU VM
 
 ## Stow Quick Start
 

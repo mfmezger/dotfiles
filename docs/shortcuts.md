@@ -47,7 +47,7 @@ For the source of truth, see:
 | `ga` | `git add -A` |
 | `gs` | `git status` |
 | `gd` | `git diff` |
-| `gl` | `git log --oneline -10` |
+| `gl` | last 10 commits: short hash, author, subject (colored) |
 | `gg` | `git add -A && git commit -m` |
 | `gcm` | `git commit -m` |
 | `gp` | `git push` |
@@ -99,18 +99,10 @@ Worktrees are created under `/tmp/worktrees/<name>`. If present, `.env` and `gcl
 
 ## System Update
 
-Preferred command:
-
 | Shortcut | Expands To |
 | -------- | ---------- |
 | `update` | macOS: `brew update && brew upgrade && brew cu -f -a && tldr --update && omz update` |
 | `update` | Linux: `paru -Syyu --noconfirm && tldr --update && omz update` |
-
-Legacy compatibility:
-
-| Command | Notes |
-| ------- | ----- |
-| `uu` | Still works, but prints a deprecation warning and then runs `update` |
 
 ## Platform-Specific Commands
 

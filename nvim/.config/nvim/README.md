@@ -1,6 +1,6 @@
 # Neovim config
 
-Personal AstroNvim v4 configuration managed in this dotfiles repo.
+Personal AstroNvim v6 configuration managed in this dotfiles repo.
 
 ## Structure
 
@@ -13,7 +13,7 @@ Personal AstroNvim v4 configuration managed in this dotfiles repo.
 
 ### Core platform
 
-- [AstroNvim v4](https://github.com/AstroNvim/AstroNvim)
+- [AstroNvim v6](https://github.com/AstroNvim/AstroNvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management
 - AstroCommunity imports for shared plugin packs
 
@@ -83,19 +83,21 @@ Custom normal-mode mappings include:
 
 ## Plugin notes
 
-Custom plugins and overrides currently live in:
+Custom plugins and overrides currently live in `lua/plugins/`:
 
-- `lua/plugins/user.lua`
+- `user.lua` - `oil.nvim`, `nvim-surround`, custom `snacks.nvim` dashboard header,
+  `LuaSnip` filetype extension for JavaScript, `better-escape.nvim` disabled
+- `conform.lua` - disables `none-ls` (formatting via `conform.nvim`)
+- `mason.lua` - Mason tools installed via `mason-tool-installer`
+- `mayu.lua` - custom `astrotheme` palette (`lua/astrotheme/palettes/mayu.lua`)
 
-This file includes:
+## Troubleshooting
 
-- `presence.nvim`
-- `lsp_signature.nvim`
-- `oil.nvim`
-- `nvim-surround`
-- custom `alpha-nvim` header
-- `LuaSnip` filetype extension for JavaScript
-- custom `nvim-autopairs` rules
+### Treesitter parsers fail to compile on macOS (`ld: tapi error: malformed file`)
+
+This happens when `xcrun` picks a beta SDK (e.g. `MacOSX27.0.sdk`) that is newer than the
+installed Command Line Tools linker. `init.lua` sets `SDKROOT` (inside Neovim only) to the
+default `MacOSX.sdk` symlink to avoid this. Then run `:TSUpdate` (or `:TSInstall <lang>`) again.
 
 ## Maintenance
 

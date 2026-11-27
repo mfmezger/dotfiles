@@ -11,8 +11,8 @@ cask "vlc"
 cask "obs"
 cask "shotcut"
 cask "appcleaner"
-cask "arc"
+cask "discord"
 
 # AI coding tools
-brew "opencode", tap: "anomalyco/tap"
+brew "anomalyco/tap/opencode-v2", trusted: true
 cask "claude-code"

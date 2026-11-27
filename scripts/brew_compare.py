@@ -1,4 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = []
+# ///
 """
 Compare Brewfile with installed Homebrew packages
 """
@@ -51,7 +55,7 @@ def get_installed_packages() -> Tuple[Set[str], Set[str]]:
 
 
 def main():
-    repo_root = Path.home() / "dotfiles"
+    repo_root = Path(__file__).resolve().parent.parent
     brewfile = repo_root / "Brewfile"
     brewfile_personal = repo_root / "Brewfile.personal"
 

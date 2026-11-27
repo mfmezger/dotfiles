@@ -5,9 +5,9 @@
 # ==============================================================================
 # TAPS
 # ==============================================================================
-tap "buo/cask-upgrade"
-tap "nikitabobko/tap"
-tap "olets/tap"
+# Trust only the command/formulae used here, not the entire third-party taps.
+tap "buo/cask-upgrade", trusted: { command: "cu" }
+tap "olets/tap", trusted: { formulae: ["zsh-abbr", "zsh-autosuggestions-abbreviations-strategy"] }
 
 # ==============================================================================
 # SYSTEM UTILITIES & MONITORING
@@ -17,6 +17,7 @@ brew "zenith"
 brew "fastfetch"
 brew "dust"
 brew "duf"
+brew "codeburn"
 
 # ==============================================================================
 # SHELL & TERMINAL TOOLS
@@ -29,6 +30,8 @@ brew "tealdeer"
 brew "olets/tap/zsh-abbr"
 brew "olets/tap/zsh-autosuggestions-abbreviations-strategy"
 brew "witr"
+brew "fzf"
+brew "tmux"
 # ==============================================================================
 # FILE MANAGEMENT & NAVIGATION
 # ==============================================================================
@@ -44,6 +47,10 @@ brew "bat"
 brew "glow"
 brew "chroma"
 brew "jq"
+brew "ripgrep"
+brew "pandoc"
+brew "typst"
+brew "d2"
 
 # ==============================================================================
 # TEXT EDITORS
@@ -56,10 +63,12 @@ cask "zed"
 brew "go"
 brew "gh"
 brew "git-delta"
+brew "hunk"
 brew "tokei"
 brew "onefetch"
 # uv is installed via curl in install_mac.sh for latest version
 brew "commitizen"
+brew "prek"
 
 # ==============================================================================
 # DEVOPS & CLOUD TOOLS
@@ -67,6 +76,8 @@ brew "commitizen"
 brew "helm"
 brew "kubectl"
 brew "k9s"
+# Docker Desktop ships docker, docker compose and kubectl.docker
+cask "docker-desktop"
 
 # ==============================================================================
 # NETWORK & DOWNLOAD TOOLS
@@ -90,7 +101,7 @@ cask "iterm2"
 # BROWSERS
 # ==============================================================================
 cask "brave-browser"
-cask "zen-browser"
+cask "zen"
 
 # ==============================================================================
 # DEVELOPMENT APPLICATIONS
@@ -132,7 +143,9 @@ cask "font-caskaydia-mono-nerd-font"
 # ==============================================================================
 # SYSTEM CUSTOMIZATION
 # ==============================================================================
-cask "eurkey"
+# Successor of the discontinued eurkey cask. Select "EurKEY v1.2" in Input Sources
+# for the classic layout (v1.3 / Next variants change ⌥-, ⌥\, ⌥⇧S and ⌥M).
+cask "eurkey-next"
 
 # ==============================================================================
 # COMMUNICATION

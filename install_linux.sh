@@ -49,6 +49,7 @@ paru -S --needed --noconfirm \
     xclip \
     zed \
     go \
+    go-task \
     scrot \
     dunst \
     hyprland \
@@ -58,7 +59,7 @@ paru -S --needed --noconfirm \
     xdg-desktop-portal-hyprland \
     qt5-wayland \
     qt6-wayland \
-    rofi-wayland \
+    rofi \
     rofi-calc \
     walker \
     wlogout \
@@ -71,7 +72,15 @@ paru -S --needed --noconfirm \
     pavucontrol \
     power-profiles-daemon \
     polkit-gnome \
-    gnome-keyring
+    gnome-keyring \
+    hyprpaper \
+    wireplumber \
+    yazi \
+    ripgrep \
+    fd \
+    jq \
+    glow \
+    tree-sitter-cli
 
 # Install the packaged Powerlevel10k when available to avoid AUR conflicts
 POWERLEVEL10K_INSTALLED_FROM_REPO=0
@@ -94,6 +103,7 @@ AUR_PACKAGES=(
     brave-bin
     zen-browser-bin
     zsh-abbr
+    hunk-bin
     discord
     witr-bin
     cliphist
@@ -172,7 +182,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo nvidia-ctk runtime configure --runtime=docker
     sudo systemctl restart docker
 
-    echo ">>> CUDA installed! The following paths have been added to your .zshrc: <<<"
+    echo ">>> CUDA installed! <<<"
     echo ">>> A reboot is recommended after NVIDIA driver installation. <<<"
 else
     echo ">>> Skipping NVIDIA/CUDA installation <<<"
@@ -349,11 +359,15 @@ sudo systemctl enable --now opensnitchd
 # ==============================================================================
 # 14. Link Dotfiles
 # ==============================================================================
+echo ">>> Updating git submodules <<<"
+git -C "$DOTFILES_DIR" submodule update --init --recursive
+
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
 
 # Backup common conflict files
 backup_if_exists ".zshrc"
+backup_if_exists ".zprofile"
 backup_if_exists ".p10k.zsh"
 backup_if_exists ".gitconfig"
 backup_if_exists ".config/nvim"

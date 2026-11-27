@@ -8,6 +8,53 @@ echo "🚀 Starting beautiful terminal setup from $DOTFILES_DIR..."
 
 source "$DOTFILES_DIR/scripts/common.sh"
 
+install_neovim() {
+    echo "📝 Checking Neovim installation..."
+    if command -v nvim &> /dev/null; then
+        local version_line
+        version_line="$(nvim --version | head -1)"
+        if [[ "$version_line" =~ v([0-9]+)\.([0-9]+) ]]; then
+            local major="${BASH_REMATCH[1]}"
+            local minor="${BASH_REMATCH[2]}"
+            if ((major > 0 || minor >= 11)); then
+                echo "✅ Neovim >= 0.11 already installed ($version_line)"
+                return 0
+            fi
+        fi
+        echo "⚠️  Installed Neovim is outdated ($version_line), upgrading to latest release..."
+    else
+        echo "📦 Neovim not found, installing latest release..."
+    fi
+
+    local arch
+    local uname_m
+    uname_m="$(uname -m)"
+    if [ "$uname_m" = "x86_64" ]; then
+        arch="linux-x86_64"
+    elif [ "$uname_m" = "aarch64" ] || [ "$uname_m" = "arm64" ]; then
+        arch="linux-arm64"
+    else
+        echo "❌ Unsupported architecture for Neovim tarball: $uname_m"
+        return 1
+    fi
+
+    local asset_name="nvim-${arch}.tar.gz"
+    local download_url="https://github.com/neovim/neovim/releases/latest/download/${asset_name}"
+    local temp_dir
+    temp_dir="$(mktemp -d)"
+
+    echo "📥 Downloading Neovim release (${asset_name})..."
+    curl -fsSL "$download_url" -o "${temp_dir}/${asset_name}"
+
+    echo "📦 Extracting Neovim to /opt..."
+    sudo rm -rf "/opt/nvim-${arch}"
+    sudo tar -C /opt -xzf "${temp_dir}/${asset_name}"
+    sudo ln -sf "/opt/nvim-${arch}/bin/nvim" /usr/local/bin/nvim
+
+    rm -rf "$temp_dir"
+    echo "✅ Neovim installed: $(/usr/local/bin/nvim --version | head -1)"
+}
+
 # Update package lists
 echo "📦 Updating package lists..."
 sudo apt update
@@ -30,9 +77,11 @@ sudo apt install -y \
     htop \
     tree \
     vim \
-    neovim \
     python3 \
     python3-pip
+
+# Install Neovim (>= 0.11 required by AstroNvim v6)
+install_neovim
 
 # Install modern terminal tools available via apt
 echo "🔧 Installing modern terminal tools..."
@@ -134,8 +183,8 @@ fi
 echo "📝 Installing commitizen..."
 uv tool install commitizen
 
-# Install witr (weather tool)
-echo "🌤️ Installing witr..."
+# Install witr (Why is this running? process inspection tool)
+echo "🔍 Installing witr..."
 if ! command -v witr &> /dev/null; then
     curl -fsSL https://raw.githubusercontent.com/pranshuparmar/witr/main/install.sh | bash
 fi
@@ -155,27 +204,27 @@ fi
 # Install Powerlevel10k theme
 echo "⚡ Installing Powerlevel10k theme..."
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 fi
 
 # Install zsh plugins
 echo "🔌 Installing zsh plugins..."
-ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
 # zsh-autosuggestions
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 fi
 
 # zsh-syntax-highlighting
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 fi
 
 # zsh-abbr (for abbreviations)
 echo "🔌 Installing zsh-abbr..."
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-abbr" ]; then
-    git clone https://github.com/olets/zsh-abbr.git $ZSH_CUSTOM/plugins/zsh-abbr
+    git clone --recurse-submodules https://github.com/olets/zsh-abbr.git "$ZSH_CUSTOM/plugins/zsh-abbr"
 fi
 
 # zsh-autosuggestions-abbreviations-strategy
@@ -213,11 +262,15 @@ if [ "$SHELL" != "/usr/bin/zsh" ]; then
 fi
 
 # Link dotfiles using stow
+echo "📦 Initializing git submodules..."
+git -C "$DOTFILES_DIR" submodule update --init --recursive
+
 echo "🔗 Linking dotfiles..."
 cd "$DOTFILES_DIR"
 
 # Backup common conflict files
 backup_if_exists ".zshrc"
+backup_if_exists ".zprofile"
 backup_if_exists ".p10k.zsh"
 backup_if_exists ".gitconfig"
 backup_if_exists ".config/nvim"

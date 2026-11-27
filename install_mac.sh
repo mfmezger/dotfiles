@@ -53,6 +53,9 @@ else
     echo ">>> uv already installed <<<"
 fi
 
+# Ensure uv is in PATH for this session
+export PATH="$HOME/.local/bin:$PATH"
+
 # 4. Install Rust toolchain (full install only)
 if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]]; then
     echo ">>> Installing rustup <<<"
@@ -156,11 +159,15 @@ if [[ ! $MINIMAL_INSTALL =~ ^[Yy]$ ]] && command -v helm &> /dev/null; then
 fi
 
 # 8. Link Dotfiles
+echo ">>> Updating git submodules <<<"
+git -C "$DOTFILES_DIR" submodule update --init --recursive
+
 echo ">>> Linking dotfiles <<<"
 cd "$DOTFILES_DIR"
 
 # Backup common conflict files
 backup_if_exists ".zshrc"
+backup_if_exists ".zprofile"
 backup_if_exists ".p10k.zsh"
 
 # Run stow based on installation type
@@ -212,6 +219,17 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo ">>> Configuring iTerm2: Load preferences from dotfiles <<<"
     defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_DIR/iterm2"
     defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+
+    # Keep bracketed paste enabled. iTerm2 offers to disable it on host change
+    # ("paste bracketing was left on") and answering "Always" sets this key.
+    # With bracketing off, TUI apps (pi, claude, vim) receive multi-line pastes
+    # as raw newlines, so every line is submitted as a separate input.
+    # NoSync* keys never sync to PrefsCustomFolder, so it must be set here.
+    echo ">>> Configuring iTerm2: Keep bracketed paste enabled <<<"
+    defaults write com.googlecode.iterm2 NoSyncTurnOffBracketedPasteOnHostChange -bool false
+
+    # Finder, Dock, screenshots, appearance
+    "$DOTFILES_DIR/scripts/macos_defaults.sh"
 fi
 
 # 10. Set Default Shell

@@ -38,9 +38,10 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
+      "ruff",
       "ty",
     },
-    -- customize language server configuration options passed to `lspconfig`
+    -- customize language server configuration options passed to `vim.lsp.config`
     ---@diagnostic disable: missing-fields
     config = {
       ruff = {
@@ -53,49 +54,25 @@ return {
       ty = {
         cmd = { "ty", "server" },
         filetypes = { "python" },
-        root_dir = function(fname)
-          return require("lspconfig.util").root_pattern("pyproject.toml", "ty.toml", "setup.py", "setup.cfg", ".git")(
-            fname
-          )
+        root_dir = function(bufnr, on_dir)
+          local root = vim.fs.root(bufnr, { "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", ".git" })
+          if root then
+            on_dir(root)
+          else
+            local buffer_name = vim.api.nvim_buf_get_name(bufnr)
+            on_dir(buffer_name ~= "" and vim.fs.dirname(buffer_name) or vim.uv.cwd())
+          end
         end,
-        single_file_support = true,
       },
     },
-    -- customize how language servers are attached
+    -- customize which language servers AstroLSP enables
     handlers = {
-      -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
-      -- function(server, opts) require("lspconfig")[server].setup(opts) end
-
-      -- the key is the server that is being setup with `lspconfig`
-      -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
-      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
+      -- setting a handler to false disables that language server
       basedpyright = false,
       pyright = false,
-      ruff = function(_, opts) require("lspconfig").ruff.setup(opts) end,
-      ty = function(_, opts) require("lspconfig").ty.setup(opts) end,
     },
-    -- Configure buffer local auto commands to add when attaching a language server
-    autocmds = {
-      -- first key is the `augroup` to add the auto commands to (:h augroup)
-      lsp_codelens_refresh = {
-        -- Optional condition to create/delete auto command group
-        -- can either be a string of a client capability or a function of `fun(client, bufnr): boolean`
-        -- condition will be resolved for each client on each execution and if it ever fails for all clients,
-        -- the auto commands will be deleted for that buffer
-        cond = "textDocument/codeLens",
-        -- cond = function(client, bufnr) return client.name == "lua_ls" end,
-        -- list of auto commands to set
-        {
-          -- events to trigger
-          event = { "InsertLeave", "BufEnter" },
-          -- the rest of the autocmd options (:h nvim_create_autocmd)
-          desc = "Refresh codelens (buffer)",
-          callback = function(args)
-            if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
-          end,
-        },
-      },
-    },
+    -- NOTE: codelens refresh is handled natively via `vim.lsp.codelens.enable()` on Neovim 0.12+
+    -- (controlled by `features.codelens` above), so no manual refresh autocmd is needed.
     -- mappings to be set up on attaching of a language server
     mappings = {
       n = {
@@ -108,16 +85,11 @@ return {
         ["<Leader>uY"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client)
-            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
+          cond = function(client, bufnr)
+            return client:supports_method("textDocument/semanticTokens/full", bufnr) and vim.lsp.semantic_tokens
           end,
         },
       },
     },
-    -- A custom `on_attach` function to be run after the default `on_attach` function
-    -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
-    on_attach = function(client, bufnr)
-      if client.name == "ruff" then client.server_capabilities.hoverProvider = false end
-    end,
   },
 }
