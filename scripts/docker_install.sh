@@ -1,24 +1,31 @@
 #!/bin/bash
-set -e
-# install docker and docker compose on stackit
+# Install Docker Engine and Docker Compose on Ubuntu.
+set -eo pipefail
 
 sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install docker-ce -y
-sudo usermod -aG docker "$USER"
+sudo apt install -y ca-certificates curl
 
-# compose - install latest version
-mkdir -p ~/.docker/cli-plugins/
-COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-ARCH=$(uname -m)
-if [ "$ARCH" = "aarch64" ]; then ARCH="aarch64"; else ARCH="x86_64"; fi
-curl -SL "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-linux-${ARCH}" -o ~/.docker/cli-plugins/docker-compose
-chmod +x ~/.docker/cli-plugins/docker-compose
+# APT reads ASCII-armored keys directly; no gpg binary is needed.
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources
+. /etc/os-release
+ARCH="$(dpkg --print-architecture)"
+echo "deb [arch=$ARCH signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu ${UBUNTU_CODENAME:-$VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin unzip
 docker compose version
 
-sudo apt install unzip
-
-echo "restart shell or logout and login."
+TARGET_USER="$(id -un)"
+if [[ $EUID -eq 0 && -n ${SUDO_USER:-} ]]; then
+    TARGET_USER="$SUDO_USER"
+fi
+if [[ $TARGET_USER != root ]]; then
+    sudo usermod -aG docker "$TARGET_USER"
+    echo "Done. Log out and back in for the docker group to take effect."
+else
+    echo "Done. No non-root user specified; docker group unchanged."
+fi
